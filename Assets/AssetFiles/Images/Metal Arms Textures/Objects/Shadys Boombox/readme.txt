@@ -1,0 +1,1 @@
+Metal Arms uses in-engine effects to color certain textures. weapon1_teeltint.png is an edit of weapon1.png to match its in-game appearence.

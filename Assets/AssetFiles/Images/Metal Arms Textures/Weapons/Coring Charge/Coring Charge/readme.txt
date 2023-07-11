@@ -1,0 +1,1 @@
+Metal Arms uses in-engine effects to change the colors of certain textures. weapon1_tinted is an edit to match the texture's in-game appearence.

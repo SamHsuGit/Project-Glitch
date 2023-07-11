@@ -1,0 +1,1 @@
+Metal Arms uses in-engine effects to change the colors of certain textures. weapon1 green.png is an edit of the default weapon texture to match its in-game appearence.

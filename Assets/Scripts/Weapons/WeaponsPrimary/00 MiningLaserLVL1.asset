@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf21f59fe439e4a439a7f7369dfe8c4a, type: 3}
+  m_Name: 00 MiningLaserLVL1
+  m_EditorClassIdentifier: 
+  damage: 1
+  splashDamage: 0
+  fireRate: 10
+  roundsPerFire: 1
+  clipSize: 0
+  maxAmmo: 0
+  shootSound: {fileID: 8300000, guid: 343fae11370088d4f9d72bf75f8608c0, type: 3}
+  clipEjectSound: {fileID: 0}
+  clipInsertSound: {fileID: 0}
+  reloadSound: {fileID: 0}
+  chargeSound: {fileID: 8300000, guid: 37ef2404848f9a745a4e8c73d859615f, type: 3}
+  lockOn: {fileID: 0}
+  controlOn: {fileID: 0}
+  lostControl: {fileID: 0}
+  toasterFireLoopStop: {fileID: 0}
+  hitSound: {fileID: 0}
+  projectile: {fileID: 0}

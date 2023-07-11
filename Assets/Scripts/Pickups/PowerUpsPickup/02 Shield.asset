@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d109709f7c00a4a46be2efd2864b873c, type: 3}
+  m_Name: 02 Shield
+  m_EditorClassIdentifier: 
+  type: 2
+  index: 2
+  weaponLevel: 0
+  pickupQtySize: 1
+  hoverAbove: 1
+  pickupSound: {fileID: 8300000, guid: cdf64e731508dfd49b5983ee13e772ce, type: 3}
+  pickupSound2: {fileID: 8300000, guid: 51035442dcc6b8a4da96278e58ad1f8e, type: 3}
+  pickupGameObject: {fileID: 0}

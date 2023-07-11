@@ -1,0 +1,1 @@
+Metal Arms uses in-engine affects to change the colors of certain textures. The transparency texture is an edit of the default texture to be accurate to its in-game appearence for this model.

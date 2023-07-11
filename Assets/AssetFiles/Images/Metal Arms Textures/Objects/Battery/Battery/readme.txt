@@ -1,0 +1,1 @@
+Metal Arms uses in-engine effects to change the colors and transparency of certain textures. weapon1_transparency is an edit to match the texture's in-game appearence.
