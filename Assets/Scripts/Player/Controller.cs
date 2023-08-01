@@ -21,8 +21,8 @@ public class Controller : NetworkBehaviour
     public bool isGrounded;
     [SyncVar(hook = nameof(SetIsMoving))] public bool isMoving = false;
     public bool options = false;
-    public float m_Speed = 15f;
-    public float _jumpForce = 15f;
+    public float m_Speed = 20f;
+    public float _jumpForce = 350f;
     public int maxJumps = 2;
     public int currentJumps = 0;
     public bool jump;
