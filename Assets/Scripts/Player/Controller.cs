@@ -120,6 +120,10 @@ public class Controller : NetworkBehaviour
         health.isAlive = true;
 
         CinematicBars.SetActive(false);
+
+        // init arrays
+        inventoryWeaponsPrimary = new bool[24];
+        inventoryWeaponsSecondary = new bool[9];
     }
 
     void SetInventory()

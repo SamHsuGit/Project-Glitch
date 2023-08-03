@@ -58,6 +58,13 @@ private void FixedUpdate()
             Shoot();
         }
     }
+    if(Time.time >= nextTimeToFire && backgroundMaskCanvasGroup.alpha == 0)
+    {
+        if(inputHandler.grenade)
+        {
+            
+        }
+    }
 }
 
 // if raycast hits a destructible object (with health but not this player), turn outer reticle red
