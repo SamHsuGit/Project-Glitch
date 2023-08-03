@@ -113,11 +113,11 @@ public class GameMenu : MonoBehaviour
         int w_Index_P = controller.currentWeaponPrimaryIndex;
         int w_Index_S = controller.currentWeaponSecondaryIndex;
 
-        for (int i = 0; i <= PrimaryWeaponIcons.Length; i++)
+        for (int i = 0; i < PrimaryWeaponIcons.Length; i++)
             PrimaryWeaponIcons[i].SetActive(false);
-        for (int i = 0; i <= SecondaryWeaponIcons.Length; i++)
+        for (int i = 0; i < SecondaryWeaponIcons.Length; i++)
             SecondaryWeaponIcons[i].SetActive(false);
-        for (int i = 0; i <= levelPrimaryWeaponIcons.Length; i++)
+        for (int i = 0; i < levelPrimaryWeaponIcons.Length; i++)
             levelPrimaryWeaponIcons[i].SetActive(false);
         PrimaryWeaponIcons[w_Index_P].SetActive(true);
         SecondaryWeaponIcons[w_Index_S].SetActive(true);

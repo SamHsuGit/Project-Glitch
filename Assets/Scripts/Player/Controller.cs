@@ -125,15 +125,15 @@ public class Controller : NetworkBehaviour
     void SetInventory()
     {
         // Empty inventory
-        for(int i = 0; i <= inventoryWeaponsPrimary.Length; i++)
+        for(int i = 0; i < inventoryWeaponsPrimary.Length; i++)
             inventoryWeaponsPrimary[i] = false;
-        for (int i = 0; i <= inventoryWeaponsSecondary.Length; i++)
+        for (int i = 0; i < inventoryWeaponsSecondary.Length; i++)
             inventoryWeaponsSecondary[i] = false;
 
         // Give starting weapons
-        for (int i = 0; i <= startingPrimaryWeapons.Length; i++)
+        for (int i = 0; i < startingPrimaryWeapons.Length; i++)
             GiveWeaponPrimary(i);
-        for (int i = 0; i <= startingSecondaryWeapons.Length; i++)
+        for (int i = 0; i < startingSecondaryWeapons.Length; i++)
             GiveWeaponSecondary(i);
         SetCurrentWeaponPrimaryIndex(0, 0);
         SetCurrentWeaponSecondaryIndex(0, 0);
@@ -173,6 +173,8 @@ public class Controller : NetworkBehaviour
 
            world.gameObject.SetActive(true);
         }
+
+        SetInventory();
     }
 
     void InputComponents()
