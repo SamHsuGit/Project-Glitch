@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bb1dc7896fe0c545bf95e5c0545e041, type: 3}
   m_Name: 02 EMP
   m_EditorClassIdentifier: 
+  index: 2
   damage: 0
   splashRadius: 10
   fireRate: 1
@@ -21,3 +22,6 @@ MonoBehaviour:
   shootSound: {fileID: 8300000, guid: 3c3ac2584a7cba24e8c030d39bcfb279, type: 3}
   lockOn: {fileID: 0}
   grenadeExplodeSound: {fileID: 8300000, guid: e7efc76eb96e85649bae83193f5b2759, type: 3}
+  ScopeZoom: {fileID: 0}
+  wrenchAssemble: {fileID: 0}
+  wrenchDisassemble: {fileID: 0}

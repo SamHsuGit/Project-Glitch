@@ -12,9 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf21f59fe439e4a439a7f7369dfe8c4a, type: 3}
   m_Name: 16 ControlTetherLVL2
   m_EditorClassIdentifier: 
+  index: 16
+  level: 2
   damage: 1
+  splashDamage: 0
   fireRate: 1
   roundsPerFire: 1
+  clips: 0
+  ammo: 0
   clipSize: 0
   maxAmmo: 0
   shootSound: {fileID: 8300000, guid: 98675c65ba4a81b41bcabab3537d4fc3, type: 3}
@@ -26,4 +31,5 @@ MonoBehaviour:
   controlOn: {fileID: 8300000, guid: eb78c965ca3dadd4cae257065fdfb0dc, type: 3}
   lostControl: {fileID: 8300000, guid: 86a95e8e1beba4e4898639f2df21e900, type: 3}
   toasterFireLoopStop: {fileID: 0}
-  grenadeExplodeSound: {fileID: 0}
+  hitSound: {fileID: 0}
+  projectile: {fileID: 0}

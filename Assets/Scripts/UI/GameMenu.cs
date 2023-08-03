@@ -28,6 +28,13 @@ public class GameMenu : MonoBehaviour
     public AudioSource buttonSound;
     public GameObject basicControlsText;
     public bool showControls;
+    public GameObject[] PrimaryWeaponIcons;
+    public GameObject[] SecondaryWeaponIcons;
+    public TextMeshProUGUI AmmoCountPrimary;
+    public TextMeshProUGUI ClipCountPrimary;
+    public TextMeshProUGUI AmmoCountSecondary;
+    public Slider laserAmmoSlider;
+    public GameObject[] levelPrimaryWeaponIcons;
 
     private int previousGraphicsQuality;
     private World world;
@@ -79,6 +86,8 @@ public class GameMenu : MonoBehaviour
         optionsMenuCanvasGroup.interactable = false;
         debugText.SetActive(false);
         basicControlsText.SetActive(false);
+
+        UpdateWeaponIcons();
     }
 
     private void Update()
@@ -89,11 +98,42 @@ public class GameMenu : MonoBehaviour
             basicControlsText.SetActive(true);
         else
             basicControlsText.SetActive(false);
+
+        UpdateWeaponIcons();
+        UpdateAmmoCounts();
     }
 
     public void UpdateHP()
     {
         hpSlider.value = (float)health.hp / (float)health.hpMax;
+    }
+
+    public void UpdateWeaponIcons()
+    {
+        int w_Index_P = controller.currentWeaponPrimaryIndex;
+        int w_Index_S = controller.currentWeaponSecondaryIndex;
+
+        for (int i = 0; i <= PrimaryWeaponIcons.Length; i++)
+            PrimaryWeaponIcons[i].SetActive(false);
+        for (int i = 0; i <= SecondaryWeaponIcons.Length; i++)
+            SecondaryWeaponIcons[i].SetActive(false);
+        for (int i = 0; i <= levelPrimaryWeaponIcons.Length; i++)
+            levelPrimaryWeaponIcons[i].SetActive(false);
+        PrimaryWeaponIcons[w_Index_P].SetActive(true);
+        SecondaryWeaponIcons[w_Index_S].SetActive(true);
+        levelPrimaryWeaponIcons[controller.weaponsPrimary[w_Index_P].level].SetActive(true);
+
+        if (w_Index_P == 0 || w_Index_P == 1 || w_Index_P == 2) // only show laser weapon ammo counter if laser weapon equipped
+            laserAmmoSlider.enabled = true;
+        else
+            laserAmmoSlider.enabled = false;
+    }
+
+    public void UpdateAmmoCounts()
+    {
+        AmmoCountPrimary.text = controller.weaponsPrimary[controller.currentWeaponPrimaryIndex].ammo.ToString();
+        ClipCountPrimary.text = controller.weaponsPrimary[controller.currentWeaponPrimaryIndex].clips.ToString();
+        AmmoCountSecondary.text = controller.weaponsSecondary[controller.currentWeaponSecondaryIndex].ammo.ToString();
     }
 
     void CheckSplitscreenCanvasRenderMode()

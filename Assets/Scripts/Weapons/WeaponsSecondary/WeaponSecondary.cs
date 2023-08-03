@@ -4,11 +4,12 @@ using UnityEngine;
 public class WeaponSecondary : ScriptableObject
 {
     [Header("Weapon Attributes")]
+    public int index;
     public int damage;
     public int splashRadius;
     public int fireRate;
     public int roundsPerFire;
-    public int clipSize;
+    public int ammo;
     public int maxAmmo;
     public AudioClip shootSound;
     public AudioClip lockOn;

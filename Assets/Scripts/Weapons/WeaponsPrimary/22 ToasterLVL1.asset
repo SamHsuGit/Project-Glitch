@@ -12,9 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf21f59fe439e4a439a7f7369dfe8c4a, type: 3}
   m_Name: 22 ToasterLVL1
   m_EditorClassIdentifier: 
+  index: 22
+  level: 1
   damage: 1
+  splashDamage: 0
   fireRate: 30
   roundsPerFire: 1
+  clips: 0
+  ammo: 0
   clipSize: 100
   maxAmmo: 400
   shootSound: {fileID: 8300000, guid: 40814434f7a302746b7213b5ff71f823, type: 3}
@@ -26,4 +31,5 @@ MonoBehaviour:
   controlOn: {fileID: 0}
   lostControl: {fileID: 0}
   toasterFireLoopStop: {fileID: 8300000, guid: 2348d63281bfff94892790dda08393d9, type: 3}
-  grenadeExplodeSound: {fileID: 0}
+  hitSound: {fileID: 0}
+  projectile: {fileID: 0}

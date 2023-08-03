@@ -2,6 +2,7 @@ using Mirror;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 public class Controller : NetworkBehaviour
 {
@@ -50,7 +51,9 @@ public class Controller : NetworkBehaviour
     public Material[] charMaterials;
     public Animator[] animators;
     public GameObject[] weaponsObsPrimary;
+    public bool[] inventoryWeaponsPrimary;
     public WeaponPrimary[] weaponsPrimary;
+    public bool[] inventoryWeaponsSecondary;
     public GameObject[] weaponsObsSecondary;
     public WeaponSecondary[] weaponsSecondary;
 
@@ -87,6 +90,8 @@ public class Controller : NetworkBehaviour
     private float _minCamAngle = -90f;
     private float fireRate = 2f;
     private float nextTimeToFire = 0f;
+    private int[] startingPrimaryWeapons = new int[] {0,23}; // mining laser, hand
+    private int[] startingSecondaryWeapons = new int[] {0,8}; // coring charge, hand
 
     // THE ORDER OF EVENTS IS CRITICAL FOR MULTIPLAYER!!!
     // Order of network events: https://docs.unity3d.com/Manual/NetworkBehaviourCallbacks.html
@@ -114,6 +119,23 @@ public class Controller : NetworkBehaviour
         health.isAlive = true;
 
         CinematicBars.SetActive(false);
+    }
+
+    void SetInventory()
+    {
+        // Empty inventory
+        for(int i = 0; i <= inventoryWeaponsPrimary.Length; i++)
+            inventoryWeaponsPrimary[i] = false;
+        for (int i = 0; i <= inventoryWeaponsSecondary.Length; i++)
+            inventoryWeaponsSecondary[i] = false;
+
+        // Give starting weapons
+        for (int i = 0; i <= startingPrimaryWeapons.Length; i++)
+            GiveWeaponPrimary(i);
+        for (int i = 0; i <= startingSecondaryWeapons.Length; i++)
+            GiveWeaponSecondary(i);
+        SetCurrentWeaponPrimaryIndex(0, 0);
+        SetCurrentWeaponSecondaryIndex(0, 0);
     }
 
     void NamePlayer()
@@ -245,9 +267,125 @@ public class Controller : NetworkBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject == null)
+            return;
+
+        GameObject ob = collision.gameObject;
         // hazards hurt player
-        //if (collision.gameObject.tag == "Hazard")
-        //    health.EditSelfHealth(-1);
+        if (ob.tag == "Hazard")
+        {
+            // subtract health by damage value of projectile instead of -1 every time
+            health.EditSelfHealth(-1);
+        }
+        else if(ob.tag == "Pickup")
+        {
+            if (ob.GetComponent<Pickup>() == null)
+                return;
+            Pickup pickup = ob.GetComponent<Pickup>();
+
+            switch (pickup.type)
+            {
+                case 0: // PRIMARY WEAPON
+                    {
+                        if (ob.GetComponent<WeaponPrimary>() != null)
+                            break;
+                        GiveWeaponPrimary(ob.GetComponent<WeaponPrimary>().index);
+                        break;
+                    }
+                case 1: // SECONDARY WEAPON
+                    {
+                        if (ob.GetComponent<WeaponSecondary>() == null)
+                            break;
+                        GiveWeaponSecondary(ob.GetComponent<WeaponSecondary>().index);
+                        break;
+                    }
+                case 2: // power up (energy, upgrades, washers)
+                    {
+                        switch(pickup.index)
+                        {
+                            case 0: //energy
+                                {
+                                    health.EditSelfHealth(+1); // energy = 100 hp?
+                                    break;
+                                }
+                            case 1: //mega energy
+                                {
+                                    health.EditSelfHealth(+2); // mega energy = 200 hp?
+                                    break;
+                                }
+                            case 2://shield
+                                {
+
+                                    break;
+                                }
+                            case 3://speed
+                                {
+
+                                    break;
+                                }
+                            case 4://EUK2
+                                {
+                                    //Advance current weapon level by 1
+                                    break;
+                                }
+                            case 5://EUK3
+                                {
+                                    //Advance current weapon level by 2???
+                                    break;
+                                }
+                            case 6://Battery
+                                {
+
+                                    break;
+                                }
+                            case 7://Washer
+                                {
+
+                                    break;
+                                }
+                            case 8://Mega Washer
+                                {
+
+                                    break;
+                                }
+                            case 9://Det pak
+                                {
+
+                                    break;
+                                }
+                            case 10://Chip
+                                {
+
+                                    break;
+                                }
+                            case 11://Secret Chip
+                                {
+
+                                    break;
+                                }
+                            case 12://Fire Buddy
+                                {
+
+                                    break;
+                                }
+                        }
+                        break;
+                    }
+            }
+            
+        }
+    }
+
+    private void GiveWeaponPrimary(int index)
+    {
+        inventoryWeaponsPrimary[index] = true;
+        weaponsPrimary[index].ammo = weaponsPrimary[index].maxAmmo;
+    }
+
+    private void GiveWeaponSecondary(int index)
+    {
+        inventoryWeaponsSecondary[index] = true;
+        weaponsSecondary[index].ammo = weaponsSecondary[index].maxAmmo;
     }
 
     private void Update()
