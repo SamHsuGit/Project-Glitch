@@ -23,6 +23,7 @@ public class Controller : NetworkBehaviour
     [SyncVar(hook = nameof(SetIsMoving))] public bool isMoving = false;
     public bool options = false;
     public float m_Speed = 20f;
+    public float m_SpeedAir = 10f;
     public float _jumpForce = 350f;
     public int maxJumps = 2;
     public int currentJumps = 0;
@@ -578,7 +579,10 @@ public class Controller : NetworkBehaviour
         direction = playerCameraOrigin.transform.right * move.x + playerCameraOrigin.transform.forward * move.y; // move in direction camera is facing
         direction = new Vector3(direction.x, 0, direction.z); // remove y component (no vertical movement)
 
-        _rb.AddForce(direction * m_Speed, ForceMode.Impulse);
+        float speed = m_Speed;
+        if (!isGrounded)
+            speed = m_SpeedAir;
+        _rb.AddForce(direction * speed, ForceMode.Impulse);
     }
 
     private void RbForceJump()
