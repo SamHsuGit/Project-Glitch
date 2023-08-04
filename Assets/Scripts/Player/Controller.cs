@@ -444,31 +444,12 @@ public class Controller : NetworkBehaviour
 
     public void PressedShoot()
     {
-        //if (Time.time < gun.nextTimeToFire) // limit how fast can shoot
-        //    return;
-
         CmdSpawnObject(0, 0, projectileOrigin.transform.position);
+    }
 
-        //if (gun.hit.transform != null && gun.hit.transform.gameObject.tag == "voxelRb") // IF SHOT VOXELRB SITTING IN WORLD, DESTROY IT
-        //{
-        //    GameObject hitObject = gun.hit.transform.gameObject;
-        //    Destroy(gun.hit.transform.gameObject);
-        //    Vector3 pos = hitObject.transform.position;
-        //    if (Settings.OnlinePlay)
-        //    {
-        //        CmdSpawnObject(3, 0, new Vector3(pos.x + -0.25f, pos.y + 0, pos.z + 0.25f));
-        //        CmdSpawnObject(3, 0, new Vector3(pos.x + -0.25f, pos.y + 0, pos.z - 0.25f));
-        //        CmdSpawnObject(3, 0, new Vector3(pos.x + 0.25f, pos.y + 0, pos.z + 0.25f));
-        //        CmdSpawnObject(3, 0, new Vector3(pos.x + 0.25f, pos.y + 0, pos.z - 0.25f));
-        //    }
-        //    else
-        //    {
-        //        SpawnObject(3, 0, new Vector3(pos.x + -0.25f, pos.y + 0, pos.z + 0.25f));
-        //        SpawnObject(3, 0, new Vector3(pos.x + -0.25f, pos.y + 0, pos.z - 0.25f));
-        //        SpawnObject(3, 0, new Vector3(pos.x + 0.25f, pos.y + 0, pos.z + 0.25f));
-        //        SpawnObject(3, 0, new Vector3(pos.x + 0.25f, pos.y + 0, pos.z - 0.25f));
-        //    }
-        //}
+    public void PressedGrenade()
+    {
+
     }
 
     void SpawnVoxelRbFromWorld(Vector3 position, byte blockID)
@@ -493,7 +474,6 @@ public class Controller : NetworkBehaviour
             Rigidbody rb = ob.GetComponent<Rigidbody>();
             rb.velocity = targetVector.normalized * weaponsPrimary[currentWeaponPrimaryIndex].projectileVelocity;
             Destroy(ob, 30);
-            //SpawnObject(type, item, pos);
         }
     }
 
