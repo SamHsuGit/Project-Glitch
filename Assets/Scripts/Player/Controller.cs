@@ -31,6 +31,7 @@ public class Controller : NetworkBehaviour
     public bool shoot;
     public bool grenade;
     public bool melee;
+    public int batteries;
 
     [SerializeField] float _lookVelocity = 1f;
 
@@ -47,11 +48,11 @@ public class Controller : NetworkBehaviour
     public GameObject playerHUD;
     public GameObject CinematicBars;
     public GameObject reticle;
+    public GameObject target;
     public GameObject sceneObjectPrefab;
     public GameObject charModel;
     public Material[] charMaterials;
     public Animator[] animators;
-    public GameObject[] projectileObjects;
     public GameObject projectileOrigin;
     public GameObject[] weaponsObsPrimary;
     public bool[] inventoryWeaponsPrimary;
@@ -59,6 +60,7 @@ public class Controller : NetworkBehaviour
     public bool[] inventoryWeaponsSecondary;
     public GameObject[] weaponsObsSecondary;
     public WeaponSecondary[] weaponsSecondary;
+    
 
     //Components
     private GameManagerScript gameManager;
@@ -283,8 +285,11 @@ public class Controller : NetworkBehaviour
         // hazards hurt player
         if (ob.tag == "Hazard")
         {
+            if (ob.GetComponent<Projectile>() == null)
+                return;
+
             // subtract health by damage value of projectile instead of -1 every time
-            health.EditSelfHealth(-1);
+            health.EditSelfHealth(-ob.GetComponent<Projectile>().damage);
         }
         else if(ob.tag == "Pickup")
         {
@@ -314,12 +319,12 @@ public class Controller : NetworkBehaviour
                         {
                             case 0: //energy
                                 {
-                                    health.EditSelfHealth(+1); // energy = 100 hp?
+                                    health.EditSelfHealth(health.batteryMaxHP); // energy fills one battery's worth of hp
                                     break;
                                 }
                             case 1: //mega energy
                                 {
-                                    health.EditSelfHealth(+2); // mega energy = 200 hp?
+                                    health.EditSelfHealth(health.hpMax - health.hp); // mega energy fills hp to max
                                     break;
                                 }
                             case 2://shield
@@ -437,35 +442,33 @@ public class Controller : NetworkBehaviour
         }
     }
 
-    private void PressedShoot()
+    public void PressedShoot()
     {
-        if (Time.time < gun.nextTimeToFire) // limit how fast can shoot
-            return;
+        //if (Time.time < gun.nextTimeToFire) // limit how fast can shoot
+        //    return;
 
         CmdSpawnObject(0, 0, projectileOrigin.transform.position);
 
-        return;
-
-        if (gun.hit.transform != null && gun.hit.transform.gameObject.tag == "voxelRb") // IF SHOT VOXELRB SITTING IN WORLD, DESTROY IT
-        {
-            GameObject hitObject = gun.hit.transform.gameObject;
-            Destroy(gun.hit.transform.gameObject);
-            Vector3 pos = hitObject.transform.position;
-            if (Settings.OnlinePlay)
-            {
-                CmdSpawnObject(3, 0, new Vector3(pos.x + -0.25f, pos.y + 0, pos.z + 0.25f));
-                CmdSpawnObject(3, 0, new Vector3(pos.x + -0.25f, pos.y + 0, pos.z - 0.25f));
-                CmdSpawnObject(3, 0, new Vector3(pos.x + 0.25f, pos.y + 0, pos.z + 0.25f));
-                CmdSpawnObject(3, 0, new Vector3(pos.x + 0.25f, pos.y + 0, pos.z - 0.25f));
-            }
-            else
-            {
-                SpawnObject(3, 0, new Vector3(pos.x + -0.25f, pos.y + 0, pos.z + 0.25f));
-                SpawnObject(3, 0, new Vector3(pos.x + -0.25f, pos.y + 0, pos.z - 0.25f));
-                SpawnObject(3, 0, new Vector3(pos.x + 0.25f, pos.y + 0, pos.z + 0.25f));
-                SpawnObject(3, 0, new Vector3(pos.x + 0.25f, pos.y + 0, pos.z - 0.25f));
-            }
-        }
+        //if (gun.hit.transform != null && gun.hit.transform.gameObject.tag == "voxelRb") // IF SHOT VOXELRB SITTING IN WORLD, DESTROY IT
+        //{
+        //    GameObject hitObject = gun.hit.transform.gameObject;
+        //    Destroy(gun.hit.transform.gameObject);
+        //    Vector3 pos = hitObject.transform.position;
+        //    if (Settings.OnlinePlay)
+        //    {
+        //        CmdSpawnObject(3, 0, new Vector3(pos.x + -0.25f, pos.y + 0, pos.z + 0.25f));
+        //        CmdSpawnObject(3, 0, new Vector3(pos.x + -0.25f, pos.y + 0, pos.z - 0.25f));
+        //        CmdSpawnObject(3, 0, new Vector3(pos.x + 0.25f, pos.y + 0, pos.z + 0.25f));
+        //        CmdSpawnObject(3, 0, new Vector3(pos.x + 0.25f, pos.y + 0, pos.z - 0.25f));
+        //    }
+        //    else
+        //    {
+        //        SpawnObject(3, 0, new Vector3(pos.x + -0.25f, pos.y + 0, pos.z + 0.25f));
+        //        SpawnObject(3, 0, new Vector3(pos.x + -0.25f, pos.y + 0, pos.z - 0.25f));
+        //        SpawnObject(3, 0, new Vector3(pos.x + 0.25f, pos.y + 0, pos.z + 0.25f));
+        //        SpawnObject(3, 0, new Vector3(pos.x + 0.25f, pos.y + 0, pos.z - 0.25f));
+        //    }
+        //}
     }
 
     void SpawnVoxelRbFromWorld(Vector3 position, byte blockID)
@@ -482,10 +485,16 @@ public class Controller : NetworkBehaviour
 
     public void CmdSpawnObject(int type, int item, Vector3 pos)
     {
-        GameObject ob = Instantiate(projectileObjects[currentWeaponPrimaryIndex], pos, Quaternion.identity);
-        ob.GetComponent<Rigidbody>().velocity = transform.forward;
-        Destroy(ob, 30);
-        //SpawnObject(type, item, pos);
+        if(weaponsPrimary[currentWeaponPrimaryIndex].projectile != null)
+        {
+            // create target vector from projectile origin
+            Vector3 targetVector = target.transform.position - projectileOrigin.transform.position;
+            GameObject ob = Instantiate(weaponsPrimary[currentWeaponPrimaryIndex].projectile, pos, Quaternion.Euler(targetVector));
+            Rigidbody rb = ob.GetComponent<Rigidbody>();
+            rb.velocity = targetVector.normalized * weaponsPrimary[currentWeaponPrimaryIndex].projectileVelocity;
+            Destroy(ob, 30);
+            //SpawnObject(type, item, pos);
+        }
     }
 
     public void SpawnObject(int type, int item, Vector3 pos, GameObject obToSpawn = null)

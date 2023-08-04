@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 3
   level: 1
-  damage: 1
+  range: 50
   splashDamage: 0
-  fireRate: 30
+  fireRate: 50
+  projectileVelocity: 100
   roundsPerFire: 1
   clips: 0
   ammo: 0

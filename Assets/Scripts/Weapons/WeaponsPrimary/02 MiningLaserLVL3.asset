@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 2
   level: 3
-  damage: 1
+  range: 50
   splashDamage: 0
-  fireRate: 15
+  fireRate: 25
+  projectileVelocity: 40
   roundsPerFire: 1
   clips: 0
   ammo: 0
@@ -32,4 +33,4 @@ MonoBehaviour:
   lostControl: {fileID: 0}
   toasterFireLoopStop: {fileID: 0}
   hitSound: {fileID: 0}
-  projectile: {fileID: 0}
+  projectile: {fileID: 507171863505185389, guid: 2e8712b5421b6e444b86ba91830c666d, type: 3}

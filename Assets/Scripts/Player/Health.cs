@@ -13,6 +13,7 @@ public class Health : NetworkBehaviour
     private int pieceCount;
     [SyncVar(hook = nameof(UpdateHP))] public int hp; // uses hp SyncVar hook to syncronize # pieces an object has across all online players when hp value changes
     public int hpMax;
+    public int batteryMaxHP;
     public float piecesRbMass = 0.0001f;
     public bool isAlive = false;
     int lastPlayerPos = 0;
@@ -41,10 +42,8 @@ public class Health : NetworkBehaviour
 
     private void Start()
     {
-        pieceCount = 0;
-        modelPieces = new List<GameObject>();
 
-        hpMax = pieceCount;
+        hpMax = batteryMaxHP * controller.batteries;
         hp = hpMax;
 
         if (isAlive)

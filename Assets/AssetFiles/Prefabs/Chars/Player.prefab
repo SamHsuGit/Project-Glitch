@@ -406,6 +406,7 @@ MonoBehaviour:
   shoot: 0
   grenade: 0
   melee: 0
+  batteries: 0
   _lookVelocity: 1
   charModelOrigin: {fileID: 6156733249479519148}
   charModelHead: {fileID: 4781231524526351261}
@@ -418,6 +419,7 @@ MonoBehaviour:
   playerHUD: {fileID: 6575853101699424077}
   CinematicBars: {fileID: 6784496414245384908}
   reticle: {fileID: 5203172495255346061}
+  target: {fileID: 7492109152352002489}
   sceneObjectPrefab: {fileID: 267288310360540051, guid: 04bb5ef7f14330842b6b88d9be1ec42b, type: 3}
   charModel: {fileID: 6156733249479519148}
   charMaterials: []
@@ -425,31 +427,6 @@ MonoBehaviour:
   - {fileID: 2451549598188852664}
   - {fileID: 5521995334900915846}
   - {fileID: 6375770597639287793}
-  projectileObjects:
-  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
-  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
-  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
-  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
-  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
-  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
-  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
-  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
-  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
-  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
-  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
-  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
-  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
-  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
-  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
-  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
-  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
-  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
-  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
-  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
-  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
-  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
-  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
-  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
   projectileOrigin: {fileID: 5980121024669953789}
   weaponsObsPrimary:
   - {fileID: 6754740116663251803}
@@ -545,6 +522,7 @@ MonoBehaviour:
   physicMaterial: {fileID: 13400000, guid: eb6c4df8f1ad7fb47bfe2e436a3df34f, type: 2}
   hp: 9
   hpMax: 9
+  batteryMaxHP: 0
   piecesRbMass: 0.0001
   isAlive: 0
   modelPieces: []
@@ -2681,5 +2659,10 @@ Camera:
 --- !u!4 &7483410035532128692 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4304110605044798366, guid: 4714d538d9e4e6046808ce08addc9a8d, type: 3}
+  m_PrefabInstance: {fileID: 6656650161996149290}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7492109152352002489 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4294320343192392595, guid: 4714d538d9e4e6046808ce08addc9a8d, type: 3}
   m_PrefabInstance: {fileID: 6656650161996149290}
   m_PrefabAsset: {fileID: 0}

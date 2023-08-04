@@ -6,9 +6,10 @@ public class WeaponPrimary : ScriptableObject
     [Header("Weapon Attributes")]
     public int index;
     public int level;
-    public int damage;
+    public int range;
     public int splashDamage;
     public int fireRate;
+    public int projectileVelocity;
     public int roundsPerFire;
     public int clips;
     public int ammo;

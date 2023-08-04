@@ -56,6 +56,7 @@ private void FixedUpdate()
             weaponSounds.clip = currentWeaponPrimary.shootSound;
             weaponSounds.Play();
             Shoot();
+             controller.PressedShoot();
         }
     }
     if(Time.time >= nextTimeToFire && backgroundMaskCanvasGroup.alpha == 0)
