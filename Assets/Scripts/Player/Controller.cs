@@ -51,6 +51,8 @@ public class Controller : NetworkBehaviour
     public GameObject charModel;
     public Material[] charMaterials;
     public Animator[] animators;
+    public GameObject[] projectileObjects;
+    public GameObject projectileOrigin;
     public GameObject[] weaponsObsPrimary;
     public bool[] inventoryWeaponsPrimary;
     public WeaponPrimary[] weaponsPrimary;
@@ -440,6 +442,10 @@ public class Controller : NetworkBehaviour
         if (Time.time < gun.nextTimeToFire) // limit how fast can shoot
             return;
 
+        CmdSpawnObject(0, 0, projectileOrigin.transform.position);
+
+        return;
+
         if (gun.hit.transform != null && gun.hit.transform.gameObject.tag == "voxelRb") // IF SHOT VOXELRB SITTING IN WORLD, DESTROY IT
         {
             GameObject hitObject = gun.hit.transform.gameObject;
@@ -476,7 +482,10 @@ public class Controller : NetworkBehaviour
 
     public void CmdSpawnObject(int type, int item, Vector3 pos)
     {
-        SpawnObject(type, item, pos);
+        GameObject ob = Instantiate(projectileObjects[currentWeaponPrimaryIndex], pos, Quaternion.identity);
+        ob.GetComponent<Rigidbody>().velocity = transform.forward;
+        Destroy(ob, 30);
+        //SpawnObject(type, item, pos);
     }
 
     public void SpawnObject(int type, int item, Vector3 pos, GameObject obToSpawn = null)

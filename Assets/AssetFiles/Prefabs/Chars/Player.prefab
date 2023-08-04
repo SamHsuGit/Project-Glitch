@@ -398,6 +398,7 @@ MonoBehaviour:
   isMoving: 0
   options: 0
   m_Speed: 20
+  m_SpeedAir: 10
   _jumpForce: 350
   maxJumps: 2
   currentJumps: 0
@@ -424,6 +425,32 @@ MonoBehaviour:
   - {fileID: 2451549598188852664}
   - {fileID: 5521995334900915846}
   - {fileID: 6375770597639287793}
+  projectileObjects:
+  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
+  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
+  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
+  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
+  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
+  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
+  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
+  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
+  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
+  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
+  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
+  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
+  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
+  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
+  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
+  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
+  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
+  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
+  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
+  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
+  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
+  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
+  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
+  - {fileID: 507171863505185389, guid: e95dadd88587945aaa6ab549b3532db8, type: 3}
+  projectileOrigin: {fileID: 5980121024669953789}
   weaponsObsPrimary:
   - {fileID: 6754740116663251803}
   - {fileID: 5838543441670788731}
@@ -448,6 +475,7 @@ MonoBehaviour:
   - {fileID: 913344116287352377}
   - {fileID: 4538529761669775592}
   - {fileID: 142601841845819872}
+  inventoryWeaponsPrimary: 
   weaponsPrimary:
   - {fileID: 11400000, guid: 1e3a9e0005dae55458b9a7f8f10dfaf0, type: 2}
   - {fileID: 11400000, guid: bd3129b23dd1d8949a5a625cde0c68eb, type: 2}
@@ -472,6 +500,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: be30e938a4a59874c8a5979efdb8020a, type: 2}
   - {fileID: 11400000, guid: 79f68c4d63e9a4346a77e016fe3fd0be, type: 2}
   - {fileID: 11400000, guid: dae3e99f11c477646b4e4057d8966ce6, type: 2}
+  inventoryWeaponsSecondary: 
   weaponsObsSecondary:
   - {fileID: 7811975564243538370}
   - {fileID: 370942520882645313}
@@ -1366,6 +1395,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5394363511234470940, guid: 16ff54cd55ffe26499574003d5d8255d, type: 3}
   m_PrefabInstance: {fileID: 2006931272366879335}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5980121024669953789 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5271363551603252378, guid: 16ff54cd55ffe26499574003d5d8255d, type: 3}
+  m_PrefabInstance: {fileID: 2006931272366879335}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6156733249479519148 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5668643379242392011, guid: 16ff54cd55ffe26499574003d5d8255d, type: 3}
@@ -1522,6 +1556,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 312114222824396920, guid: 3d19cc3d1f9b877449baa2296722f596, type: 3}
       propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 349193628841813735, guid: 3d19cc3d1f9b877449baa2296722f596, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 349193628841813735, guid: 3d19cc3d1f9b877449baa2296722f596, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 407892830637051851, guid: 3d19cc3d1f9b877449baa2296722f596, type: 3}
