@@ -7,6 +7,7 @@ public class WeaponSecondary : ScriptableObject
     public int index;
     public int damage;
     public int splashRadius;
+    public int projectileVelocity;
     public int fireRate;
     public int roundsPerFire;
     public int ammo;
@@ -17,4 +18,5 @@ public class WeaponSecondary : ScriptableObject
     public AudioClip ScopeZoom;
     public AudioClip wrenchAssemble;
     public AudioClip wrenchDisassemble;
+    public GameObject projectile;
 }

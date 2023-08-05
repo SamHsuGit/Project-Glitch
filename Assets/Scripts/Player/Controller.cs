@@ -53,7 +53,8 @@ public class Controller : NetworkBehaviour
     public GameObject charModel;
     public Material[] charMaterials;
     public Animator[] animators;
-    public GameObject projectileOrigin;
+    public GameObject projectilePrimaryOrigin;
+    public GameObject projectileSecondaryOrigin;
     public GameObject[] weaponsObsPrimary;
     public bool[] inventoryWeaponsPrimary;
     public WeaponPrimary[] weaponsPrimary;
@@ -444,12 +445,12 @@ public class Controller : NetworkBehaviour
 
     public void PressedShoot()
     {
-        CmdSpawnObject(0, 0, projectileOrigin.transform.position);
+        CmdSpawnObject(0, 0, projectilePrimaryOrigin.transform.position);
     }
 
     public void PressedGrenade()
     {
-
+        CmdSpawnObject(1, 0, projectileSecondaryOrigin.transform.position);
     }
 
     void SpawnVoxelRbFromWorld(Vector3 position, byte blockID)
@@ -466,15 +467,38 @@ public class Controller : NetworkBehaviour
 
     public void CmdSpawnObject(int type, int item, Vector3 pos)
     {
-        if(weaponsPrimary[currentWeaponPrimaryIndex].projectile != null)
+        switch(type)
         {
-            // create target vector from projectile origin
-            Vector3 targetVector = target.transform.position - projectileOrigin.transform.position;
-            GameObject ob = Instantiate(weaponsPrimary[currentWeaponPrimaryIndex].projectile, pos, Quaternion.Euler(targetVector));
-            Rigidbody rb = ob.GetComponent<Rigidbody>();
-            rb.velocity = targetVector.normalized * weaponsPrimary[currentWeaponPrimaryIndex].projectileVelocity;
-            Destroy(ob, 30);
+            case (0):
+            {
+                if (weaponsPrimary[currentWeaponPrimaryIndex].projectile != null)
+                {
+                    // create target vector from projectile origin
+                    Vector3 targetVector = target.transform.position - pos;
+                    GameObject ob = Instantiate(weaponsPrimary[currentWeaponPrimaryIndex].projectile, pos, Quaternion.Euler(targetVector));
+                    Rigidbody rb = ob.GetComponent<Rigidbody>();
+                    rb.velocity = targetVector.normalized * weaponsPrimary[currentWeaponPrimaryIndex].projectileVelocity;
+                    Destroy(ob, 30);
+                }
+                break;
+            }
+            case 1:
+            {
+                if (weaponsSecondary[currentWeaponSecondaryIndex].projectile != null)
+                {
+                    Vector3 grenadeTarget = target.transform.position + target.transform.up * 3; // grenade should have slight upwards velocity
+                    // create target vector from projectile origin
+                    Vector3 targetVector = grenadeTarget - pos;
+                    GameObject ob = Instantiate(weaponsSecondary[currentWeaponSecondaryIndex].projectile, pos, Quaternion.Euler(targetVector));
+                    Rigidbody rb = ob.GetComponent<Rigidbody>();
+                    rb.velocity = targetVector.normalized * weaponsPrimary[currentWeaponSecondaryIndex].projectileVelocity;
+                    Destroy(ob, 120); // grenade should destroy itself before 2 min (120 sec), but just in case, clean up scene
+                }
+                break;
+            }
         }
+        
+        
     }
 
     public void SpawnObject(int type, int item, Vector3 pos, GameObject obToSpawn = null)

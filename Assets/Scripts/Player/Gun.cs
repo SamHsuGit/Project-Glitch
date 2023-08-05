@@ -5,10 +5,12 @@ using Mirror;
 public class Gun : NetworkBehaviour
 {
     public float hitScanDist = 100f;
-    public float fireRate = 2f;
+    public float fireRatePrimary = 2f;
+    public float fireRateSecondary = 2f;
     public float impactForce = 0.01f;
     private int damage = 1;
-    public float nextTimeToFire = 0f;
+    public float nextTimeToFirePrimary = 0f;
+    public float nextTimeToFireSecondary = 0f;
     public float sphereCastRadius = 0.1f;
 
     public Camera fpsCam;
@@ -26,6 +28,7 @@ public class Gun : NetworkBehaviour
     private Vector3 sphereCastStart;
     private Image image;
     private int currentPrimaryWeaponIndex;
+    private int currentSecondaryWeaponIndex;
 
     private void Awake()
     {
@@ -45,25 +48,32 @@ private void FixedUpdate()
     sphereCastStart = controller.playerCamera.transform.parent.transform.position;
 
     currentPrimaryWeaponIndex = controller.currentWeaponPrimaryIndex;
+    currentSecondaryWeaponIndex = controller.currentWeaponSecondaryIndex;
     WeaponPrimary currentWeaponPrimary = controller.weaponsPrimary[currentPrimaryWeaponIndex];
-    fireRate = currentWeaponPrimary.fireRate * 0.5f;
+    WeaponSecondary currentWeaponSecondary = controller.weaponsSecondary[currentSecondaryWeaponIndex];
+    fireRatePrimary = currentWeaponPrimary.fireRate * 0.5f;
+    fireRateSecondary = currentWeaponSecondary.fireRate * 0.5f;
 
-    if (Time.time >= nextTimeToFire && backgroundMaskCanvasGroup.alpha == 0)
+    if (Time.time >= nextTimeToFirePrimary && backgroundMaskCanvasGroup.alpha == 0)
     {
         if (inputHandler.shoot)
         {
-            nextTimeToFire = Time.time + 1f / fireRate;
+            nextTimeToFirePrimary = Time.time + 1f / fireRatePrimary;
             weaponSounds.clip = currentWeaponPrimary.shootSound;
             weaponSounds.Play();
             Shoot();
-             controller.PressedShoot();
+            controller.PressedShoot();
         }
     }
-    if(Time.time >= nextTimeToFire && backgroundMaskCanvasGroup.alpha == 0)
+    if(Time.time >= nextTimeToFireSecondary && backgroundMaskCanvasGroup.alpha == 0)
     {
+        // WIP, FIX BY TRIGGERING STARG AND END OF ANIMATION TO ENSURE CANNOT THROW MULTIPLE GRENADES DURING ANIMATION
         if(inputHandler.grenade)
         {
-            
+            nextTimeToFireSecondary = Time.time + 1f / fireRateSecondary;
+            weaponSounds.clip = currentWeaponSecondary.shootSound;
+            weaponSounds.Play();
+            Invoke("Grenade", 1.5f); // allow 3 seconds of windup to trigger grenade toss (ideally trigger this from animation event)
         }
     }
 }
@@ -131,6 +141,11 @@ public Health FindTarget()
             else
                 Damage(target);
         }
+    }
+
+    public void Grenade()
+    {
+        controller.PressedGrenade();
     }
 
     [Command]

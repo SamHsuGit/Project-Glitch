@@ -427,7 +427,8 @@ MonoBehaviour:
   - {fileID: 2451549598188852664}
   - {fileID: 5521995334900915846}
   - {fileID: 6375770597639287793}
-  projectileOrigin: {fileID: 5980121024669953789}
+  projectilePrimaryOrigin: {fileID: 5980121024669953789}
+  projectileSecondaryOrigin: {fileID: 6681044958610792634}
   weaponsObsPrimary:
   - {fileID: 6754740116663251803}
   - {fileID: 5838543441670788731}
@@ -1391,6 +1392,11 @@ GameObject:
 --- !u!95 &6375770597639287793 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 4873251931459912086, guid: 16ff54cd55ffe26499574003d5d8255d, type: 3}
+  m_PrefabInstance: {fileID: 2006931272366879335}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6681044958610792634 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5147011455507616477, guid: 16ff54cd55ffe26499574003d5d8255d, type: 3}
   m_PrefabInstance: {fileID: 2006931272366879335}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &6754740116663251803 stripped

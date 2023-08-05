@@ -12,7 +12,7 @@ public class Projectile : MonoBehaviour
     public GameObject[] particles;
 
     private bool exploded = false;
-    private float grenadeFuseTime = 3.38f;
+    private float grenadeFuseTime = 4f;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -32,8 +32,7 @@ public class Projectile : MonoBehaviour
     private void Explode()
     {
         exploded = true; // ensures this is only called once
-
-        if (!exploded)
+        //if (!exploded)
         {
             if(explosion != null)
             explosion.Play();
@@ -44,8 +43,7 @@ public class Projectile : MonoBehaviour
                 Rigidbody rb = ob.GetComponent<Rigidbody>();
                 rb.velocity = Vector3.up * 3f;
             }
-
-            Destroy(this.gameObject);
         }
+        Destroy(this.gameObject);
     }
 }
