@@ -47,4 +47,9 @@ public class AudioAnimEventPlayer : MonoBehaviour
     {
         grenadeToss.Play();
     }
+
+    public void PressedGrenade()
+    {
+
+    }
 }
