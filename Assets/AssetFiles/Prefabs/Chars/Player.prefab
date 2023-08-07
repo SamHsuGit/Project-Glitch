@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 6602663469932926552}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -542,9 +542,11 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   hitScanDist: 100
-  fireRate: 2
+  fireRatePrimary: 2
+  fireRateSecondary: 2
   impactForce: 0.01
-  nextTimeToFire: 0
+  nextTimeToFirePrimary: 0
+  nextTimeToFireSecondary: 0
   sphereCastRadius: 0.1
   fpsCam: {fileID: 7207859136020956860}
   weaponSounds: {fileID: 6691431893627038704}
@@ -1207,6 +1209,18 @@ PrefabInstance:
       propertyPath: controller
       value: 
       objectReference: {fileID: 3963772888375218276}
+    - target: {fileID: 4567593462456021678, guid: 16ff54cd55ffe26499574003d5d8255d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4567593462456021678, guid: 16ff54cd55ffe26499574003d5d8255d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4567593462456021678, guid: 16ff54cd55ffe26499574003d5d8255d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4873251931459912086, guid: 16ff54cd55ffe26499574003d5d8255d, type: 3}
       propertyPath: m_Controller
       value: 

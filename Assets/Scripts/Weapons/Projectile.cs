@@ -9,16 +9,20 @@ public class Projectile : MonoBehaviour
     public int collisionCountThreshold;
     public AudioSource ricochet;
     public AudioSource explosion;
-    public GameObject[] particles;
+    public ParticleSystem particleSystem;
 
     private bool exploded = false;
     private float grenadeFuseTime = 4f;
+    public bool isGrenade = false;
 
     private void OnCollisionEnter(Collision collision)
     {
         collisionCount++;
         if (ricochet != null)
             ricochet.Play();
+
+        //if (collision.gameObject.tag == "Player") // collides with self
+        //    Explode();
 
         if (collisionCount > collisionCountThreshold)
             Explode();
@@ -31,19 +35,16 @@ public class Projectile : MonoBehaviour
 
     private void Explode()
     {
+        explosion.Play();
         exploded = true; // ensures this is only called once
         //if (!exploded)
-        {
-            if(explosion != null)
-            explosion.Play();
+        if(isGrenade && particleSystem != null)
+            particleSystem.Play();
+        Invoke("DestroyObject", 5f);
+    }
 
-            for(int i = 0; i < particles.Length; i++)
-            {
-                GameObject ob = Instantiate(particles[i], transform.position, Quaternion.identity);
-                Rigidbody rb = ob.GetComponent<Rigidbody>();
-                rb.velocity = Vector3.up * 3f;
-            }
-        }
-        Destroy(this.gameObject);
+    private void DestroyObject()
+    {
+        Destroy(gameObject);
     }
 }
