@@ -11,6 +11,7 @@ public class AudioAnimEventPlayer : MonoBehaviour
     public AudioSource grenadeToss;
     public GameObject[] grenadeObs;
     public Controller controller;
+    public Gun gun;
 
     public void Update()
     {
@@ -48,8 +49,13 @@ public class AudioAnimEventPlayer : MonoBehaviour
         grenadeToss.Play();
     }
 
-    public void PressedGrenade()
+    public void SpawnGrenade()
     {
+        controller.PressedGrenade();
+    }
 
+    public void GrenadeAnimEnd()
+    {
+        controller.isThrowingGrenade = false;
     }
 }

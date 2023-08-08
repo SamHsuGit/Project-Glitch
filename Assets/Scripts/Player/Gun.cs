@@ -29,7 +29,6 @@ public class Gun : NetworkBehaviour
     private Image image;
     private int currentPrimaryWeaponIndex;
     private int currentSecondaryWeaponIndex;
-    private bool isThrowingGrenade;
 
     private void Awake()
     {
@@ -66,23 +65,18 @@ private void FixedUpdate()
             controller.PressedShoot();
         }
     }
-    if(backgroundMaskCanvasGroup.alpha == 0 && !isThrowingGrenade) // && Time.time >= nextTimeToFireSecondary)
+    if (backgroundMaskCanvasGroup.alpha == 0 && !controller.isThrowingGrenade) // && Time.time >= nextTimeToFireSecondary)
     {
         // WIP, FIX BY TRIGGERING STARG AND END OF ANIMATION TO ENSURE CANNOT THROW MULTIPLE GRENADES DURING ANIMATION
-        if(inputHandler.grenade)
+        if (inputHandler.grenade)
         {
-            isThrowingGrenade = true;
+            controller.isThrowingGrenade = true;
             nextTimeToFireSecondary = Time.time + 1f / fireRateSecondary;
             weaponSounds.clip = currentWeaponSecondary.shootSound;
             weaponSounds.Play();
-            //Invoke("Grenade", 1.5f); // allow 3 seconds of windup to trigger grenade toss (ideally trigger this from animation event)
+            //controller.PressedGrenade();
         }
     }
-}
-
-public void GrenadeThrowEnd()
-{
-    isThrowingGrenade = false;
 }
 
 // if raycast hits a destructible object (with health but not this player), turn outer reticle red
@@ -148,11 +142,6 @@ public Health FindTarget()
             else
                 Damage(target);
         }
-    }
-
-    public void Grenade()
-    {
-        controller.PressedGrenade();
     }
 
     [Command]

@@ -32,6 +32,7 @@ public class Controller : NetworkBehaviour
     public bool grenade;
     public bool melee;
     public int batteries;
+    public bool isThrowingGrenade = false;
 
     [SerializeField] float _lookVelocity = 1f;
 
@@ -450,7 +451,11 @@ public class Controller : NetworkBehaviour
 
     public void PressedGrenade()
     {
-        CmdSpawnObject(1, 0, projectileSecondaryOrigin.transform.position);
+        //if (!isThrowingGrenade)
+        {
+            isThrowingGrenade = true;
+            CmdSpawnObject(1, 0, projectileSecondaryOrigin.transform.position);
+        }
     }
 
     void SpawnVoxelRbFromWorld(Vector3 position, byte blockID)
@@ -478,7 +483,8 @@ public class Controller : NetworkBehaviour
                     GameObject ob = Instantiate(weaponsPrimary[currentWeaponPrimaryIndex].projectile, pos, Quaternion.Euler(targetVector));
                     Rigidbody rb = ob.GetComponent<Rigidbody>();
                     rb.velocity = targetVector.normalized * weaponsPrimary[currentWeaponPrimaryIndex].projectileVelocity;
-                    Destroy(ob, 30);
+                    ob.transform.forward = playerCamera.transform.forward; // rotate projectile spawn object to face camera direction
+                    Destroy(ob, 120);
                 }
                 break;
             }

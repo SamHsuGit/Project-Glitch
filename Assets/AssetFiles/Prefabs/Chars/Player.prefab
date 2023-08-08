@@ -407,6 +407,7 @@ MonoBehaviour:
   grenade: 0
   melee: 0
   batteries: 0
+  isThrowingGrenade: 0
   _lookVelocity: 1
   charModelOrigin: {fileID: 6156733249479519148}
   charModelHead: {fileID: 4781231524526351261}
@@ -1190,6 +1191,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 18146a914bc5b174a9b5f8d51ecc972b, type: 2}
     - target: {fileID: 2924189630361579680, guid: 16ff54cd55ffe26499574003d5d8255d, type: 3}
+      propertyPath: gun
+      value: 
+      objectReference: {fileID: 3324826297497535085}
+    - target: {fileID: 2924189630361579680, guid: 16ff54cd55ffe26499574003d5d8255d, type: 3}
       propertyPath: controller
       value: 
       objectReference: {fileID: 3963772888375218276}
@@ -1205,6 +1210,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 18146a914bc5b174a9b5f8d51ecc972b, type: 2}
+    - target: {fileID: 4345295163625332183, guid: 16ff54cd55ffe26499574003d5d8255d, type: 3}
+      propertyPath: gun
+      value: 
+      objectReference: {fileID: 3324826297497535085}
     - target: {fileID: 4345295163625332183, guid: 16ff54cd55ffe26499574003d5d8255d, type: 3}
       propertyPath: controller
       value: 
@@ -1229,6 +1238,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 18146a914bc5b174a9b5f8d51ecc972b, type: 2}
+    - target: {fileID: 5058518916389370782, guid: 16ff54cd55ffe26499574003d5d8255d, type: 3}
+      propertyPath: gun
+      value: 
+      objectReference: {fileID: 3324826297497535085}
     - target: {fileID: 5058518916389370782, guid: 16ff54cd55ffe26499574003d5d8255d, type: 3}
       propertyPath: controller
       value: 
