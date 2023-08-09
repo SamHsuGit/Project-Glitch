@@ -480,10 +480,10 @@ public class Controller : NetworkBehaviour
                 {
                     // create target vector from projectile origin
                     Vector3 targetVector = target.transform.position - pos;
-                    GameObject ob = Instantiate(weaponsPrimary[currentWeaponPrimaryIndex].projectile, pos, Quaternion.Euler(targetVector));
+                    GameObject ob = Instantiate(weaponsPrimary[currentWeaponPrimaryIndex].projectile, pos, Quaternion.LookRotation(projectilePrimaryOrigin.transform.forward, Vector3.up));
                     Rigidbody rb = ob.GetComponent<Rigidbody>();
                     rb.velocity = targetVector.normalized * weaponsPrimary[currentWeaponPrimaryIndex].projectileVelocity;
-                    ob.transform.forward = playerCamera.transform.forward; // rotate projectile spawn object to face camera direction
+                    ob.transform.Rotate(Vector3.right, 90f);
                     Destroy(ob, 120);
                 }
                 break;

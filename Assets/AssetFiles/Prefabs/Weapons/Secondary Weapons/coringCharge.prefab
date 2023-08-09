@@ -70,8 +70,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a3cb8d5c310e82946a6be983ab49a7de, type: 2}
-  - {fileID: 2100000, guid: bd2bced46644eff4c9ba636a60c4f0b9, type: 2}
+  - {fileID: 2100000, guid: 62346d72830bcd4409d99595abbc67c8, type: 2}
+  - {fileID: 2100000, guid: 711fb862b04c06049b601ae1d197dd50, type: 2}
   - {fileID: 2100000, guid: 4845754485766fb4b840315e16f19f5f, type: 2}
   - {fileID: 2100000, guid: 4115461f5f7049e4f93fdaab3b50c793, type: 2}
   - {fileID: 2100000, guid: 52dd8aaf2f991ff4ba63dc9be3f9482a, type: 2}
@@ -113,7 +113,6 @@ MonoBehaviour:
   collisionCountThreshold: 3
   ricochet: {fileID: 610814122563447460}
   explosion: {fileID: 2272382510622480922}
-  particleSystem: {fileID: 2136786156430523196}
   isGrenade: 1
 --- !u!198 &2136786156430523196
 ParticleSystem:
