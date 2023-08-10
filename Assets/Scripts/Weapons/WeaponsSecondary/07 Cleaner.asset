@@ -15,7 +15,7 @@ MonoBehaviour:
   index: 7
   damage: 50
   splashRadius: 0
-  projectileVelocity: 20
+  projectileVelocity: 1
   fireRate: 1
   roundsPerFire: 3
   ammo: 0

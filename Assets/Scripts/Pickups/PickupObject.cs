@@ -39,9 +39,11 @@ public class PickupObject : MonoBehaviour
     public AudioClip hitSound;
     public GameObject projectile;
 
+    private float initialYPos;
+
     private void Awake()
     {
-        
+        initialYPos = transform.position.y;
     }
 
     void Start()
@@ -54,7 +56,7 @@ public class PickupObject : MonoBehaviour
     {
         if(isPickup)
         {
-            transform.position = new Vector3(transform.position.x, Mathf.Sin(Mathf.Deg2Rad* 360 * Time.time) * 0.25f, transform.position.z);
+            transform.position = new Vector3(transform.position.x, initialYPos + Mathf.Sin(Mathf.Deg2Rad* 360 * Time.time) * 0.25f, transform.position.z);
             transform.Rotate(new Vector3(0, Mathf.Deg2Rad * 100, 0));
         }
     }
