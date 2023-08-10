@@ -54,8 +54,8 @@ public class PickupObject : MonoBehaviour
     {
         if(isPickup)
         {
-            transform.position = new Vector3(transform.position.x, Mathf.Sin(Mathf.Deg2Rad* 360 * Time.time) * 0.5f, transform.position.z);
-            transform.Rotate(new Vector3(0, 360 * Time.time * 0.001f, 0));
+            transform.position = new Vector3(transform.position.x, Mathf.Sin(Mathf.Deg2Rad* 360 * Time.time) * 0.25f, transform.position.z);
+            transform.Rotate(new Vector3(0, Mathf.Deg2Rad * 120, 0));
         }
     }
 }

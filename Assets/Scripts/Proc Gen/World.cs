@@ -24,6 +24,7 @@ public class World : MonoBehaviour
     public CustomNetworkManager customNetworkManager;
     public GameObject worldPlayer;
     public PhysicMaterial physicMaterial;
+    public GameObject[] pickups;
     [HideInInspector] public static World Instance { get { return _instance; } }
 
     // PRIVATE VARIABLES
@@ -70,6 +71,9 @@ public class World : MonoBehaviour
             mainCamera.enabled = false;
 
         Settings.WorldLoaded = true;
+
+        for (int i = 0; i < pickups.Length; i++)
+            pickups[i].SetActive(true);
     }
 
     public void JoinPlayer(GameObject playerGameObject)
