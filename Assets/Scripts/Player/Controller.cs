@@ -295,6 +295,7 @@ public class Controller : NetworkBehaviour
         }
         else if(ob.tag == "Pickup")
         {
+            Debug.Log("test");
             if (ob.GetComponent<PickupObject>() == null)
                 return;
             PickupObject pickup = ob.GetComponent<PickupObject>();
