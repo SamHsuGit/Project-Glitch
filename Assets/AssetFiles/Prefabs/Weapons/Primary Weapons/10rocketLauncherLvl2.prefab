@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 7044335422311489204}
   m_Layer: 0
   m_Name: 10rocketLauncherLvl2
-  m_TagString: Untagged
+  m_TagString: Pickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -297,7 +297,9 @@ public class Controller : NetworkBehaviour
         {
             if (ob.GetComponent<Pickup>() == null)
                 return;
-            Pickup pickup = ob.GetComponent<Pickup>();
+            PickupObject pickup = ob.GetComponent<PickupObject>();
+            pickup.audioSourcePlayer.clip = pickup.pickupSound1;
+            pickup.audioSourcePlayer.Play();
 
             switch (pickup.type)
             {
@@ -388,7 +390,7 @@ public class Controller : NetworkBehaviour
                         break;
                     }
             }
-            
+            Destroy(pickup.gameObject);
         }
     }
 

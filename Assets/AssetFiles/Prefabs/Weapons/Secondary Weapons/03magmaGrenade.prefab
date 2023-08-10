@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: -2064280877567805341}
   m_Layer: 0
   m_Name: 03magmaGrenade
-  m_TagString: Untagged
+  m_TagString: Pickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -414,7 +414,7 @@ MonoBehaviour:
   clipInsertSound: {fileID: 0}
   ripperSawLoop: {fileID: 0}
   ripperSawWindDown: {fileID: 0}
-  controlTetherLockOn: {fileID: 0}
+  lockOn: {fileID: 0}
   controlTetherControlOn: {fileID: 0}
   controlTetherLostControl: {fileID: 0}
   toasterFireLoop: {fileID: 0}
