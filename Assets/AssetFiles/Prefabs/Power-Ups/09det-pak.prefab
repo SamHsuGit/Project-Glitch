@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -2542842970529444824}
   - component: {fileID: 8798513101067339677}
   - component: {fileID: 5488131959778577747}
+  - component: {fileID: -3874762714748413880}
   m_Layer: 0
   m_Name: 09det-pak
   m_TagString: Pickup
@@ -275,3 +276,16 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+--- !u!65 &-3874762714748413880
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5304626218118341129}
+  m_Material: {fileID: 13400000, guid: eb6c4df8f1ad7fb47bfe2e436a3df34f, type: 2}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8418882, y: 0.54783815, z: 1.0974295}
+  m_Center: {x: 0.012248412, y: 0.031836286, z: -0.017903896}

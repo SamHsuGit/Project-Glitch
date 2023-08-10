@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7709976817250236698}
   - component: {fileID: 9057457205323119145}
   - component: {fileID: 1034866000221826513}
+  - component: {fileID: 8346003026940149516}
   m_Layer: 0
   m_Name: 04morbotArtifact3
   m_TagString: Pickup
@@ -275,3 +276,16 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+--- !u!65 &8346003026940149516
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3877227419695536770}
+  m_Material: {fileID: 13400000, guid: eb6c4df8f1ad7fb47bfe2e436a3df34f, type: 2}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.87352, y: 2.5600452, z: 0.8228721}
+  m_Center: {x: 0.000008165836, y: 0.00010948838, z: 0.08978951}

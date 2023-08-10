@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -8578126990331609255}
   - component: {fileID: 4838803537171363637}
   - component: {fileID: 6391798574967218026}
+  - component: {fileID: -5296654734718602088}
   m_Layer: 0
   m_Name: 10chip
   m_TagString: Pickup
@@ -275,3 +276,16 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+--- !u!65 &-5296654734718602088
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881145533699808045}
+  m_Material: {fileID: 13400000, guid: eb6c4df8f1ad7fb47bfe2e436a3df34f, type: 2}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.809251, y: 0.373901, z: 1.685936}
+  m_Center: {x: -0.0041514933, y: -0.081605494, z: 0.0009979904}

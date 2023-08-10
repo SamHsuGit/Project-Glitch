@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -8037210439025989611}
   - component: {fileID: 6407264045765364088}
   - component: {fileID: 3930214620808289520}
+  - component: {fileID: 6504207554529713804}
   m_Layer: 0
   m_Name: 21Slingshot
   m_TagString: Pickup
@@ -275,3 +276,16 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+--- !u!65 &6504207554529713804
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4575655683924092178}
+  m_Material: {fileID: 13400000, guid: eb6c4df8f1ad7fb47bfe2e436a3df34f, type: 2}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}

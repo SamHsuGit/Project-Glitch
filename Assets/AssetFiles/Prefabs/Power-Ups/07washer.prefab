@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -8482318821631065403}
   - component: {fileID: 362120162614703164}
   - component: {fileID: 1018137761107424}
+  - component: {fileID: -1293300448142756457}
   m_Layer: 0
   m_Name: 07washer
   m_TagString: Pickup
@@ -275,3 +276,16 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+--- !u!65 &-1293300448142756457
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7482086627947579197}
+  m_Material: {fileID: 13400000, guid: eb6c4df8f1ad7fb47bfe2e436a3df34f, type: 2}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.9626817, y: 0.009644549, z: 1.9626818}
+  m_Center: {x: 1.0728898e-21, y: -0.000009715557, z: 0.00000005960523}

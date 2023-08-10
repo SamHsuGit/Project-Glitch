@@ -295,7 +295,7 @@ public class Controller : NetworkBehaviour
         }
         else if(ob.tag == "Pickup")
         {
-            if (ob.GetComponent<Pickup>() == null)
+            if (ob.GetComponent<PickupObject>() == null)
                 return;
             PickupObject pickup = ob.GetComponent<PickupObject>();
             pickup.audioSourcePlayer.clip = pickup.pickupSound1;

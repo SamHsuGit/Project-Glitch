@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5853725294604501525}
   - component: {fileID: 772868772618105760}
   - component: {fileID: 1405981255591807230}
+  - component: {fileID: -3099389240978949912}
   m_Layer: 0
   m_Name: 03morbotArtifact-speed
   m_TagString: Pickup
@@ -275,3 +276,16 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+--- !u!65 &-3099389240978949912
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1771550230289742710}
+  m_Material: {fileID: 13400000, guid: eb6c4df8f1ad7fb47bfe2e436a3df34f, type: 2}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.1935062, y: 1.2551019, z: 4.1935067}
+  m_Center: {x: 0, y: 0.03337857, z: -0.0000000019895179}

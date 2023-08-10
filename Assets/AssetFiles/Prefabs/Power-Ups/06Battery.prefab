@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -2429414751258087581}
   - component: {fileID: 1244923348940129309}
   - component: {fileID: 111709857764378359}
+  - component: {fileID: 7096734864724223542}
   m_Layer: 0
   m_Name: 06Battery
   m_TagString: Pickup
@@ -277,3 +278,16 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+--- !u!65 &7096734864724223542
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915887878431172586}
+  m_Material: {fileID: 13400000, guid: eb6c4df8f1ad7fb47bfe2e436a3df34f, type: 2}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.925681, y: 2.045315, z: 0.921414}
+  m_Center: {x: 0.013999492, y: -0.07923046, z: -0.004328996}

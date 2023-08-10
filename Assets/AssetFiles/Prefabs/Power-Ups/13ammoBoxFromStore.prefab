@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -6975521441544677061}
   - component: {fileID: 6127898819002264955}
   - component: {fileID: 4927461350529442994}
+  - component: {fileID: 6751598553920939780}
   m_Layer: 0
   m_Name: 13ammoBoxFromStore
   m_TagString: Pickup
@@ -277,3 +278,16 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+--- !u!65 &6751598553920939780
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 399034419620818116}
+  m_Material: {fileID: 13400000, guid: eb6c4df8f1ad7fb47bfe2e436a3df34f, type: 2}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.4038811, y: 2.173368, z: 1.0351729}
+  m_Center: {x: 0.014490515, y: 1.086684, z: 0.0033824742}

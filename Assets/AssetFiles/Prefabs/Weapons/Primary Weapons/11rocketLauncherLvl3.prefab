@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5763532559159726282}
   - component: {fileID: 7380998075555321238}
   - component: {fileID: 7400872891100687262}
+  - component: {fileID: 1115681183631969248}
   m_Layer: 0
   m_Name: 11rocketLauncherLvl3
   m_TagString: Pickup
@@ -279,3 +280,16 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+--- !u!65 &1115681183631969248
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7088322727876314399}
+  m_Material: {fileID: 13400000, guid: eb6c4df8f1ad7fb47bfe2e436a3df34f, type: 2}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.816514, y: 2.179562, z: 4.1136866}
+  m_Center: {x: -0.17396703, y: 1.2230959, z: 0.24556744}

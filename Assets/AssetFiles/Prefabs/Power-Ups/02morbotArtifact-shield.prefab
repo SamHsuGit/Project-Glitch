@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -1538712740551123921}
   - component: {fileID: -2386082960727736793}
   - component: {fileID: 2398551036748669140}
+  - component: {fileID: -427774108013446044}
   m_Layer: 0
   m_Name: 02morbotArtifact-shield
   m_TagString: Pickup
@@ -275,3 +276,16 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+--- !u!65 &-427774108013446044
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2454342739625389820}
+  m_Material: {fileID: 13400000, guid: eb6c4df8f1ad7fb47bfe2e436a3df34f, type: 2}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.1470275, y: 3.4908354, z: 3.442141}
+  m_Center: {x: -0.43805522, y: -0.012212688, z: -0.09810972}

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 452846528079508660}
   - component: {fileID: 3348560898436703455}
   - component: {fileID: 1903949973485043841}
+  - component: {fileID: 5191408393366120186}
   m_Layer: 0
   m_Name: 01energy2
   m_TagString: Pickup
@@ -275,3 +276,16 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+--- !u!65 &5191408393366120186
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8425419887019565634}
+  m_Material: {fileID: 13400000, guid: eb6c4df8f1ad7fb47bfe2e436a3df34f, type: 2}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.040504, y: 2.7939765, z: 2.5474494}
+  m_Center: {x: -0.00013703108, y: 0.0004766583, z: -0.00007802247}
