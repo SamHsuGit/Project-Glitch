@@ -3,13 +3,13 @@ using UnityEngine;
 using Mirror;
 public class Health : NetworkBehaviour
 {
-    public AudioSource hitSound;
-    public AudioSource hurtSound;
+    public AudioSource audioSourcePlayer;
+    public AudioClip hurtSound;
     public AudioClip[] hurtClips;
     public int currentHurtClipIndex;
-    public AudioSource deathSound;
+    public AudioClip deathSound;
     public PhysicMaterial physicMaterial;
-
+    
     private int pieceCount;
     [SyncVar(hook = nameof(UpdateHP))] public int hp; // uses hp SyncVar hook to syncronize # pieces an object has across all online players when hp value changes
     public int hpMax;
@@ -115,19 +115,20 @@ public class Health : NetworkBehaviour
 
     public void PlayHurtSound(int weaponHitIndex)
     {
-        hitSound.clip = controller.weaponsPrimary[controller.currentWeaponPrimaryIndex].hitSound;
-        hitSound.Play();
+        audioSourcePlayer.clip = controller.weaponsPrimary[controller.currentWeaponPrimaryIndex].hitSound;
+        audioSourcePlayer.Play();
 
         if (currentHurtClipIndex > hurtClips.Length)
             currentHurtClipIndex = 0;
-        hurtSound.clip = hurtClips[currentHurtClipIndex];
-        hurtSound.Play();
+        audioSourcePlayer.clip = hurtSound = hurtClips[currentHurtClipIndex];
+        audioSourcePlayer.Play();
         currentHurtClipIndex++;
     }
 
     public void PlayDeathSound()
     {
-        deathSound.Play();
+        audioSourcePlayer.clip = deathSound;
+        audioSourcePlayer.Play();
     }
 
     void SetModelPieceVisibility(List<GameObject> modelPartsList)

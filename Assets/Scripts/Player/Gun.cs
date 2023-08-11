@@ -14,11 +14,12 @@ public class Gun : NetworkBehaviour
     public float sphereCastRadius = 0.1f;
 
     public Camera fpsCam;
-    public AudioSource weaponSounds;
-    public AudioSource hitSound;
+    public AudioSource audioSourcePlayer;
     public GameObject reticleChangeColor;
     public GameObject backgroundMask;
     public Health target;
+    public WeaponPrimary currentWeaponPrimary;
+    public WeaponSecondary currentWeaponSecondary;
 
     InputHandler inputHandler;
     Controller controller;
@@ -49,8 +50,8 @@ private void FixedUpdate()
 
     currentPrimaryWeaponIndex = controller.currentWeaponPrimaryIndex;
     currentSecondaryWeaponIndex = controller.currentWeaponSecondaryIndex;
-    WeaponPrimary currentWeaponPrimary = controller.weaponsPrimary[currentPrimaryWeaponIndex];
-    WeaponSecondary currentWeaponSecondary = controller.weaponsSecondary[currentSecondaryWeaponIndex];
+    currentWeaponPrimary = controller.weaponsPrimary[currentPrimaryWeaponIndex];
+    currentWeaponSecondary = controller.weaponsSecondary[currentSecondaryWeaponIndex];
     fireRatePrimary = currentWeaponPrimary.fireRate * 0.5f;
     fireRateSecondary = currentWeaponSecondary.fireRate * 0.5f;
 
@@ -59,8 +60,8 @@ private void FixedUpdate()
         if (inputHandler.shoot)
         {
             nextTimeToFirePrimary = Time.time + 1f / fireRatePrimary;
-            weaponSounds.clip = currentWeaponPrimary.shootSound;
-            weaponSounds.Play();
+            audioSourcePlayer.clip = currentWeaponPrimary.shootSound;
+            audioSourcePlayer.Play();
             Shoot();
             controller.PressedShoot();
         }
@@ -72,8 +73,8 @@ private void FixedUpdate()
         {
             controller.isThrowingGrenade = true;
             nextTimeToFireSecondary = Time.time + 1f / fireRateSecondary;
-            weaponSounds.clip = currentWeaponSecondary.shootSound;
-            weaponSounds.Play();
+            audioSourcePlayer.clip = currentWeaponSecondary.shootSound;
+            audioSourcePlayer.Play();
             //controller.PressedGrenade();
         }
     }
@@ -113,29 +114,33 @@ public Health FindTarget()
     // Server calculated shoot logic gives players the authority to change hp of other preregistered gameObjects
     public void Shoot()
     {
-        if (hit.transform != null && hit.transform.tag == "BaseObPiece") // hit base object
+        if (hit.transform != null) // hit something
         {
-            hitSound.Play();
+            Debug.Log(currentWeaponPrimary.name);
+            audioSourcePlayer.clip = currentWeaponPrimary.hitSound;
+            audioSourcePlayer.Play();
 
+            // spawn damage sparks effects (use particle system)
             Vector3 pos = hit.transform.position;
             if (Settings.OnlinePlay)
             {
-                controller.CmdSpawnObject(3, 3, new Vector3(pos.x + -0.25f, pos.y + 0, pos.z + 0.25f));
-                controller.CmdSpawnObject(3, 3, new Vector3(pos.x + -0.25f, pos.y + 0, pos.z - 0.25f));
-                controller.CmdSpawnObject(3, 3, new Vector3(pos.x + 0.25f, pos.y + 0, pos.z + 0.25f));
-                controller.CmdSpawnObject(3, 3, new Vector3(pos.x + 0.25f, pos.y + 0, pos.z - 0.25f));
+                //controller.CmdSpawnObject(3, 3, new Vector3(pos.x + -0.25f, pos.y + 0, pos.z + 0.25f));
+                //controller.CmdSpawnObject(3, 3, new Vector3(pos.x + -0.25f, pos.y + 0, pos.z - 0.25f));
+                //controller.CmdSpawnObject(3, 3, new Vector3(pos.x + 0.25f, pos.y + 0, pos.z + 0.25f));
+                //controller.CmdSpawnObject(3, 3, new Vector3(pos.x + 0.25f, pos.y + 0, pos.z - 0.25f));
             }
             else
             {
-                controller.SpawnObject(3, 3, new Vector3(pos.x + -0.25f, pos.y + 0, pos.z + 0.25f));
-                controller.SpawnObject(3, 3, new Vector3(pos.x + -0.25f, pos.y + 0, pos.z - 0.25f));
-                controller.SpawnObject(3, 3, new Vector3(pos.x + 0.25f, pos.y + 0, pos.z + 0.25f));
-                controller.SpawnObject(3, 3, new Vector3(pos.x + 0.25f, pos.y + 0, pos.z - 0.25f));
+                //controller.SpawnObject(3, 3, new Vector3(pos.x + -0.25f, pos.y + 0, pos.z + 0.25f));
+                //controller.SpawnObject(3, 3, new Vector3(pos.x + -0.25f, pos.y + 0, pos.z - 0.25f));
+                //controller.SpawnObject(3, 3, new Vector3(pos.x + 0.25f, pos.y + 0, pos.z + 0.25f));
+                //controller.SpawnObject(3, 3, new Vector3(pos.x + 0.25f, pos.y + 0, pos.z - 0.25f));
             }
         }
-        else if (target != null) // if target was found
+        if (target != null) // if target was found
         {
-            hitSound.Play();
+            audioSourcePlayer.clip = currentWeaponPrimary.hitSound;
+            audioSourcePlayer.Play();
 
             if (Settings.OnlinePlay)
                 CmdDamage(target);

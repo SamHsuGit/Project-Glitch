@@ -50,7 +50,6 @@ public class Controller : NetworkBehaviour
     public GameObject CinematicBars;
     public GameObject reticle;
     public GameObject target;
-    public GameObject sceneObjectPrefab;
     public GameObject charModel;
     public Material[] charMaterials;
     public Animator[] animators;
@@ -62,6 +61,7 @@ public class Controller : NetworkBehaviour
     public bool[] inventoryWeaponsSecondary;
     public GameObject[] weaponsObsSecondary;
     public WeaponSecondary[] weaponsSecondary;
+    public AudioSource audioSourcePlayer;
     
 
     //Components
@@ -278,12 +278,12 @@ public class Controller : NetworkBehaviour
         currentWeaponSecondaryIndex = newValue;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collider)
     {
-        if (collision.gameObject == null)
+        if (collider.gameObject == null)
             return;
 
-        GameObject ob = collision.gameObject;
+        GameObject ob = collider.gameObject;
         // hazards hurt player
         if (ob.tag == "Hazard")
         {
@@ -295,27 +295,19 @@ public class Controller : NetworkBehaviour
         }
         else if(ob.tag == "Pickup")
         {
-            Debug.Log("test");
             if (ob.GetComponent<PickupObject>() == null)
                 return;
             PickupObject pickup = ob.GetComponent<PickupObject>();
-            pickup.audioSourcePlayer.clip = pickup.pickupSound1;
-            pickup.audioSourcePlayer.Play();
-
             switch (pickup.type)
             {
                 case 0: // PRIMARY WEAPON
                     {
-                        if (ob.GetComponent<WeaponPrimary>() != null)
-                            break;
-                        GiveWeaponPrimary(ob.GetComponent<WeaponPrimary>().index);
+                        GiveWeaponPrimary(pickup.index);
                         break;
                     }
                 case 1: // SECONDARY WEAPON
                     {
-                        if (ob.GetComponent<WeaponSecondary>() == null)
-                            break;
-                        GiveWeaponSecondary(ob.GetComponent<WeaponSecondary>().index);
+                        GiveWeaponSecondary(pickup.index);
                         break;
                     }
                 case 2: // power up (energy, upgrades, washers)
@@ -391,6 +383,8 @@ public class Controller : NetworkBehaviour
                         break;
                     }
             }
+            audioSourcePlayer.clip = pickup.pickupSound1;
+            audioSourcePlayer.Play();
             Destroy(pickup.gameObject);
         }
     }
@@ -461,17 +455,17 @@ public class Controller : NetworkBehaviour
         }
     }
 
-    void SpawnVoxelRbFromWorld(Vector3 position, byte blockID)
-    {
-        if (blockID == 0 || blockID == 1) // if the blockID at position is air, barrier, base, procGenVBO, then skip to next position
-            return;
+    //void SpawnVoxelRbFromWorld(Vector3 position, byte blockID)
+    //{
+    //    if (blockID == 0 || blockID == 1) // if the blockID at position is air, barrier, base, procGenVBO, then skip to next position
+    //        return;
 
-        //EditVoxel(position, 0, true); // destroy voxel at position
-        if (Settings.OnlinePlay)
-            CmdSpawnObject(0, blockID, position);
-        else
-            SpawnObject(0, blockID, position);
-    }
+    //    //EditVoxel(position, 0, true); // destroy voxel at position
+    //    if (Settings.OnlinePlay)
+    //        CmdSpawnObject(0, blockID, position);
+    //    else
+    //        SpawnObject(0, blockID, position);
+    //}
 
     public void CmdSpawnObject(int type, int item, Vector3 pos)
     {
@@ -510,41 +504,41 @@ public class Controller : NetworkBehaviour
         
     }
 
-    public void SpawnObject(int type, int item, Vector3 pos, GameObject obToSpawn = null)
-    {
-        Vector3 spawnDir;
-        // all other camera modes, spawn object in direction of playerObject
-            spawnDir = transform.forward;
+    //public void SpawnObject(int type, int item, Vector3 pos, GameObject obToSpawn = null)
+    //{
+    //    Vector3 spawnDir;
+    //    // all other camera modes, spawn object in direction of playerObject
+    //        spawnDir = transform.forward;
 
-        GameObject ob = Instantiate(sceneObjectPrefab, pos, Quaternion.identity);
-        Rigidbody rb;
+    //    GameObject ob = Instantiate(sceneObjectPrefab, pos, Quaternion.identity);
+    //    Rigidbody rb;
 
-        ob.transform.rotation = Quaternion.LookRotation(spawnDir); // orient forwards in direction of camera
-        rb = ob.GetComponent<Rigidbody>();
-        rb.mass = health.piecesRbMass;
-        rb.isKinematic = false;
-        rb.velocity = spawnDir * 25; // give some velocity away from where player is looking
+    //    ob.transform.rotation = Quaternion.LookRotation(spawnDir); // orient forwards in direction of camera
+    //    rb = ob.GetComponent<Rigidbody>();
+    //    rb.mass = health.piecesRbMass;
+    //    rb.isKinematic = false;
+    //    rb.velocity = spawnDir * 25; // give some velocity away from where player is looking
 
-        SceneObject sceneObject = ob.GetComponent<SceneObject>();
-        // IF VOXEL
-        sceneObject.SetEquippedItem(type, item); // set the child object on the server
-        sceneObject.typeProjectile = item; // set the SyncVar on the scene object for clients
-        BoxCollider VoxelBc = ob.AddComponent<BoxCollider>();
-        VoxelBc.material = physicMaterial;
-        VoxelBc.center = new Vector3(0.5f, 0.5f, 0.5f);
-        ob.tag = "voxelRb";
-        sceneObject.controller = this;
+    //    SceneObject sceneObject = ob.GetComponent<SceneObject>();
+    //    // IF VOXEL
+    //    sceneObject.SetEquippedItem(type, item); // set the child object on the server
+    //    sceneObject.typeProjectile = item; // set the SyncVar on the scene object for clients
+    //    BoxCollider VoxelBc = ob.AddComponent<BoxCollider>();
+    //    VoxelBc.material = physicMaterial;
+    //    VoxelBc.center = new Vector3(0.5f, 0.5f, 0.5f);
+    //    ob.tag = "voxelRb";
+    //    sceneObject.controller = this;
 
-        if (Settings.OnlinePlay)
-        {
-            ob.GetComponent<NetworkIdentity>().enabled = true;
-            if (ob.GetComponent<NetworkTransform>() == null)
-                ob.AddComponent<NetworkTransform>();
-            ob.GetComponent<NetworkTransform>().enabled = true;
-            customNetworkManager.SpawnNetworkOb(ob);
-        }
-        Destroy(ob, 30); // clean up objects after 30 seconds
-    }
+    //    if (Settings.OnlinePlay)
+    //    {
+    //        ob.GetComponent<NetworkIdentity>().enabled = true;
+    //        if (ob.GetComponent<NetworkTransform>() == null)
+    //            ob.AddComponent<NetworkTransform>();
+    //        ob.GetComponent<NetworkTransform>().enabled = true;
+    //        customNetworkManager.SpawnNetworkOb(ob);
+    //    }
+    //    Destroy(ob, 30); // clean up objects after 30 seconds
+    //}
 
     bool CheckGroundedCollider()
     {

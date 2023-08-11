@@ -119,7 +119,7 @@ MonoBehaviour:
   clipSize: 0
   maxAmmo: 0
   isPickup: 1
-  audioSourcePlayer: {fileID: 5902663502482000743, guid: 04bb5ef7f14330842b6b88d9be1ec42b, type: 3}
+  audioSourcePlayer: {fileID: -4778907913020493998}
   pickupSound1: {fileID: 8300000, guid: ba01ed23d45adea4993573a1212828db, type: 3}
   ammoPickupSound: {fileID: 0}
   weaponFireSound: {fileID: 0}
