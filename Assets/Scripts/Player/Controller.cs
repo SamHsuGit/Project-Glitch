@@ -55,11 +55,11 @@ public class Controller : NetworkBehaviour
     public Animator[] animators;
     public GameObject projectilePrimaryOrigin;
     public GameObject projectileSecondaryOrigin;
-    public GameObject[] weaponsObsPrimary;
+    public GameObject[] weaponsHeldModelsPrimary;
     public bool[] inventoryWeaponsPrimary;
     public WeaponPrimary[] weaponsPrimary;
     public bool[] inventoryWeaponsSecondary;
-    public GameObject[] weaponsObsSecondary;
+    public GameObject[] weaponsHeldModelsSecondary;
     public WeaponSecondary[] weaponsSecondary;
     public AudioSource audioSourcePlayer;
     
@@ -74,8 +74,8 @@ public class Controller : NetworkBehaviour
     private InputHandler _inputHandler;
     private Health health;
     private Gun gun;
-    private CanvasGroup backgroundMaskCanvasGroup;
     private GameMenu gameMenuComponent;
+    private CanvasGroup backgroundMaskCanvasGroup;
     private BoxCollider playerCameraBoxCollider;
     private PhysicMaterial physicMaterial;
     private CustomNetworkManager customNetworkManager;
@@ -298,6 +298,8 @@ public class Controller : NetworkBehaviour
             if (ob.GetComponent<PickupObject>() == null)
                 return;
             PickupObject pickup = ob.GetComponent<PickupObject>();
+
+            gameMenuComponent.ShowPickupItem(pickup.type, pickup.index);
             switch (pickup.type)
             {
                 case 0: // PRIMARY WEAPON
@@ -312,6 +314,7 @@ public class Controller : NetworkBehaviour
                     }
                 case 2: // power up (energy, upgrades, washers)
                     {
+
                         switch(pickup.index)
                         {
                             case 0: //energy
@@ -393,12 +396,20 @@ public class Controller : NetworkBehaviour
     {
         inventoryWeaponsPrimary[index] = true;
         weaponsPrimary[index].ammo = weaponsPrimary[index].maxAmmo;
+
+        for (int i = 0; i < weaponsHeldModelsPrimary.Length; i++)
+            weaponsHeldModelsPrimary[i].SetActive(false);
+        weaponsHeldModelsPrimary[index].SetActive(true);
     }
 
     private void GiveWeaponSecondary(int index)
     {
         inventoryWeaponsSecondary[index] = true;
         weaponsSecondary[index].ammo = weaponsSecondary[index].maxAmmo;
+
+        for (int i = 0; i < weaponsHeldModelsSecondary.Length; i++)
+            weaponsHeldModelsSecondary[i].SetActive(false);
+        weaponsHeldModelsSecondary[index].SetActive(true);
     }
 
     private void Update()

@@ -35,6 +35,10 @@ public class GameMenu : MonoBehaviour
     public TextMeshProUGUI AmmoCountSecondary;
     public Slider laserAmmoSlider;
     public GameObject[] levelPrimaryWeaponIcons;
+    public GameObject[] pickupsWeaponPrimary;
+    public GameObject[] pickupsWeaponSecondary;
+    public GameObject[] pickupsPowerUps;
+    public GameObject currentPickupGameObject;
 
     private int previousGraphicsQuality;
     private World world;
@@ -101,6 +105,9 @@ public class GameMenu : MonoBehaviour
 
         UpdateWeaponIcons();
         UpdateAmmoCounts();
+
+        if(currentPickupGameObject != null)
+            currentPickupGameObject.transform.Rotate(new Vector3(0, Mathf.Deg2Rad * 100, 0));
     }
 
     public void UpdateHP()
@@ -134,6 +141,44 @@ public class GameMenu : MonoBehaviour
         AmmoCountPrimary.text = controller.weaponsPrimary[controller.currentWeaponPrimaryIndex].ammo.ToString();
         ClipCountPrimary.text = controller.weaponsPrimary[controller.currentWeaponPrimaryIndex].clips.ToString();
         AmmoCountSecondary.text = controller.weaponsSecondary[controller.currentWeaponSecondaryIndex].ammo.ToString();
+    }
+
+    public void ShowPickupItem(int type, int index)
+    {
+        //set all as hidden when picking up multiple items
+        for (int i = 0; i < pickupsWeaponPrimary.Length; i++)
+            pickupsWeaponPrimary[i].SetActive(false);
+        for(int i = 0; i < pickupsWeaponSecondary.Length; i++)
+            pickupsWeaponSecondary[i].SetActive(false);
+        for(int i = 0; i < pickupsPowerUps.Length; i++)
+            pickupsPowerUps[i].SetActive(false);
+
+        switch (type)
+        {
+            case 0:
+                {
+                    currentPickupGameObject = pickupsWeaponPrimary[index];
+                    break;
+                }
+            case 1:
+                {
+                    currentPickupGameObject = pickupsWeaponSecondary[index];
+                    break;
+                }
+            case 2:
+                {
+                    currentPickupGameObject = pickupsPowerUps[index];
+                    break;
+                }
+        }
+
+        currentPickupGameObject.SetActive(true);
+        Invoke("HidePickupItem", 3f);
+    }
+
+    private void HidePickupItem()
+    {
+        currentPickupGameObject.SetActive(false);
     }
 
     void CheckSplitscreenCanvasRenderMode()

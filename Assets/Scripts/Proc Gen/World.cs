@@ -24,7 +24,7 @@ public class World : MonoBehaviour
     public CustomNetworkManager customNetworkManager;
     public GameObject worldPlayer;
     public PhysicMaterial physicMaterial;
-    public GameObject[] pickups;
+    public GameObject[] objectsToActivateAtWorldLoad;
     [HideInInspector] public static World Instance { get { return _instance; } }
 
     // PRIVATE VARIABLES
@@ -72,8 +72,8 @@ public class World : MonoBehaviour
 
         Settings.WorldLoaded = true;
 
-        for (int i = 0; i < pickups.Length; i++)
-            pickups[i].SetActive(true);
+        for (int i = 0; i < objectsToActivateAtWorldLoad.Length; i++)
+            objectsToActivateAtWorldLoad[i].SetActive(true);
     }
 
     public void JoinPlayer(GameObject playerGameObject)

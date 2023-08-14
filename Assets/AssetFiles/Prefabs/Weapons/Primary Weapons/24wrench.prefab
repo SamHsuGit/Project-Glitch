@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 6231634585311405142}
   - component: {fileID: 7305369363794566193}
   - component: {fileID: 7975581220170470797}
-  - component: {fileID: -6580292944815812178}
   m_Layer: 0
   m_Name: 24wrench
   m_TagString: Pickup
@@ -290,16 +289,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!65 &-6580292944815812178
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5780501510676682312}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.168594, y: 1.180156, z: 0.488922}
-  m_Center: {x: 0, y: 0.279868, z: 0.059008002}

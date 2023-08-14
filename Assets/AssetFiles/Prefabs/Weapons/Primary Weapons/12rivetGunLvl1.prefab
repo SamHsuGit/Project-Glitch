@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 3007518829356129341}
   - component: {fileID: 1792716185298158394}
   - component: {fileID: 4219967904561196929}
-  - component: {fileID: -69670367127993881}
   m_Layer: 0
   m_Name: 12rivetGunLvl1
   m_TagString: Pickup
@@ -292,16 +291,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!65 &-69670367127993881
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8973807824262560634}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.90262496, y: 1.4848139, z: 2.334374}
-  m_Center: {x: 0.00828667, y: 0.15516254, z: 1.0505381}

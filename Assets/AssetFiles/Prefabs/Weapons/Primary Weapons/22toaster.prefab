@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 5044625948798551544}
   - component: {fileID: 6205053930518180993}
   - component: {fileID: 2795401770360720153}
-  - component: {fileID: -6369145086828251840}
   m_Layer: 0
   m_Name: 22toaster
   m_TagString: Pickup
@@ -290,16 +289,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!65 &-6369145086828251840
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6078679151752489412}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.70724, y: 0.674483, z: 2.1553998}
-  m_Center: {x: 0.12766019, y: -0.023180515, z: 1.3141544}

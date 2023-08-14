@@ -116,7 +116,6 @@ public Health FindTarget()
     {
         if (hit.transform != null) // hit something
         {
-            Debug.Log(currentWeaponPrimary.name);
             audioSourcePlayer.clip = currentWeaponPrimary.hitSound;
             audioSourcePlayer.Play();
 

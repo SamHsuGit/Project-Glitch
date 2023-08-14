@@ -1402,6 +1402,58 @@ MonoBehaviour:
   - {fileID: 5457465035282807547}
   - {fileID: 7471972457597962459}
   - {fileID: 2463472996678103050}
+  pickupsWeaponPrimary:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  pickupsWeaponSecondary:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  pickupsPowerUps:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  currentPickupGameObject: {fileID: 0}
 --- !u!223 &1391849460458908909
 Canvas:
   m_ObjectHideFlags: 0
@@ -7142,7 +7194,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &657315206160786307
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7191,11 +7243,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Grab \t\tHold/Release RMB (B)\nStore \t\tRelease Grab while aimed at air\nUnstore
-    \t\tHold Grab while aimed at air\nBuild\t\tHold/Release LMB (X) with Stored Bricks\nConvert
-    Brick\tPress Build while Grabbing Brick\n\nNavigate Slots\tScroll/Arrow Keys
-    (D-Pad)\nChange Cam\tTab (Y)\n\nOptions\t\tEsc (Start)\nMove\t\tWASD (Left Stick)\nLook\t\tMouse
-    (Right Stick)\nJump\t\tSpace (Xbox A)\nSprint\t\tLeft Shift (Left Stick Press)"
+  m_text: "Options\t\tEsc (Start)\nMove\t\tWASD (Left Stick)\nLook\t\tMouse (Right
+    Stick)\nJump\t\tSpace (Xbox A)"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
