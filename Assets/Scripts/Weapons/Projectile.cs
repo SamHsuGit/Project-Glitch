@@ -18,6 +18,8 @@ public class Projectile : MonoBehaviour
     private void Awake()
     {
         particle_Sys = GetComponent<ParticleSystem>();
+        if (isGrenade)
+            GetComponent<PickupObject>().enabled = false;
     }
 
     private void Start()

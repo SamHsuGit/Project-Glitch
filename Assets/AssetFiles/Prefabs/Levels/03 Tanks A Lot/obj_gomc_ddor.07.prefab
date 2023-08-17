@@ -466,7 +466,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 8, z: 8}
   m_Center: {x: -3, y: 0, z: 0}
 --- !u!114 &7060239615837624871
 MonoBehaviour:
@@ -491,7 +491,7 @@ MonoBehaviour:
   doorCloseSound: {fileID: 8300000, guid: 10ec27f705f8bd445a6c19764cfee118, type: 3}
   doorWaitPeriod: 1
   timeOfLastDoorTrigger: 0
-  doorSpeed: 0.125
+  doorSpeed: 1
   doorOpen: 0
 --- !u!82 &3705503237957108426
 AudioSource:
@@ -600,5 +600,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 8, z: 8}
   m_Center: {x: 3, y: 0, z: 0}

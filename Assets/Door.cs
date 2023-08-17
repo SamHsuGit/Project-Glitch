@@ -40,7 +40,6 @@ public class Door : MonoBehaviour
 
     public void CloseDoor()
     {
-        Debug.Log("doorClosed");
         doorOpen = false;
         doorLeft.transform.position = Vector3.Lerp(openLeft, closedLeft, doorSpeed);
         doorRight.transform.position = Vector3.Lerp(openRight, closedRight, doorSpeed);
@@ -54,7 +53,6 @@ public class Door : MonoBehaviour
 
     public void OpenDoor()
     {
-        Debug.Log("doorOpen");
         timeOfLastDoorTrigger = Time.time;
         doorOpen = true;
         doorLeft.transform.position = Vector3.Lerp(closedLeft, openLeft, doorSpeed);

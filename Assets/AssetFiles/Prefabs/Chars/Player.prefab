@@ -403,7 +403,7 @@ MonoBehaviour:
   shoot: 0
   grenade: 0
   melee: 0
-  batteries: 0
+  batteries: 3
   isThrowingGrenade: 0
   _lookVelocity: 1
   charModelOrigin: {fileID: 6156733249479519148}
@@ -520,9 +520,9 @@ MonoBehaviour:
   currentHurtClipIndex: 0
   deathSound: {fileID: 0}
   physicMaterial: {fileID: 13400000, guid: eb6c4df8f1ad7fb47bfe2e436a3df34f, type: 2}
-  hp: 9
-  hpMax: 9
-  batteryMaxHP: 0
+  hp: 200
+  hpMax: 300
+  batteryMaxHP: 100
   piecesRbMass: 0.0001
   isAlive: 0
   modelPieces: []

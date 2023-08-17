@@ -13,7 +13,7 @@ public class Health : NetworkBehaviour
     private int pieceCount;
     [SyncVar(hook = nameof(UpdateHP))] public int hp; // uses hp SyncVar hook to syncronize # pieces an object has across all online players when hp value changes
     public int hpMax;
-    public int batteryMaxHP;
+    public int batteryMaxHP = 100;
     public float piecesRbMass = 0.0001f;
     public bool isAlive = false;
     int lastPlayerPos = 0;
@@ -101,8 +101,16 @@ public class Health : NetworkBehaviour
 
     public void EditSelfHealth(int amount) // Server updates hp and then updates pieces
     {
-        hp = hp + amount;
-        UpdateHP(hp, hp);
+        if (hp + amount > hpMax)
+        {
+            hp = hpMax;
+            return;
+        }
+        else
+        {
+            hp = hp + amount;
+            UpdateHP(hp, hp);
+        }
     }
 
     // runs from gun script when things are shot, runs in this script when object falls below certain height

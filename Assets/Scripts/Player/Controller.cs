@@ -31,7 +31,7 @@ public class Controller : NetworkBehaviour
     public bool shoot;
     public bool grenade;
     public bool melee;
-    public int batteries;
+    public int batteries = 1;
     public bool isThrowingGrenade = false;
 
     [SerializeField] float _lookVelocity = 1f;
@@ -290,8 +290,10 @@ public class Controller : NetworkBehaviour
             if (ob.GetComponent<Projectile>() == null)
                 return;
 
+            Projectile projectile = ob.GetComponent<Projectile>();
+
             // subtract health by damage value of projectile instead of -1 every time
-            health.EditSelfHealth(-ob.GetComponent<Projectile>().damage);
+            health.EditSelfHealth(-projectile.damage);
         }
         else if(ob.tag == "Pickup")
         {
