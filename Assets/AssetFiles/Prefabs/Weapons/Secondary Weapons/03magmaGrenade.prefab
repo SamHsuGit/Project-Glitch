@@ -18,11 +18,12 @@ GameObject:
   - component: {fileID: 6982387825060234361}
   - component: {fileID: 9049500508790222401}
   - component: {fileID: 7419785849958516417}
+  - component: {fileID: 5123253581664399741}
   - component: {fileID: -6627252206714515614}
   - component: {fileID: -2064280877567805341}
   m_Layer: 0
   m_Name: 03magmaGrenade
-  m_TagString: Pickup
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,7 +100,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 982784944137954184}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8ae97bea0fedab4fbfa743bf32ec9ff, type: 3}
   m_Name: 
@@ -378,6 +379,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.2641563, y: 0.80055904, z: 1.7016242}
   m_Center: {x: 0.005046487, y: 0.00062513346, z: -0.0051351185}
+--- !u!65 &5123253581664399741
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 982784944137954184}
+  m_Material: {fileID: 13400000, guid: eb6c4df8f1ad7fb47bfe2e436a3df34f, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.2641563, y: 0.80055904, z: 1.7016242}
+  m_Center: {x: 0.005046487, y: 0.00062513346, z: -0.0051351185}
 --- !u!114 &-6627252206714515614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,7 +399,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 982784944137954184}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0632f94b95c6634b9d3e7385000680f, type: 3}
   m_Name: 

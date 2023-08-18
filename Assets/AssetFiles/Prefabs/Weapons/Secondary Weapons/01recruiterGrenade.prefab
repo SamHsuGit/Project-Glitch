@@ -18,11 +18,12 @@ GameObject:
   - component: {fileID: -8166007656221862757}
   - component: {fileID: -4234570120050511182}
   - component: {fileID: -8089699817436305195}
+  - component: {fileID: 7258040162184900024}
   - component: {fileID: 3522973771638083976}
   - component: {fileID: 352691565602850415}
   m_Layer: 0
   m_Name: 01recruiterGrenade
-  m_TagString: Pickup
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,7 +101,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3806480048283036458}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8ae97bea0fedab4fbfa743bf32ec9ff, type: 3}
   m_Name: 
@@ -378,6 +379,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.82740605, y: 0.62768805, z: 0.827407}
   m_Center: {x: 0.0005889982, y: -0.0023580045, z: -0.00036850572}
+--- !u!65 &7258040162184900024
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3806480048283036458}
+  m_Material: {fileID: 13400000, guid: eb6c4df8f1ad7fb47bfe2e436a3df34f, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.82740605, y: 0.62768805, z: 0.827407}
+  m_Center: {x: 0.0005889982, y: -0.0023580045, z: -0.00036850572}
 --- !u!114 &3522973771638083976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,7 +399,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3806480048283036458}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0632f94b95c6634b9d3e7385000680f, type: 3}
   m_Name: 

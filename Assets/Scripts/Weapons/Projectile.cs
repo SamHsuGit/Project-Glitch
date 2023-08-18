@@ -18,8 +18,8 @@ public class Projectile : MonoBehaviour
     private void Awake()
     {
         particle_Sys = GetComponent<ParticleSystem>();
-        if (isGrenade)
-            GetComponent<PickupObject>().enabled = false;
+        //if (isGrenade)
+        //    GetComponent<PickupObject>().enabled = false;
     }
 
     private void Start()
@@ -47,7 +47,7 @@ public class Projectile : MonoBehaviour
         //if (!exploded)
         if(isGrenade && particle_Sys != null)
             particle_Sys.Play(); // used for grenades
-        Invoke("DestroyObject", 5f);
+        Invoke("DestroyObject", grenadeFuseTime + 0.1f);
     }
 
     private void DestroyObject()

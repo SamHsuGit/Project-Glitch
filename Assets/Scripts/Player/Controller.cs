@@ -322,11 +322,13 @@ public class Controller : NetworkBehaviour
                             case 0: //energy
                                 {
                                     health.EditSelfHealth(health.batteryMaxHP); // energy fills one battery's worth of hp
+                                    gameMenuComponent.UpdateHP();
                                     break;
                                 }
                             case 1: //mega energy
                                 {
                                     health.EditSelfHealth(health.hpMax - health.hp); // mega energy fills hp to max
+                                    gameMenuComponent.UpdateHP();
                                     break;
                                 }
                             case 2://shield
@@ -494,7 +496,7 @@ public class Controller : NetworkBehaviour
                     Rigidbody rb = ob.GetComponent<Rigidbody>();
                     rb.velocity = targetVector.normalized * weaponsPrimary[currentWeaponPrimaryIndex].projectileVelocity;
                     ob.transform.Rotate(Vector3.right, 90f);
-                    Destroy(ob, 120);
+                    Destroy(ob, 30);
                 }
                 break;
             }
@@ -508,7 +510,7 @@ public class Controller : NetworkBehaviour
                     GameObject ob = Instantiate(weaponsSecondary[currentWeaponSecondaryIndex].projectile, pos, Quaternion.Euler(targetVector));
                     Rigidbody rb = ob.GetComponent<Rigidbody>();
                     rb.velocity = targetVector.normalized * weaponsPrimary[currentWeaponSecondaryIndex].projectileVelocity;
-                    Destroy(ob, 120); // grenade should destroy itself before 2 min (120 sec), but just in case, clean up scene
+                    Destroy(ob, 30); // grenade should destroy itself before 30 sec, but just in case, clean up scene
                 }
                 break;
             }
