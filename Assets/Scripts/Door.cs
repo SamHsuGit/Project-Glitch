@@ -14,6 +14,8 @@ public class Door : MonoBehaviour
     public AudioClip doorOpenSound;
     public AudioClip doorOpenArriveSound;
     public AudioClip doorTravelSound;
+    public AudioClip doorSoundCombinedOpen;
+    public AudioClip doorSoundCombinedClosed;
     public AudioClip doorCloseSound;
     public AudioClip doorCloseArriveSound;
 
@@ -36,7 +38,6 @@ public class Door : MonoBehaviour
         closedRight = closedRightPos.transform.position;
         openLeft = openLeftPos.transform.position;
         openRight = openRightPos.transform.position;
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -72,7 +73,7 @@ public class Door : MonoBehaviour
             doorLeft.transform.position = openLeft;
             doorRight.transform.position = openRight;
             doorOpen = true;
-            audioSourcePlayer.Stop();
+            //audioSourcePlayer.Stop();
             //playedOneShotClosed = false;
             //if (!playedOneShotOpen)
             //{
@@ -86,7 +87,7 @@ public class Door : MonoBehaviour
             doorLeft.transform.position = closedLeft;
             doorRight.transform.position = closedRight;
             doorOpen = false;
-            audioSourcePlayer.Stop();
+            //audioSourcePlayer.Stop();
             //playedOneShotOpen = false;
             //if (!playedOneShotClosed)
             //{
@@ -99,16 +100,20 @@ public class Door : MonoBehaviour
 
     public void OpenDoor()
     {
-        audioSourcePlayer.clip = doorTravelSound;
-        audioSourcePlayer.Play();
+        audioSourcePlayer.PlayOneShot(doorSoundCombinedOpen);
+
+        //audioSourcePlayer.clip = doorTravelSound;
+        //audioSourcePlayer.Play();
         doorLeft.transform.position = Vector3.MoveTowards(closedLeft, openLeft, step);
         doorRight.transform.position = Vector3.MoveTowards(closedRight, openRight, step);
     }
 
     public void CloseDoor()
     {
-        audioSourcePlayer.clip = doorTravelSound;
-        audioSourcePlayer.Play();
+        audioSourcePlayer.PlayOneShot(doorSoundCombinedClosed);
+
+        //audioSourcePlayer.clip = doorTravelSound;
+        //audioSourcePlayer.Play();
         doorLeft.transform.position = Vector3.MoveTowards(openLeft, closedLeft, step);
         doorRight.transform.position = Vector3.MoveTowards(openRight, closedRight, step);
     }

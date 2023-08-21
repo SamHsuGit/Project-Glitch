@@ -12,8 +12,9 @@ public class Lift : MonoBehaviour
     public AudioClip liftTravelSound;
     public float liftWaitPeriod = 1f;
     public float timeOfLastLiftTrigger;
-    public float liftSpeed = 1f;
+    public float liftSpeed = 50f;
     public bool liftIsUp = false;
+    public bool liftTriggered = false;
 
     private Vector3 down;
     private Vector3 up;
@@ -24,35 +25,46 @@ public class Lift : MonoBehaviour
         up = upPos.transform.position;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag != "Ground")
+            liftTriggered = true;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        liftTriggered = true;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        liftTriggered = false;
+    }
+
     void Update()
     {
         if (liftIsUp && Time.time > timeOfLastLiftTrigger + liftWaitPeriod)
             LiftDown();
     }
 
-    public void LiftDown()
-    {
-        liftIsUp = false;
-        audioSourcePlayer.clip = liftTravelSound;
-        audioSourcePlayer.Play();
-        lift.transform.position = Vector3.Lerp(up, down, liftSpeed);
-        audioSourcePlayer.Stop();
-        audioSourcePlayer.PlayOneShot(liftArriveSound);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        LiftUp();
-    }
-
     public void LiftUp()
     {
         timeOfLastLiftTrigger = Time.time;
         liftIsUp = true;
-        audioSourcePlayer.clip = liftTravelSound;
-        audioSourcePlayer.Play();
+        //audioSourcePlayer.clip = liftTravelSound;
+        //audioSourcePlayer.Play();
         lift.transform.position = Vector3.Lerp(down, up, liftSpeed);
-        audioSourcePlayer.Stop();
-        audioSourcePlayer.PlayOneShot(liftArriveSound);
+        //audioSourcePlayer.Stop();
+        //audioSourcePlayer.PlayOneShot(liftArriveSound);
+    }
+
+    public void LiftDown()
+    {
+        liftIsUp = false;
+        //audioSourcePlayer.clip = liftTravelSound;
+        //audioSourcePlayer.Play();
+        lift.transform.position = Vector3.Lerp(up, down, liftSpeed);
+        //audioSourcePlayer.Stop();
+        //audioSourcePlayer.PlayOneShot(liftArriveSound);
     }
 }

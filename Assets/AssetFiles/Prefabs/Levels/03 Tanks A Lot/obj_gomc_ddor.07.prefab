@@ -489,6 +489,8 @@ MonoBehaviour:
   doorOpenSound: {fileID: 8300000, guid: a1f411f3222dfcf468df69d40098b939, type: 3}
   doorOpenArriveSound: {fileID: 8300000, guid: 312e4d1b0b41c0c4bb566468a856246e, type: 3}
   doorTravelSound: {fileID: 8300000, guid: 6337896d6878dce42a4a26f7c719ebe1, type: 3}
+  doorSoundCombinedOpen: {fileID: 8300000, guid: 303759c22d1b1a54e838c499f9ea61f7, type: 3}
+  doorSoundCombinedClosed: {fileID: 8300000, guid: 10ec27f705f8bd445a6c19764cfee118, type: 3}
   doorCloseSound: {fileID: 8300000, guid: fc4666a30570d324ea26bb96e0bf958f, type: 3}
   doorCloseArriveSound: {fileID: 8300000, guid: f9b1715e7255c6249b67323faa82f36e, type: 3}
   doorSpeed: 1
