@@ -19,6 +19,8 @@ public class Lift : MonoBehaviour
     private Vector3 down;
     private Vector3 up;
 
+    float step;
+
     void Awake()
     {
         down = downPos.transform.position;
@@ -43,8 +45,43 @@ public class Lift : MonoBehaviour
 
     void Update()
     {
-        if (liftIsUp && Time.time > timeOfLastLiftTrigger + liftWaitPeriod)
+        //if (liftIsUp && Time.time > timeOfLastLiftTrigger + liftWaitPeriod)
+        //    LiftDown();
+
+        // Move our position a step closer to the target.
+        step = liftSpeed * Time.time; // calculate distance to move
+
+        // open door if trigered by bool
+        if (!liftIsUp && liftTriggered)
+            LiftUp();
+        else if (liftIsUp && !liftTriggered) // close door if past a certain time and nothing in triggered area
             LiftDown();
+
+        // Detect if doors are open or closed and play appropriate sounds
+        if (Vector3.Distance(lift.transform.position, up) < 0.001f) // CHECK IF UP
+        {
+            lift.transform.position = up;
+            liftIsUp = true;
+            //audioSourcePlayer.Stop();
+            //playedOneShotDown = false;
+            //if (!playedOneShotUp)
+            //{
+            //    playedOneShotUp = true;
+            //    audioSourcePlayer.PlayOneShot(liftArriveSound);
+            //}
+        }
+        else if (Vector3.Distance(lift.transform.position, down) < 0.001f) // CHECK IF DOWN
+        {
+            lift.transform.position = down;
+            liftIsUp = false;
+            //audioSourcePlayer.Stop();
+            //playedOneShotUp = false;
+            //if (!playedOneShotDown)
+            //{
+            //    playedOneShotDown = true;
+            //    audioSourcePlayer.PlayOneShot(liftArriveSound);
+            //}
+        }
     }
 
     public void LiftUp()
@@ -53,7 +90,8 @@ public class Lift : MonoBehaviour
         liftIsUp = true;
         //audioSourcePlayer.clip = liftTravelSound;
         //audioSourcePlayer.Play();
-        lift.transform.position = Vector3.Lerp(down, up, liftSpeed);
+        //lift.transform.position = Vector3.Lerp(down, up, liftSpeed);
+        lift.transform.position = Vector3.MoveTowards(down, up, step);
         //audioSourcePlayer.Stop();
         //audioSourcePlayer.PlayOneShot(liftArriveSound);
     }
@@ -63,7 +101,8 @@ public class Lift : MonoBehaviour
         liftIsUp = false;
         //audioSourcePlayer.clip = liftTravelSound;
         //audioSourcePlayer.Play();
-        lift.transform.position = Vector3.Lerp(up, down, liftSpeed);
+        //lift.transform.position = Vector3.Lerp(up, down, liftSpeed);
+        lift.transform.position = Vector3.MoveTowards(up, down, step);
         //audioSourcePlayer.Stop();
         //audioSourcePlayer.PlayOneShot(liftArriveSound);
     }
