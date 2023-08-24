@@ -59,6 +59,7 @@ MonoBehaviour:
   timeOfLastLiftTrigger: 0
   liftSpeed: 1
   liftIsUp: 0
+  liftTriggered: 0
 --- !u!82 &5069542493549774780
 AudioSource:
   m_ObjectHideFlags: 0
@@ -166,8 +167,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 3, z: 1}
-  m_Center: {x: -1.58, y: -1.5, z: 1.51}
+  m_Size: {x: 1, y: 1.5, z: 1}
+  m_Center: {x: -1.58, y: -0.5, z: 1.51}
 --- !u!1 &2900523541774002140
 GameObject:
   m_ObjectHideFlags: 0
