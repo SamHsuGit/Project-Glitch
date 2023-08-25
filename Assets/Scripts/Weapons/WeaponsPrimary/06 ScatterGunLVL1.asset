@@ -16,7 +16,7 @@ MonoBehaviour:
   level: 1
   range: 10
   splashDamage: 0
-  fireRate: 2
+  fireRate: 3
   projectileVelocity: 100
   roundsPerFire: 1
   clips: 0

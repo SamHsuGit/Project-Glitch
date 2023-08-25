@@ -31,8 +31,9 @@ public class Controller : NetworkBehaviour
     public bool shoot;
     public bool grenade;
     public bool melee;
-    public int batteries = 1;
+    public int batteries = 3;
     public bool isThrowingGrenade = false;
+    public int playerNumber = 1;
 
     [SerializeField] float _lookVelocity = 1f;
 
@@ -55,14 +56,12 @@ public class Controller : NetworkBehaviour
     public Animator[] animators;
     public GameObject projectilePrimaryOrigin;
     public GameObject projectileSecondaryOrigin;
-    public GameObject[] weaponsHeldModelsPrimary;
-    public bool[] inventoryWeaponsPrimary;
-    public WeaponPrimary[] weaponsPrimary;
-    public bool[] inventoryWeaponsSecondary;
-    public GameObject[] weaponsHeldModelsSecondary;
-    public WeaponSecondary[] weaponsSecondary;
+    public GameObject[] wPrimaryModels;
+    public PickupObject[] wPrimaryPickupObjects;
+    public GameObject[] wSecondaryModels;
+    public PickupObject[] wSecondaryPickupObjects;
     public AudioSource audioSourcePlayer;
-    
+    public InputHandler _inputHandler;
 
     //Components
     private GameManagerScript gameManager;
@@ -71,7 +70,6 @@ public class Controller : NetworkBehaviour
     private Rigidbody _rb;
     private Animator animator;
     private PlayerInput playerInput;
-    private InputHandler _inputHandler;
     private Health health;
     private Gun gun;
     private GameMenu gameMenuComponent;
@@ -97,8 +95,6 @@ public class Controller : NetworkBehaviour
     private float _minCamAngle = -90f;
     private float fireRate = 2f;
     private float nextTimeToFire = 0f;
-    private int[] startingPrimaryWeapons = new int[] {0,23}; // mining laser, hand
-    private int[] startingSecondaryWeapons = new int[] {0,8}; // coring charge, hand
 
     // THE ORDER OF EVENTS IS CRITICAL FOR MULTIPLAYER!!!
     // Order of network events: https://docs.unity3d.com/Manual/NetworkBehaviourCallbacks.html
@@ -127,24 +123,30 @@ public class Controller : NetworkBehaviour
 
         CinematicBars.SetActive(false);
 
-        // init arrays
-        inventoryWeaponsPrimary = new bool[24];
-        inventoryWeaponsSecondary = new bool[9];
+        wPrimaryPickupObjects = new PickupObject[wPrimaryModels.Length];
+        for (int i = 0; i < wPrimaryModels.Length; i++)
+            wPrimaryPickupObjects[i] = wPrimaryModels[i].GetComponent<PickupObject>();
+
+        wSecondaryPickupObjects = new PickupObject[wSecondaryModels.Length];
+        for (int i = 0; i < wSecondaryModels.Length; i++)
+            wSecondaryPickupObjects[i] = wSecondaryModels[i].GetComponent<PickupObject>();
     }
 
     void SetInventory()
     {
-        // Empty inventory
-        for(int i = 0; i < inventoryWeaponsPrimary.Length; i++)
-            inventoryWeaponsPrimary[i] = false;
-        for (int i = 0; i < inventoryWeaponsSecondary.Length; i++)
-            inventoryWeaponsSecondary[i] = false;
+        // Give all weapons max ammo to start
+        for (int i = 0; i < wPrimaryPickupObjects.Length; i++)
+        {
+            wPrimaryPickupObjects[i].ammo = wPrimaryPickupObjects[i].maxAmmo;
+            wPrimaryPickupObjects[i].clips = wPrimaryPickupObjects[i].maxClips;
+        }
+        for (int i = 0; i < wSecondaryPickupObjects.Length; i++)
+        {
+            wSecondaryPickupObjects[i].ammo = wSecondaryPickupObjects[i].maxAmmo;
+            wSecondaryPickupObjects[i].clips = wSecondaryPickupObjects[i].maxClips;
+        }
 
-        // Give starting weapons
-        for (int i = 0; i < startingPrimaryWeapons.Length; i++)
-            GiveWeaponPrimary(i);
-        for (int i = 0; i < startingSecondaryWeapons.Length; i++)
-            GiveWeaponSecondary(i);
+        // Set starting weapons to first in array
         SetCurrentWeaponPrimaryIndex(0, 0);
         SetCurrentWeaponSecondaryIndex(0, 0);
     }
@@ -271,11 +273,19 @@ public class Controller : NetworkBehaviour
     public void SetCurrentWeaponPrimaryIndex(int oldValue, int newValue)
     {
         currentWeaponPrimaryIndex = newValue;
+        
+        for (int i = 0; i < wPrimaryModels.Length; i++)
+            wPrimaryModels[i].SetActive(false);
+        wPrimaryModels[newValue].SetActive(true);
     }
 
     public void SetCurrentWeaponSecondaryIndex(int oldValue, int newValue)
     {
         currentWeaponSecondaryIndex = newValue;
+
+        for (int i = 0; i < wSecondaryModels.Length; i++)
+            wSecondaryModels[i].SetActive(false);
+        wSecondaryModels[newValue].SetActive(true);
     }
 
     private void OnTriggerEnter(Collider collider)
@@ -285,7 +295,7 @@ public class Controller : NetworkBehaviour
 
         GameObject ob = collider.gameObject;
         // hazards hurt player
-        if (ob.tag == "Hazard")
+        if (ob.layer == 12 && ob.tag != "Hazard" + playerNumber)
         {
             if (ob.GetComponent<Projectile>() == null)
                 return;
@@ -306,12 +316,16 @@ public class Controller : NetworkBehaviour
             {
                 case 0: // PRIMARY WEAPON
                     {
-                        GiveWeaponPrimary(pickup.index);
+                        if(pickup.clips + pickup.ammoPickupQty < pickup.maxClips)
+                            GiveClipsPrimary(pickup.index, pickup.ammoPickupQty);
+                        SetCurrentWeaponPrimaryIndex(pickup.index, pickup.index);
                         break;
                     }
                 case 1: // SECONDARY WEAPON
                     {
-                        GiveWeaponSecondary(pickup.index);
+                        if (pickup.clips + pickup.ammoPickupQty < pickup.maxClips)
+                            GiveClipsSecondary(pickup.index, pickup.ammoPickupQty);
+                        SetCurrentWeaponSecondaryIndex(pickup.index, pickup.index);
                         break;
                     }
                 case 2: // power up (energy, upgrades, washers)
@@ -396,24 +410,14 @@ public class Controller : NetworkBehaviour
         }
     }
 
-    private void GiveWeaponPrimary(int index)
+    private void GiveClipsPrimary(int index, int amount)
     {
-        inventoryWeaponsPrimary[index] = true;
-        weaponsPrimary[index].ammo = weaponsPrimary[index].maxAmmo;
-
-        for (int i = 0; i < weaponsHeldModelsPrimary.Length; i++)
-            weaponsHeldModelsPrimary[i].SetActive(false);
-        weaponsHeldModelsPrimary[index].SetActive(true);
+        wPrimaryPickupObjects[index].clips = amount;
     }
 
-    private void GiveWeaponSecondary(int index)
+    private void GiveClipsSecondary(int index, int amount)
     {
-        inventoryWeaponsSecondary[index] = true;
-        weaponsSecondary[index].ammo = weaponsSecondary[index].maxAmmo;
-
-        for (int i = 0; i < weaponsHeldModelsSecondary.Length; i++)
-            weaponsHeldModelsSecondary[i].SetActive(false);
-        weaponsHeldModelsSecondary[index].SetActive(true);
+        wSecondaryPickupObjects[index].clips = amount;
     }
 
     private void Update()
@@ -470,47 +474,35 @@ public class Controller : NetworkBehaviour
         }
     }
 
-    //void SpawnVoxelRbFromWorld(Vector3 position, byte blockID)
-    //{
-    //    if (blockID == 0 || blockID == 1) // if the blockID at position is air, barrier, base, procGenVBO, then skip to next position
-    //        return;
-
-    //    //EditVoxel(position, 0, true); // destroy voxel at position
-    //    if (Settings.OnlinePlay)
-    //        CmdSpawnObject(0, blockID, position);
-    //    else
-    //        SpawnObject(0, blockID, position);
-    //}
-
     public void CmdSpawnObject(int type, int item, Vector3 pos)
     {
         switch(type)
         {
             case (0):
             {
-                if (weaponsPrimary[currentWeaponPrimaryIndex].projectile != null)
+                if (wPrimaryPickupObjects[currentWeaponPrimaryIndex].projectile != null)
                 {
                     // create target vector from projectile origin
                     Vector3 targetVector = target.transform.position - pos;
-                    GameObject ob = Instantiate(weaponsPrimary[currentWeaponPrimaryIndex].projectile, pos, Quaternion.LookRotation(projectilePrimaryOrigin.transform.forward, Vector3.up));
+                    GameObject ob = Instantiate(wPrimaryPickupObjects[currentWeaponPrimaryIndex].projectile, pos, Quaternion.LookRotation(projectilePrimaryOrigin.transform.forward, Vector3.up));
                     Rigidbody rb = ob.GetComponent<Rigidbody>();
-                    rb.velocity = targetVector.normalized * weaponsPrimary[currentWeaponPrimaryIndex].projectileVelocity;
+                    rb.velocity = targetVector.normalized * wPrimaryPickupObjects[currentWeaponPrimaryIndex].projectileVelocity;
                     ob.transform.Rotate(Vector3.right, 90f);
-                    Destroy(ob, 30);
+                    Destroy(ob, 3);
                 }
                 break;
             }
             case 1:
             {
-                if (weaponsSecondary[currentWeaponSecondaryIndex].projectile != null)
+                if (wSecondaryPickupObjects[currentWeaponSecondaryIndex].projectile != null)
                 {
                     Vector3 grenadeTarget = target.transform.position + target.transform.up * 3; // grenade should have slight upwards velocity
                     // create target vector from projectile origin
                     Vector3 targetVector = grenadeTarget - pos;
-                    GameObject ob = Instantiate(weaponsSecondary[currentWeaponSecondaryIndex].projectile, pos, Quaternion.Euler(targetVector));
+                    GameObject ob = Instantiate(wSecondaryPickupObjects[currentWeaponSecondaryIndex].projectile, pos, Quaternion.Euler(targetVector));
                     Rigidbody rb = ob.GetComponent<Rigidbody>();
-                    rb.velocity = targetVector.normalized * weaponsPrimary[currentWeaponSecondaryIndex].projectileVelocity;
-                    Destroy(ob, 30); // grenade should destroy itself before 30 sec, but just in case, clean up scene
+                    rb.velocity = targetVector.normalized * wSecondaryPickupObjects[currentWeaponSecondaryIndex].projectileVelocity;
+                    Destroy(ob, 10); // grenade should destroy itself before 10 sec, but just in case, clean up scene
                 }
                 break;
             }
@@ -518,42 +510,6 @@ public class Controller : NetworkBehaviour
         
         
     }
-
-    //public void SpawnObject(int type, int item, Vector3 pos, GameObject obToSpawn = null)
-    //{
-    //    Vector3 spawnDir;
-    //    // all other camera modes, spawn object in direction of playerObject
-    //        spawnDir = transform.forward;
-
-    //    GameObject ob = Instantiate(sceneObjectPrefab, pos, Quaternion.identity);
-    //    Rigidbody rb;
-
-    //    ob.transform.rotation = Quaternion.LookRotation(spawnDir); // orient forwards in direction of camera
-    //    rb = ob.GetComponent<Rigidbody>();
-    //    rb.mass = health.piecesRbMass;
-    //    rb.isKinematic = false;
-    //    rb.velocity = spawnDir * 25; // give some velocity away from where player is looking
-
-    //    SceneObject sceneObject = ob.GetComponent<SceneObject>();
-    //    // IF VOXEL
-    //    sceneObject.SetEquippedItem(type, item); // set the child object on the server
-    //    sceneObject.typeProjectile = item; // set the SyncVar on the scene object for clients
-    //    BoxCollider VoxelBc = ob.AddComponent<BoxCollider>();
-    //    VoxelBc.material = physicMaterial;
-    //    VoxelBc.center = new Vector3(0.5f, 0.5f, 0.5f);
-    //    ob.tag = "voxelRb";
-    //    sceneObject.controller = this;
-
-    //    if (Settings.OnlinePlay)
-    //    {
-    //        ob.GetComponent<NetworkIdentity>().enabled = true;
-    //        if (ob.GetComponent<NetworkTransform>() == null)
-    //            ob.AddComponent<NetworkTransform>();
-    //        ob.GetComponent<NetworkTransform>().enabled = true;
-    //        customNetworkManager.SpawnNetworkOb(ob);
-    //    }
-    //    Destroy(ob, 30); // clean up objects after 30 seconds
-    //}
 
     bool CheckGroundedCollider()
     {

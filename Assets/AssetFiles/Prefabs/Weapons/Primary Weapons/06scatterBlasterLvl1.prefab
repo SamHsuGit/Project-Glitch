@@ -166,7 +166,7 @@ MonoBehaviour:
   ammoPickupQty: 8
   range: 10
   splashDamage: 0
-  fireRate: 2
+  fireRate: 4
   projectileVelocity: 100
   roundsPerFire: 1
   clips: 0

@@ -170,7 +170,7 @@ MonoBehaviour:
   ammoPickupQty: 3
   range: 75
   splashDamage: 10
-  fireRate: 2
+  fireRate: 1
   projectileVelocity: 20
   roundsPerFire: 1
   clips: 0
@@ -197,7 +197,7 @@ MonoBehaviour:
   wrenchAssemble: {fileID: 8300000, guid: 0974c019bb2013d41b3683a6c9c8d1ef, type: 3}
   grenadeExplode: {fileID: 0}
   hitSound: {fileID: 0}
-  projectile: {fileID: 0}
+  projectile: {fileID: 8080008727931553248, guid: 6b4c8942324fe7b458b9a69a93ec7429, type: 3}
 --- !u!82 &5246276639635916077
 AudioSource:
   m_ObjectHideFlags: 0

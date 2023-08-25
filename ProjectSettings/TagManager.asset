@@ -4,10 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Hazard
   - Ground
   - Water
   - Pickup
+  - Hazard1
+  - Hazard2
+  - Hazard3
+  - Hazard4
   layers:
   - Default
   - TransparentFX
@@ -21,7 +24,7 @@ TagManager:
   - 
   - 
   - Player
-  - 
+  - Hazard
   - 
   - 
   - 

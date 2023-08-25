@@ -18,8 +18,8 @@ public class Gun : NetworkBehaviour
     public GameObject reticleChangeColor;
     public GameObject backgroundMask;
     public Health target;
-    public WeaponPrimary currentWeaponPrimary;
-    public WeaponSecondary currentWeaponSecondary;
+    public PickupObject currentWeaponPrimary;
+    public PickupObject currentWeaponSecondary;
 
     InputHandler inputHandler;
     Controller controller;
@@ -50,9 +50,9 @@ private void FixedUpdate()
 
     currentPrimaryWeaponIndex = controller.currentWeaponPrimaryIndex;
     currentSecondaryWeaponIndex = controller.currentWeaponSecondaryIndex;
-    currentWeaponPrimary = controller.weaponsPrimary[currentPrimaryWeaponIndex];
-    currentWeaponSecondary = controller.weaponsSecondary[currentSecondaryWeaponIndex];
-    fireRatePrimary = currentWeaponPrimary.fireRate * 0.5f;
+    currentWeaponPrimary = controller.wPrimaryPickupObjects[currentPrimaryWeaponIndex];
+    currentWeaponSecondary = controller.wSecondaryPickupObjects[currentSecondaryWeaponIndex];
+    fireRatePrimary = currentWeaponPrimary.fireRate * 0.375f;
     fireRateSecondary = currentWeaponSecondary.fireRate * 0.5f;
 
     if (Time.time >= nextTimeToFirePrimary && backgroundMaskCanvasGroup.alpha == 0)
@@ -60,9 +60,10 @@ private void FixedUpdate()
         if (inputHandler.shoot)
         {
             nextTimeToFirePrimary = Time.time + 1f / fireRatePrimary;
-            audioSourcePlayer.clip = currentWeaponPrimary.shootSound;
-            audioSourcePlayer.Play();
-            Shoot();
+            //audioSourcePlayer.clip = currentWeaponPrimary.shootSound;
+            audioSourcePlayer.PlayOneShot(currentWeaponPrimary.weaponFireSound);
+            currentWeaponPrimary.ammo = currentWeaponPrimary.ammo - currentWeaponPrimary.roundsPerFire;
+            HitRegCheck();
             controller.PressedShoot();
         }
     }
@@ -73,15 +74,15 @@ private void FixedUpdate()
         {
             controller.isThrowingGrenade = true;
             nextTimeToFireSecondary = Time.time + 1f / fireRateSecondary;
-            audioSourcePlayer.clip = currentWeaponSecondary.shootSound;
-            audioSourcePlayer.Play();
+            //audioSourcePlayer.clip = currentWeaponSecondary.shootSound;
+            audioSourcePlayer.PlayOneShot(currentWeaponSecondary.weaponFireSound);
             //controller.PressedGrenade();
         }
     }
 }
 
 // if raycast hits a destructible object (with health but not this player), turn outer reticle red
-public Health FindTarget()
+public Health FindTarget() // use hitscan to detect if something is targeted by reticle
     {
         image.color = Color.HSVToRGB(0, 0, 50, true);
 
@@ -90,13 +91,8 @@ public Health FindTarget()
         {
             if (hit.transform.GetComponent<Health>() != null)
                 target = hit.transform.GetComponent<Health>();
-
-            if (hit.transform.tag == "BaseObPiece") // else if targeting a base object
-            {
-                image.color = Color.HSVToRGB(0, 100, 50, true); // turn reticle red
-                return null;
-            }
-            else if (target != null && target.gameObject != gameObject && target.hp != 0) // if hits a model that is not this model
+            
+            if (target != null && target.gameObject != gameObject && target.hp != 0) // if hits a model that is not this model
             {
                 image.color = Color.HSVToRGB(0, 100, 50, true); // turn reticle red
                 return target;
@@ -112,12 +108,12 @@ public Health FindTarget()
     }
 
     // Server calculated shoot logic gives players the authority to change hp of other preregistered gameObjects
-    public void Shoot()
+    public void HitRegCheck() // if hitscan weapon is used and hits something
     {
-        if (hit.transform != null) // hit something
+        if (hit.transform != null) // hit anything (ground, walls)
         {
-            audioSourcePlayer.clip = currentWeaponPrimary.hitSound;
-            audioSourcePlayer.Play();
+            //audioSourcePlayer.clip = currentWeaponPrimary.hitSound;
+            audioSourcePlayer.PlayOneShot(currentWeaponPrimary.hitSound);
 
             // spawn damage sparks effects (use particle system)
             Vector3 pos = hit.transform.position;
@@ -136,10 +132,10 @@ public Health FindTarget()
                 //controller.SpawnObject(3, 3, new Vector3(pos.x + 0.25f, pos.y + 0, pos.z - 0.25f));
             }
         }
-        if (target != null) // if target was found
+        if (target != null) // if target was found (i.e. player)
         {
-            audioSourcePlayer.clip = currentWeaponPrimary.hitSound;
-            audioSourcePlayer.Play();
+            //audioSourcePlayer.clip = currentWeaponPrimary.hitSound;
+            audioSourcePlayer.PlayOneShot(currentWeaponPrimary.hitSound);
 
             if (Settings.OnlinePlay)
                 CmdDamage(target);

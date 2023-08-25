@@ -78,6 +78,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Scroll",
+                    "type": "PassThrough",
+                    "id": "e23dafc7-6de3-4022-aa7c-34ccd83a3f0d",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "NavigateUp",
                     "type": "Value",
                     "id": "b141e51c-1a69-4696-a587-7e2d14e554aa",
@@ -451,6 +460,17 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Melee",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4d38cb9b-2295-4714-9657-e1f7495b66c0",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Scroll",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

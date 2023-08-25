@@ -67,7 +67,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 418efe2178f89bd40a8fb185a2e76bde, type: 2}
-  - {fileID: 2100000, guid: ff348338da5d68e47a0820fec0616c16, type: 2}
+  - {fileID: 2100000, guid: d2241dbfbaf3ea14cae6c3bd2e1d69be, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -166,7 +166,7 @@ MonoBehaviour:
   ammoPickupQty: 12
   range: 10
   splashDamage: 0
-  fireRate: 2
+  fireRate: 5
   projectileVelocity: 100
   roundsPerFire: 2
   clips: 0

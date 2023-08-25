@@ -16,11 +16,11 @@ MonoBehaviour:
   level: 3
   range: 50
   splashDamage: 0
-  fireRate: 50
+  fireRate: 40
   projectileVelocity: 100
   roundsPerFire: 1
   clips: 0
-  ammo: 0
+  ammo: 500
   clipSize: 100
   maxAmmo: 500
   shootSound: {fileID: 8300000, guid: 7a3fe999ca29a1042ac8508aa3210186, type: 3}

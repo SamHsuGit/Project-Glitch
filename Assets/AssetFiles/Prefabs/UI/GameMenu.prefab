@@ -1403,57 +1403,59 @@ MonoBehaviour:
   - {fileID: 7471972457597962459}
   - {fileID: 2463472996678103050}
   pickupsWeaponPrimary:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 3259007335214794273, guid: ebfae42647b8eb54da7230e483bd8621, type: 3}
+  - {fileID: 1052061009111708377, guid: eba2818b090a9d14bbf85a072b3109b8, type: 3}
+  - {fileID: 8493367327160157357, guid: 96820816a4e2ae645b274dcde3a1d80c, type: 3}
+  - {fileID: 2034560760574563498, guid: e7c7972cdfd89184a8fa9cef368b9fd7, type: 3}
+  - {fileID: 2034560760574563498, guid: de4faa7226661fa4fa34a9b7d5f6ec39, type: 3}
+  - {fileID: 6178015256848164292, guid: 052a7e8e44a470047b026397a079305c, type: 3}
+  - {fileID: 3599046438331110633, guid: b6f0fd9c27d21334486c52284434cced, type: 3}
+  - {fileID: 4005991214670844647, guid: eb812a78e104152428118ac8b2f2b8b3, type: 3}
+  - {fileID: 4005991214670844647, guid: 93c73bc73040d9b408e5076f831fe640, type: 3}
+  - {fileID: 2030505052218266816, guid: fc63d77584515fb4c86818cb72949a83, type: 3}
+  - {fileID: 7088322727876314399, guid: 8b437e734e5fda74d94186ad58731831, type: 3}
+  - {fileID: 7088322727876314399, guid: f2d34c731e8ae8d4cb3ba1ca8665cd09, type: 3}
+  - {fileID: 8973807824262560634, guid: e9fe90841e5f9134b93378705d4815eb, type: 3}
+  - {fileID: 8973807824262560634, guid: e431a5a4c8cb50b4eb2f798581a5ba33, type: 3}
+  - {fileID: 2690853983710026140, guid: f293b7a8b174ab248be51cb5f35a3310, type: 3}
+  - {fileID: 3828872061197186523, guid: e31a2994dfbe4334084a2bbd44af6e8c, type: 3}
+  - {fileID: 3828872061197186523, guid: da728dbab465dc34e832d7ddbe10017d, type: 3}
+  - {fileID: 3828872061197186523, guid: f4f3abb8a2ac73b43a18c298ba1bec91, type: 3}
+  - {fileID: 152621003840782624, guid: 93aab513ae425e34b9520d757d150dbd, type: 3}
+  - {fileID: 152621003840782624, guid: a042d0a5438fdae429fea86e2789b3c9, type: 3}
+  - {fileID: 152621003840782624, guid: dce35fcd065722f4fa36d19c3795f779, type: 3}
+  - {fileID: 4575655683924092178, guid: e8feec60ff4897049a9869a73470171d, type: 3}
+  - {fileID: 6078679151752489412, guid: e60b51cf6c4b91442a3b256588ffe917, type: 3}
+  - {fileID: 6078679151752489412, guid: bb9c80a0c824db84cadffe81e96089b4, type: 3}
+  - {fileID: 5780501510676682312, guid: 42f67a6751d9b0546b05bd0e9dfbe74d, type: 3}
+  - {fileID: 1595405377493021524, guid: 79c1804add9580749b6777efd81f459e, type: 3}
   pickupsWeaponSecondary:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2982366427439032964, guid: 4f6b5ad2a2851db44a9e77d767aa7e9e, type: 3}
+  - {fileID: 4634878423786645867, guid: ba8882c8695fb6d4d9b759ef95d4b213, type: 3}
+  - {fileID: 3806480048283036458, guid: 75a6e8b367656f94a9a4086eb6a0a37b, type: 3}
+  - {fileID: 3275877409010977494, guid: 427100de05799ac4a84f626a2b7d6cd0, type: 3}
+  - {fileID: 982784944137954184, guid: 867a4a572be08c144a57c10f1fc4b86d, type: 3}
+  - {fileID: 8434572637136793758, guid: b94c0b4b1050b624a82dbd6c09cdfcf6, type: 3}
+  - {fileID: 8434572637136793758, guid: b94c0b4b1050b624a82dbd6c09cdfcf6, type: 3}
+  - {fileID: 8434572637136793758, guid: b94c0b4b1050b624a82dbd6c09cdfcf6, type: 3}
+  - {fileID: 8434572637136793758, guid: b94c0b4b1050b624a82dbd6c09cdfcf6, type: 3}
   pickupsPowerUps:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 3176497729887741750, guid: ce8b44ddbbd9fa341a799439d982af1e, type: 3}
+  - {fileID: 8510362686830887412, guid: 2c0c063b4a7017c46aefdc692b911e65, type: 3}
+  - {fileID: 2454342739625389820, guid: 5601909ca59284d448a447877c536bd3, type: 3}
+  - {fileID: 1771550230289742710, guid: d6fca0298380ba346bd7bd0caefd66ec, type: 3}
+  - {fileID: 3877227419695536770, guid: 40afe8b60b1ac824cb9535c78680ca3b, type: 3}
+  - {fileID: 7130885734363939450, guid: a93ccd530e0f58d419580b3d8898f776, type: 3}
+  - {fileID: 1915887878431172586, guid: 3944adf77ae864c4d9bac9d524bae2c0, type: 3}
+  - {fileID: 7482086627947579197, guid: 45399a08ffe350a4eae55abfdb912d1b, type: 3}
+  - {fileID: 3184728479614190443, guid: eec5e6451a06bce4b80f704f99e4a73e, type: 3}
+  - {fileID: 5304626218118341129, guid: 554be75e6b4d7c14b9c696d0b62546cd, type: 3}
+  - {fileID: 1881145533699808045, guid: 707abc396545d2f45a421f72c3d62823, type: 3}
+  - {fileID: 9149500499980773557, guid: c97d47c1c3a07204d892bf557d352441, type: 3}
+  - {fileID: 4114503280158225004, guid: 7e88fb55312feb844b72dbf637c29d68, type: 3}
+  - {fileID: 399034419620818116, guid: e21515a551a619f40a1d8f73b680b448, type: 3}
   currentPickupGameObject: {fileID: 0}
+  setNavigate: 0
 --- !u!223 &1391849460458908909
 Canvas:
   m_ObjectHideFlags: 0
@@ -2125,7 +2127,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 40}
-  m_SizeDelta: {x: 70, y: 20}
+  m_SizeDelta: {x: 50, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1391849460921825676
 CanvasRenderer:
@@ -2180,7 +2182,7 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 2941586644497020350}
+    m_SelectOnUp: {fileID: 4077332918785026370}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}

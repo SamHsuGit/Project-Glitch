@@ -192,7 +192,7 @@ MonoBehaviour:
   wrenchAssemble: {fileID: 8300000, guid: 0974c019bb2013d41b3683a6c9c8d1ef, type: 3}
   grenadeExplode: {fileID: 0}
   hitSound: {fileID: 0}
-  projectile: {fileID: 0}
+  projectile: {fileID: 1416732151930378535, guid: d02c0a772cb4459458e89af8f1d9818a, type: 3}
 --- !u!82 &1465383062435769471
 AudioSource:
   m_ObjectHideFlags: 0

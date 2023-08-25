@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bb1dc7896fe0c545bf95e5c0545e041, type: 3}
+  m_Name: 04 Cleaner
+  m_EditorClassIdentifier: 
+  index: 7
+  damage: 50
+  splashRadius: 0
+  projectileVelocity: 1
+  fireRate: 1
+  roundsPerFire: 3
+  ammo: 0
+  maxAmmo: 2
+  shootSound: {fileID: 8300000, guid: 3c3ac2584a7cba24e8c030d39bcfb279, type: 3}
+  lockOn: {fileID: 8300000, guid: 05b8def52418c574dad2e6d788c123c4, type: 3}
+  grenadeExplodeSound: {fileID: 8300000, guid: efea61103af0963438f4622c771d37b7, type: 3}
+  ScopeZoom: {fileID: 0}
+  wrenchAssemble: {fileID: 0}
+  wrenchDisassemble: {fileID: 0}
+  projectile: {fileID: 0}

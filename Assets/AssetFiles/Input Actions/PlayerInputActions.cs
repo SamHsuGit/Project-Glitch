@@ -100,6 +100,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Scroll"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""e23dafc7-6de3-4022-aa7c-34ccd83a3f0d"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""NavigateUp"",
                     ""type"": ""Value"",
                     ""id"": ""b141e51c-1a69-4696-a587-7e2d14e554aa"",
@@ -473,6 +482,17 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Melee"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4d38cb9b-2295-4714-9657-e1f7495b66c0"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Scroll"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1101,6 +1121,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Actions_Jump = m_Actions.FindAction("Jump", throwIfNotFound: true);
         m_Actions_ToggleOptions = m_Actions.FindAction("ToggleOptions", throwIfNotFound: true);
         m_Actions_ToggleControls = m_Actions.FindAction("ToggleControls", throwIfNotFound: true);
+        m_Actions_Scroll = m_Actions.FindAction("Scroll", throwIfNotFound: true);
         m_Actions_NavigateUp = m_Actions.FindAction("NavigateUp", throwIfNotFound: true);
         m_Actions_NavigateDown = m_Actions.FindAction("NavigateDown", throwIfNotFound: true);
         m_Actions_NavigateLeft = m_Actions.FindAction("NavigateLeft", throwIfNotFound: true);
@@ -1185,6 +1206,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Actions_Jump;
     private readonly InputAction m_Actions_ToggleOptions;
     private readonly InputAction m_Actions_ToggleControls;
+    private readonly InputAction m_Actions_Scroll;
     private readonly InputAction m_Actions_NavigateUp;
     private readonly InputAction m_Actions_NavigateDown;
     private readonly InputAction m_Actions_NavigateLeft;
@@ -1202,6 +1224,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Actions_Jump;
         public InputAction @ToggleOptions => m_Wrapper.m_Actions_ToggleOptions;
         public InputAction @ToggleControls => m_Wrapper.m_Actions_ToggleControls;
+        public InputAction @Scroll => m_Wrapper.m_Actions_Scroll;
         public InputAction @NavigateUp => m_Wrapper.m_Actions_NavigateUp;
         public InputAction @NavigateDown => m_Wrapper.m_Actions_NavigateDown;
         public InputAction @NavigateLeft => m_Wrapper.m_Actions_NavigateLeft;
@@ -1240,6 +1263,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @ToggleControls.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnToggleControls;
                 @ToggleControls.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnToggleControls;
                 @ToggleControls.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnToggleControls;
+                @Scroll.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnScroll;
+                @Scroll.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnScroll;
+                @Scroll.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnScroll;
                 @NavigateUp.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnNavigateUp;
                 @NavigateUp.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnNavigateUp;
                 @NavigateUp.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnNavigateUp;
@@ -1283,6 +1309,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @ToggleControls.started += instance.OnToggleControls;
                 @ToggleControls.performed += instance.OnToggleControls;
                 @ToggleControls.canceled += instance.OnToggleControls;
+                @Scroll.started += instance.OnScroll;
+                @Scroll.performed += instance.OnScroll;
+                @Scroll.canceled += instance.OnScroll;
                 @NavigateUp.started += instance.OnNavigateUp;
                 @NavigateUp.performed += instance.OnNavigateUp;
                 @NavigateUp.canceled += instance.OnNavigateUp;
@@ -1462,6 +1491,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnToggleOptions(InputAction.CallbackContext context);
         void OnToggleControls(InputAction.CallbackContext context);
+        void OnScroll(InputAction.CallbackContext context);
         void OnNavigateUp(InputAction.CallbackContext context);
         void OnNavigateDown(InputAction.CallbackContext context);
         void OnNavigateLeft(InputAction.CallbackContext context);

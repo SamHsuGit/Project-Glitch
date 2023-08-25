@@ -74,7 +74,7 @@ public class Health : NetworkBehaviour
                 CmdEditSelfHealth(-1);
             if (!Settings.OnlinePlay)
                 EditSelfHealth(-1);
-            PlayDeathSound();
+            audioSourcePlayer.PlayOneShot(deathSound);
         }
     }
 
@@ -123,20 +123,12 @@ public class Health : NetworkBehaviour
 
     public void PlayHurtSound(int weaponHitIndex)
     {
-        audioSourcePlayer.clip = controller.weaponsPrimary[controller.currentWeaponPrimaryIndex].hitSound;
-        audioSourcePlayer.Play();
+        audioSourcePlayer.PlayOneShot(controller.wPrimaryPickupObjects[controller.currentWeaponPrimaryIndex].hitSound);
 
         if (currentHurtClipIndex > hurtClips.Length)
             currentHurtClipIndex = 0;
-        audioSourcePlayer.clip = hurtSound = hurtClips[currentHurtClipIndex];
-        audioSourcePlayer.Play();
+        audioSourcePlayer.PlayOneShot(hurtClips[currentHurtClipIndex]);
         currentHurtClipIndex++;
-    }
-
-    public void PlayDeathSound()
-    {
-        audioSourcePlayer.clip = deathSound;
-        audioSourcePlayer.Play();
     }
 
     void SetModelPieceVisibility(List<GameObject> modelPartsList)

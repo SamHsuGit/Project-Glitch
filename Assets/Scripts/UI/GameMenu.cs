@@ -39,6 +39,7 @@ public class GameMenu : MonoBehaviour
     public GameObject[] pickupsWeaponSecondary;
     public GameObject[] pickupsPowerUps;
     public GameObject currentPickupGameObject;
+    public bool setNavigate = false;
 
     private int previousGraphicsQuality;
     private World world;
@@ -50,6 +51,7 @@ public class GameMenu : MonoBehaviour
     Canvas canvas;
     Health health;
     CustomNetworkManager customNetworkManager;
+    InputHandler inputHandler;
 
     UnityEngine.Rendering.Universal.UniversalAdditionalCameraData uac;
 
@@ -63,6 +65,7 @@ public class GameMenu : MonoBehaviour
         canvas = GetComponent<Canvas>();
         health = player.GetComponent<Health>();
         showControls = SettingsStatic.LoadedSettings.showControls;
+        inputHandler = controller._inputHandler;
     }
 
     private void Start()
@@ -79,7 +82,6 @@ public class GameMenu : MonoBehaviour
         QualitySettings.SetQualityLevel(SettingsStatic.LoadedSettings.graphicsQuality);
         fullScreenToggle.isOn = SettingsStatic.LoadedSettings.fullscreen;
         invertYToggle.isOn = SettingsStatic.LoadedSettings.invertY;
-        UpdateHP();
 
         uac = playerCamera.GetComponent<Camera>().GetComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>();
 
@@ -91,7 +93,14 @@ public class GameMenu : MonoBehaviour
         debugText.SetActive(false);
         basicControlsText.SetActive(false);
 
+        UpdateHP();
         UpdateWeaponIcons();
+        UpdateAmmoCounts();
+    }
+
+    public void toggleNavigate()
+    {
+        setNavigate = true;
     }
 
     private void Update()
@@ -105,9 +114,33 @@ public class GameMenu : MonoBehaviour
 
         UpdateWeaponIcons();
         UpdateAmmoCounts();
+        UpdateHP();
 
-        if(currentPickupGameObject != null)
+        if (currentPickupGameObject != null)
             currentPickupGameObject.transform.Rotate(new Vector3(0, Mathf.Deg2Rad * 100, 0));
+
+        if (optionsMenuCanvasGroup.alpha != 1 && (setNavigate || inputHandler.scrollWheel != Vector2.zero))
+        {
+            int currentWeaponPrimaryIndex = controller.currentWeaponPrimaryIndex;
+            int weaponsPrimaryCount = controller.wPrimaryModels.Length;
+
+            Debug.Log(weaponsPrimaryCount);
+
+            if (setNavigate)
+                setNavigate = false;
+
+            if (inputHandler.navUp || inputHandler.scrollWheel.y > 0)
+                currentWeaponPrimaryIndex++;
+            if (inputHandler.navDown || inputHandler.scrollWheel.y < 0)
+                currentWeaponPrimaryIndex--;
+
+            if (controller.currentWeaponPrimaryIndex > weaponsPrimaryCount - 1)
+                currentWeaponPrimaryIndex = 0;
+            if (controller.currentWeaponPrimaryIndex < 0)
+                currentWeaponPrimaryIndex = weaponsPrimaryCount - 1;
+
+            controller.SetCurrentWeaponPrimaryIndex(currentWeaponPrimaryIndex, currentWeaponPrimaryIndex);
+        }
     }
 
     public void UpdateHP()
@@ -128,19 +161,18 @@ public class GameMenu : MonoBehaviour
             levelPrimaryWeaponIcons[i].SetActive(false);
         PrimaryWeaponIcons[w_Index_P].SetActive(true);
         SecondaryWeaponIcons[w_Index_S].SetActive(true);
-        levelPrimaryWeaponIcons[controller.weaponsPrimary[w_Index_P].level].SetActive(true);
+        levelPrimaryWeaponIcons[controller.wPrimaryPickupObjects[w_Index_P].level].SetActive(true);
 
+        laserAmmoSlider.enabled = false;
         if (w_Index_P == 0 || w_Index_P == 1 || w_Index_P == 2) // only show laser weapon ammo counter if laser weapon equipped
             laserAmmoSlider.enabled = true;
-        else
-            laserAmmoSlider.enabled = false;
     }
 
     public void UpdateAmmoCounts()
     {
-        AmmoCountPrimary.text = controller.weaponsPrimary[controller.currentWeaponPrimaryIndex].ammo.ToString();
-        ClipCountPrimary.text = controller.weaponsPrimary[controller.currentWeaponPrimaryIndex].clips.ToString();
-        AmmoCountSecondary.text = controller.weaponsSecondary[controller.currentWeaponSecondaryIndex].ammo.ToString();
+        AmmoCountPrimary.text = controller.wPrimaryPickupObjects[controller.currentWeaponPrimaryIndex].ammo.ToString();
+        ClipCountPrimary.text = controller.wPrimaryPickupObjects[controller.currentWeaponPrimaryIndex].clips.ToString();
+        AmmoCountSecondary.text = controller.wSecondaryPickupObjects[controller.currentWeaponSecondaryIndex].ammo.ToString();
     }
 
     public void ShowPickupItem(int type, int index)
