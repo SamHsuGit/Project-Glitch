@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: Sam Hsu
-  productName: MetalArms
+  productName: Project-Glitch
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0, g: 0, b: 0, a: 1}
@@ -788,7 +788,7 @@ PlayerSettings:
     Standalone: 6
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: MetalArms
+  metroPackageName: Project-Glitch
   metroPackageVersion: 0.1.0.0
   metroCertificatePath: Assets/WSATestCertificate.pfx
   metroCertificatePassword: "@ikc\x7F8ai"
