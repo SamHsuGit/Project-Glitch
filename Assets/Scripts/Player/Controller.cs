@@ -31,6 +31,8 @@ public class Controller : NetworkBehaviour
     public bool shoot;
     public bool grenade;
     public bool melee;
+    public bool switchPrimary;
+    public bool switchSecondary;
     public int batteries = 3;
     public bool isThrowingGrenade = false;
     public int playerNumber = 1;
@@ -138,12 +140,12 @@ public class Controller : NetworkBehaviour
         for (int i = 0; i < wPrimaryPickupObjects.Length; i++)
         {
             wPrimaryPickupObjects[i].ammo = wPrimaryPickupObjects[i].maxAmmo;
-            wPrimaryPickupObjects[i].clips = wPrimaryPickupObjects[i].maxClips;
+            wPrimaryPickupObjects[i].ammoReserve = wPrimaryPickupObjects[i].maxAmmoReserve;
         }
         for (int i = 0; i < wSecondaryPickupObjects.Length; i++)
         {
             wSecondaryPickupObjects[i].ammo = wSecondaryPickupObjects[i].maxAmmo;
-            wSecondaryPickupObjects[i].clips = wSecondaryPickupObjects[i].maxClips;
+            wSecondaryPickupObjects[i].ammoReserve = wSecondaryPickupObjects[i].maxAmmoReserve;
         }
 
         // Set starting weapons to first in array
@@ -316,15 +318,19 @@ public class Controller : NetworkBehaviour
             {
                 case 0: // PRIMARY WEAPON
                     {
-                        if(pickup.clips + pickup.ammoPickupQty < pickup.maxClips)
-                            GiveClipsPrimary(pickup.index, pickup.ammoPickupQty);
+                        if (wPrimaryPickupObjects[pickup.index].ammoReserve + pickup.ammoPickupQty < pickup.maxAmmoReserve)
+                            SetAmmoReservePrimary(pickup.index, wPrimaryPickupObjects[pickup.index].ammoReserve + pickup.ammoPickupQty);
+                        else
+                            SetAmmoReservePrimary(pickup.index, pickup.maxAmmoReserve);
                         SetCurrentWeaponPrimaryIndex(pickup.index, pickup.index);
                         break;
                     }
                 case 1: // SECONDARY WEAPON
                     {
-                        if (pickup.clips + pickup.ammoPickupQty < pickup.maxClips)
-                            GiveClipsSecondary(pickup.index, pickup.ammoPickupQty);
+                        if (wSecondaryPickupObjects[pickup.index].ammo + pickup.ammoPickupQty < pickup.maxAmmo)
+                            SetAmmoSecondary(pickup.index, wSecondaryPickupObjects[pickup.index].ammo + pickup.ammoPickupQty);
+                        else
+                            SetAmmoSecondary(pickup.index, pickup.maxAmmo);
                         SetCurrentWeaponSecondaryIndex(pickup.index, pickup.index);
                         break;
                     }
@@ -410,14 +416,29 @@ public class Controller : NetworkBehaviour
         }
     }
 
-    private void GiveClipsPrimary(int index, int amount)
+    private void SetAmmoReservePrimary(int index, int amount)
     {
-        wPrimaryPickupObjects[index].clips = amount;
+        wPrimaryPickupObjects[index].ammoReserve = amount;
     }
 
-    private void GiveClipsSecondary(int index, int amount)
+    private void SetAmmoSecondary(int index, int amount)
     {
-        wSecondaryPickupObjects[index].clips = amount;
+        wSecondaryPickupObjects[index].ammo = amount;
+    }
+
+    private void CheckAutoReloadPrimaryWeapon()
+    {
+        if (wPrimaryPickupObjects[currentWeaponPrimaryIndex].ammo == 0)
+            ReloadPrimaryWeapon();
+    }
+
+    private void ReloadPrimaryWeapon()
+    {
+        if (wPrimaryPickupObjects[currentWeaponPrimaryIndex].ammoReserve == 0 && wPrimaryPickupObjects[currentWeaponPrimaryIndex].ammo != wPrimaryPickupObjects[currentWeaponPrimaryIndex].maxAmmo)
+            return;
+
+        wPrimaryPickupObjects[currentWeaponPrimaryIndex].ammoReserve -= wPrimaryPickupObjects[currentWeaponPrimaryIndex].maxAmmo;
+        wPrimaryPickupObjects[currentWeaponPrimaryIndex].ammo = wPrimaryPickupObjects[currentWeaponPrimaryIndex].maxAmmo;
     }
 
     private void Update()
@@ -457,6 +478,7 @@ public class Controller : NetworkBehaviour
             Move();
             RbForceJump();
             Animate();
+            CheckAutoReloadPrimaryWeapon();
         }
     }
 
@@ -547,6 +569,9 @@ public class Controller : NetworkBehaviour
         grenade = _inputHandler.grenade;
 
         melee = _inputHandler.melee;
+
+        switchPrimary = _inputHandler.switchPrimary;
+        switchSecondary = _inputHandler.switchSecondary;
     }
 
     private void Look()

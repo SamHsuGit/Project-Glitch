@@ -13,11 +13,10 @@ public class PickupObject : MonoBehaviour
     public int fireRate;
     public int projectileVelocity;
     public int roundsPerFire;
-    public int clips;
+    public int ammoReserve;
     public int ammo;
-    public int clipSize;
     public int maxAmmo;
-    public int maxClips;
+    public int maxAmmoReserve;
     public bool isPickup;
     public bool bounce = true;
     public AudioSource audioSourcePlayer;

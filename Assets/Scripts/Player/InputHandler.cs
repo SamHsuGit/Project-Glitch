@@ -14,6 +14,8 @@ public class InputHandler : MonoBehaviour
     public bool shoot = false;
     public bool grenade = false;
     public bool melee = false;
+    public bool switchPrimary = false;
+    public bool switchSecondary = false;
 
     public void OnMove(InputAction.CallbackContext ctx) => move = ctx.ReadValue<Vector2>();
     public void OnLook(InputAction.CallbackContext ctx) => look = ctx.ReadValue<Vector2>();
@@ -26,5 +28,7 @@ public class InputHandler : MonoBehaviour
     public void OnShoot(InputAction.CallbackContext ctx) => shoot = ctx.performed;
     public void OnGrenade(InputAction.CallbackContext ctx) => grenade = ctx.performed;
     public void OnMelee(InputAction.CallbackContext ctx) => melee = ctx.performed;
+    public void OnSwitchPrimary(InputAction.CallbackContext ctx) => switchPrimary = ctx.performed;
+    public void OnSwitchSecondary(InputAction.CallbackContext ctx) => switchSecondary = ctx.performed;
 
 }

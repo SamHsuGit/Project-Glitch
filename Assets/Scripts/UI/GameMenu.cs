@@ -119,25 +119,27 @@ public class GameMenu : MonoBehaviour
         if (currentPickupGameObject != null)
             currentPickupGameObject.transform.Rotate(new Vector3(0, Mathf.Deg2Rad * 100, 0));
 
-        if (optionsMenuCanvasGroup.alpha != 1 && (setNavigate || inputHandler.scrollWheel != Vector2.zero))
+        if (optionsMenuCanvasGroup.alpha != 1 && controller.switchPrimary && (setNavigate || inputHandler.scrollWheel != Vector2.zero))
         {
             int currentWeaponPrimaryIndex = controller.currentWeaponPrimaryIndex;
             int weaponsPrimaryCount = controller.wPrimaryModels.Length;
-
-            Debug.Log(weaponsPrimaryCount);
 
             if (setNavigate)
                 setNavigate = false;
 
             if (inputHandler.navUp || inputHandler.scrollWheel.y > 0)
                 currentWeaponPrimaryIndex++;
+
             if (inputHandler.navDown || inputHandler.scrollWheel.y < 0)
                 currentWeaponPrimaryIndex--;
 
-            if (controller.currentWeaponPrimaryIndex > weaponsPrimaryCount - 1)
+            // index out of bounds check
+            if (currentWeaponPrimaryIndex > weaponsPrimaryCount - 3)
                 currentWeaponPrimaryIndex = 0;
-            if (controller.currentWeaponPrimaryIndex < 0)
-                currentWeaponPrimaryIndex = weaponsPrimaryCount - 1;
+            if (currentWeaponPrimaryIndex < 0)
+                currentWeaponPrimaryIndex = weaponsPrimaryCount - 3;
+
+            //Debug.Log(currentWeaponPrimaryIndex + "/" + weaponsPrimaryCount);
 
             controller.SetCurrentWeaponPrimaryIndex(currentWeaponPrimaryIndex, currentWeaponPrimaryIndex);
         }
@@ -161,17 +163,35 @@ public class GameMenu : MonoBehaviour
             levelPrimaryWeaponIcons[i].SetActive(false);
         PrimaryWeaponIcons[w_Index_P].SetActive(true);
         SecondaryWeaponIcons[w_Index_S].SetActive(true);
-        levelPrimaryWeaponIcons[controller.wPrimaryPickupObjects[w_Index_P].level].SetActive(true);
+        levelPrimaryWeaponIcons[controller.wPrimaryPickupObjects[w_Index_P].level - 1].SetActive(true);
 
-        laserAmmoSlider.enabled = false;
+        laserAmmoSlider.gameObject.SetActive(false);
+        AmmoCountPrimary.gameObject.SetActive(true);
+        ClipCountPrimary.gameObject.SetActive(true);
         if (w_Index_P == 0 || w_Index_P == 1 || w_Index_P == 2) // only show laser weapon ammo counter if laser weapon equipped
-            laserAmmoSlider.enabled = true;
+        {
+            AmmoCountPrimary.gameObject.SetActive(false);
+            ClipCountPrimary.gameObject.SetActive(false);
+            laserAmmoSlider.gameObject.SetActive(true);
+        }
     }
 
     public void UpdateAmmoCounts()
     {
+        // laser ammo counter
+        if (controller.currentWeaponPrimaryIndex < 3 && controller.shoot)
+            laserAmmoSlider.value = controller.wPrimaryPickupObjects[controller.currentWeaponPrimaryIndex].ammo;
+        else if (controller.currentWeaponPrimaryIndex < 3)
+        {
+            laserAmmoSlider.value = laserAmmoSlider.maxValue;
+            controller.wPrimaryPickupObjects[controller.currentWeaponPrimaryIndex].ammo = controller.wPrimaryPickupObjects[controller.currentWeaponPrimaryIndex].maxAmmo;
+        }
+
+        //primary weapon counter
         AmmoCountPrimary.text = controller.wPrimaryPickupObjects[controller.currentWeaponPrimaryIndex].ammo.ToString();
-        ClipCountPrimary.text = controller.wPrimaryPickupObjects[controller.currentWeaponPrimaryIndex].clips.ToString();
+        ClipCountPrimary.text = controller.wPrimaryPickupObjects[controller.currentWeaponPrimaryIndex].ammoReserve.ToString();
+
+        // secondary weapon counter
         AmmoCountSecondary.text = controller.wSecondaryPickupObjects[controller.currentWeaponSecondaryIndex].ammo.ToString();
     }
 

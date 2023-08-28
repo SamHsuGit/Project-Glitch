@@ -168,14 +168,16 @@ MonoBehaviour:
   ammoPickupQty: 1
   range: 50
   splashDamage: 0
-  fireRate: 40
+  fireRate: 25
   projectileVelocity: 40
   roundsPerFire: 2
-  clips: 0
+  ammoReserve: 0
   ammo: 0
   clipSize: 0
-  maxAmmo: 0
+  maxAmmo: 100
+  maxAmmoReserve: 100
   isPickup: 1
+  bounce: 1
   audioSourcePlayer: {fileID: 1033569526691053934}
   pickupSound1: {fileID: 8300000, guid: d8bf25860bd0715428cec115f11e5059, type: 3}
   ammoPickupSound: {fileID: 8300000, guid: 977ec7387d007ad4389b4622b9d545f4, type: 3}
@@ -195,7 +197,7 @@ MonoBehaviour:
   wrenchAssemble: {fileID: 8300000, guid: 0974c019bb2013d41b3683a6c9c8d1ef, type: 3}
   grenadeExplode: {fileID: 0}
   hitSound: {fileID: 0}
-  projectile: {fileID: 507171863505185389, guid: 2e8712b5421b6e444b86ba91830c666d, type: 3}
+  projectile: {fileID: 507171863505185389, guid: f1c384722c7821448afcfeb1be6d83ce, type: 3}
 --- !u!82 &1033569526691053934
 AudioSource:
   m_ObjectHideFlags: 0

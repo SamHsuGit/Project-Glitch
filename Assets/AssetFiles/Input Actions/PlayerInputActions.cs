@@ -152,6 +152,24 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchPrimary"",
+                    ""type"": ""Button"",
+                    ""id"": ""cc34004f-11af-422f-9470-476e01cfc478"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchSecondary"",
+                    ""type"": ""Button"",
+                    ""id"": ""50e36b93-2d02-45ec-b1ec-4590ea3922fe"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -493,6 +511,50 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Scroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""00ca2faf-bddb-4f9c-bbcd-1660af043d74"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""SwitchPrimary"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""383bfd52-3ce2-4eaf-ac93-3d4d3a50045a"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SwitchPrimary"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5304d29c-9a4b-4f1b-b1aa-f0ca943d176d"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""SwitchSecondary"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""336af6d7-5e94-468a-8f31-239a353ae70d"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SwitchSecondary"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1127,6 +1189,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Actions_NavigateLeft = m_Actions.FindAction("NavigateLeft", throwIfNotFound: true);
         m_Actions_NavigateRight = m_Actions.FindAction("NavigateRight", throwIfNotFound: true);
         m_Actions_Debug = m_Actions.FindAction("Debug", throwIfNotFound: true);
+        m_Actions_SwitchPrimary = m_Actions.FindAction("SwitchPrimary", throwIfNotFound: true);
+        m_Actions_SwitchSecondary = m_Actions.FindAction("SwitchSecondary", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1212,6 +1276,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Actions_NavigateLeft;
     private readonly InputAction m_Actions_NavigateRight;
     private readonly InputAction m_Actions_Debug;
+    private readonly InputAction m_Actions_SwitchPrimary;
+    private readonly InputAction m_Actions_SwitchSecondary;
     public struct ActionsActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -1230,6 +1296,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @NavigateLeft => m_Wrapper.m_Actions_NavigateLeft;
         public InputAction @NavigateRight => m_Wrapper.m_Actions_NavigateRight;
         public InputAction @Debug => m_Wrapper.m_Actions_Debug;
+        public InputAction @SwitchPrimary => m_Wrapper.m_Actions_SwitchPrimary;
+        public InputAction @SwitchSecondary => m_Wrapper.m_Actions_SwitchSecondary;
         public InputActionMap Get() { return m_Wrapper.m_Actions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1281,6 +1349,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Debug.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnDebug;
                 @Debug.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnDebug;
                 @Debug.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnDebug;
+                @SwitchPrimary.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSwitchPrimary;
+                @SwitchPrimary.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSwitchPrimary;
+                @SwitchPrimary.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSwitchPrimary;
+                @SwitchSecondary.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSwitchSecondary;
+                @SwitchSecondary.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSwitchSecondary;
+                @SwitchSecondary.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSwitchSecondary;
             }
             m_Wrapper.m_ActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -1327,6 +1401,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Debug.started += instance.OnDebug;
                 @Debug.performed += instance.OnDebug;
                 @Debug.canceled += instance.OnDebug;
+                @SwitchPrimary.started += instance.OnSwitchPrimary;
+                @SwitchPrimary.performed += instance.OnSwitchPrimary;
+                @SwitchPrimary.canceled += instance.OnSwitchPrimary;
+                @SwitchSecondary.started += instance.OnSwitchSecondary;
+                @SwitchSecondary.performed += instance.OnSwitchSecondary;
+                @SwitchSecondary.canceled += instance.OnSwitchSecondary;
             }
         }
     }
@@ -1497,6 +1577,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnNavigateLeft(InputAction.CallbackContext context);
         void OnNavigateRight(InputAction.CallbackContext context);
         void OnDebug(InputAction.CallbackContext context);
+        void OnSwitchPrimary(InputAction.CallbackContext context);
+        void OnSwitchSecondary(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

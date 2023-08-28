@@ -168,14 +168,16 @@ MonoBehaviour:
   ammoPickupQty: 1
   range: 50
   splashDamage: 0
-  fireRate: 25
+  fireRate: 15
   projectileVelocity: 40
   roundsPerFire: 1
-  clips: 0
+  ammoReserve: 0
   ammo: 0
   clipSize: 0
-  maxAmmo: 0
+  maxAmmo: 100
+  maxAmmoReserve: 100
   isPickup: 1
+  bounce: 1
   audioSourcePlayer: {fileID: 1564741380196472877}
   pickupSound1: {fileID: 8300000, guid: d8bf25860bd0715428cec115f11e5059, type: 3}
   ammoPickupSound: {fileID: 8300000, guid: 977ec7387d007ad4389b4622b9d545f4, type: 3}

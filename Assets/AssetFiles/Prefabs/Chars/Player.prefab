@@ -397,6 +397,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: e23dafc7-6de3-4022-aa7c-34ccd83a3f0d
     m_ActionName: Actions/Scroll[/Mouse/scroll]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4390896333885380563}
+        m_TargetAssemblyTypeName: InputHandler, Assembly-CSharp
+        m_MethodName: OnSwitchPrimary
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: cc34004f-11af-422f-9470-476e01cfc478
+    m_ActionName: Actions/SwitchPrimary[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4390896333885380563}
+        m_TargetAssemblyTypeName: InputHandler, Assembly-CSharp
+        m_MethodName: OnSwitchSecondary
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 50e36b93-2d02-45ec-b1ec-4590ea3922fe
+    m_ActionName: Actions/SwitchSecondary[/Keyboard/q]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Actions
@@ -425,6 +457,8 @@ MonoBehaviour:
   shoot: 0
   grenade: 0
   melee: 0
+  switchPrimary: 0
+  switchSecondary: 0
 --- !u!114 &3963772888375218276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -456,6 +490,8 @@ MonoBehaviour:
   shoot: 0
   grenade: 0
   melee: 0
+  switchPrimary: 0
+  switchSecondary: 0
   batteries: 3
   isThrowingGrenade: 0
   playerNumber: 1
