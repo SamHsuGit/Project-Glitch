@@ -411,6 +411,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3963772888375218276}
+        m_TargetAssemblyTypeName: Controller, Assembly-CSharp
+        m_MethodName: CheckReloadPrimaryWeapon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: cc34004f-11af-422f-9470-476e01cfc478
     m_ActionName: Actions/SwitchPrimary[/Keyboard/e]
   - m_PersistentCalls:
@@ -494,6 +506,7 @@ MonoBehaviour:
   switchSecondary: 0
   batteries: 3
   isThrowingGrenade: 0
+  isReloading: 0
   playerNumber: 1
   _lookVelocity: 1
   charModelOrigin: {fileID: 6156733249479519148}
@@ -541,8 +554,6 @@ MonoBehaviour:
   - {fileID: 4525400122366797821}
   - {fileID: 4577447853774546176}
   - {fileID: 6771511870824813538}
-  - {fileID: 4169866472623386498}
-  - {fileID: 8058618095383546395}
   wPrimaryPickupObjects: []
   wSecondaryModels:
   - {fileID: 590854241631128524}
@@ -3887,11 +3898,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2593716234518345651, guid: 16ff54cd55ffe26499574003d5d8255d, type: 3}
   m_PrefabInstance: {fileID: 2006931272366879335}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &4169866472623386498 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2451183247314116069, guid: 16ff54cd55ffe26499574003d5d8255d, type: 3}
-  m_PrefabInstance: {fileID: 2006931272366879335}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4525400122366797821 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2672743668391237018, guid: 16ff54cd55ffe26499574003d5d8255d, type: 3}
@@ -3990,11 +3996,6 @@ GameObject:
 --- !u!1 &7948084446448011373 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8473322495730760202, guid: 16ff54cd55ffe26499574003d5d8255d, type: 3}
-  m_PrefabInstance: {fileID: 2006931272366879335}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8058618095383546395 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8363179207799601276, guid: 16ff54cd55ffe26499574003d5d8255d, type: 3}
   m_PrefabInstance: {fileID: 2006931272366879335}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &8831800288913475332 stripped

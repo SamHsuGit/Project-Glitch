@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 6976479444726254941}
   - component: {fileID: 6976479444726254940}
   m_Layer: 5
-  m_Name: Names Text
+  m_Name: Credits Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -142,7 +142,18 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: A Fan-Made GAME BY SAM HSU
+  m_text: 'Fan-Made re-creation by Sam Hsu
+
+    Based on the Original game "Metal
+    Arms: Glitch In the System" by Swingin'' Ape Studios and originally published
+    by Sierra Entertainment
+
+    The IP is currently owned by Activision Blizzard,
+    Inc. and the creators of this fan-made re-creation claims no rights to the source
+    materials, assets, sounds used in this project.
+
+    Soundtrack rights owned
+    by PCB Productions.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
   m_sharedMaterial: {fileID: 2147374, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
@@ -424,7 +435,7 @@ GameObject:
   - component: {fileID: 6976479445994056059}
   - component: {fileID: 6976479445994056058}
   m_Layer: 5
-  m_Name: Credits Text
+  m_Name: Credits Title Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -511,7 +522,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 3
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -613,7 +624,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: BACK
+  m_text: Back
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
   m_sharedMaterial: {fileID: 2147374, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
@@ -646,7 +657,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 3
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535

@@ -35,6 +35,7 @@ public class Controller : NetworkBehaviour
     public bool switchSecondary;
     public int batteries = 3;
     public bool isThrowingGrenade = false;
+    public bool isReloading = false;
     public int playerNumber = 1;
 
     [SerializeField] float _lookVelocity = 1f;
@@ -125,6 +126,11 @@ public class Controller : NetworkBehaviour
 
         CinematicBars.SetActive(false);
 
+        SetInventory();
+    }
+
+    void SetInventory()
+    {
         wPrimaryPickupObjects = new PickupObject[wPrimaryModels.Length];
         for (int i = 0; i < wPrimaryModels.Length; i++)
             wPrimaryPickupObjects[i] = wPrimaryModels[i].GetComponent<PickupObject>();
@@ -132,10 +138,7 @@ public class Controller : NetworkBehaviour
         wSecondaryPickupObjects = new PickupObject[wSecondaryModels.Length];
         for (int i = 0; i < wSecondaryModels.Length; i++)
             wSecondaryPickupObjects[i] = wSecondaryModels[i].GetComponent<PickupObject>();
-    }
 
-    void SetInventory()
-    {
         // Give all weapons max ammo to start
         for (int i = 0; i < wPrimaryPickupObjects.Length; i++)
         {
@@ -187,8 +190,6 @@ public class Controller : NetworkBehaviour
 
            world.gameObject.SetActive(true);
         }
-
-        SetInventory();
     }
 
     void InputComponents()
@@ -322,7 +323,7 @@ public class Controller : NetworkBehaviour
                             SetAmmoReservePrimary(pickup.index, wPrimaryPickupObjects[pickup.index].ammoReserve + pickup.ammoPickupQty);
                         else
                             SetAmmoReservePrimary(pickup.index, pickup.maxAmmoReserve);
-                        SetCurrentWeaponPrimaryIndex(pickup.index, pickup.index);
+                        //SetCurrentWeaponPrimaryIndex(pickup.index, pickup.index);
                         break;
                     }
                 case 1: // SECONDARY WEAPON
@@ -331,7 +332,7 @@ public class Controller : NetworkBehaviour
                             SetAmmoSecondary(pickup.index, wSecondaryPickupObjects[pickup.index].ammo + pickup.ammoPickupQty);
                         else
                             SetAmmoSecondary(pickup.index, pickup.maxAmmo);
-                        SetCurrentWeaponSecondaryIndex(pickup.index, pickup.index);
+                        //SetCurrentWeaponSecondaryIndex(pickup.index, pickup.index);
                         break;
                     }
                 case 2: // power up (energy, upgrades, washers)
@@ -412,7 +413,7 @@ public class Controller : NetworkBehaviour
             }
             audioSourcePlayer.clip = pickup.pickupSound1;
             audioSourcePlayer.Play();
-            Destroy(pickup.gameObject);
+            pickup.Respawn();
         }
     }
 
@@ -426,10 +427,13 @@ public class Controller : NetworkBehaviour
         wSecondaryPickupObjects[index].ammo = amount;
     }
 
-    private void CheckAutoReloadPrimaryWeapon()
+    public void CheckReloadPrimaryWeapon()
     {
-        if (wPrimaryPickupObjects[currentWeaponPrimaryIndex].ammo == 0)
-            ReloadPrimaryWeapon();
+        if (!isReloading && wPrimaryPickupObjects[currentWeaponPrimaryIndex].ammo == 0)
+        {
+            isReloading = true;
+            Invoke("ReloadPrimaryWeapon", 3f);
+        }
     }
 
     private void ReloadPrimaryWeapon()
@@ -439,6 +443,8 @@ public class Controller : NetworkBehaviour
 
         wPrimaryPickupObjects[currentWeaponPrimaryIndex].ammoReserve -= wPrimaryPickupObjects[currentWeaponPrimaryIndex].maxAmmo;
         wPrimaryPickupObjects[currentWeaponPrimaryIndex].ammo = wPrimaryPickupObjects[currentWeaponPrimaryIndex].maxAmmo;
+
+        isReloading = false; // remove this eventually as the reloading anim end will trigger this is finished
     }
 
     private void Update()
@@ -478,7 +484,7 @@ public class Controller : NetworkBehaviour
             Move();
             RbForceJump();
             Animate();
-            CheckAutoReloadPrimaryWeapon();
+            CheckReloadPrimaryWeapon();
         }
     }
 
@@ -489,11 +495,7 @@ public class Controller : NetworkBehaviour
 
     public void PressedGrenade()
     {
-        //if (!isThrowingGrenade)
-        {
-            isThrowingGrenade = true;
-            CmdSpawnObject(1, 0, projectileSecondaryOrigin.transform.position);
-        }
+        CmdSpawnObject(1, 0, projectileSecondaryOrigin.transform.position);
     }
 
     public void CmdSpawnObject(int type, int item, Vector3 pos)
@@ -516,7 +518,7 @@ public class Controller : NetworkBehaviour
             }
             case 1:
             {
-                if (wSecondaryPickupObjects[currentWeaponSecondaryIndex].projectile != null)
+                if (wSecondaryPickupObjects[currentWeaponSecondaryIndex].projectile != null && wSecondaryPickupObjects[currentWeaponSecondaryIndex].ammo > 0)
                 {
                     Vector3 grenadeTarget = target.transform.position + target.transform.up * 3; // grenade should have slight upwards velocity
                     // create target vector from projectile origin
@@ -525,7 +527,10 @@ public class Controller : NetworkBehaviour
                     Rigidbody rb = ob.GetComponent<Rigidbody>();
                     rb.velocity = targetVector.normalized * wSecondaryPickupObjects[currentWeaponSecondaryIndex].projectileVelocity;
                     Destroy(ob, 10); // grenade should destroy itself before 10 sec, but just in case, clean up scene
-                }
+
+                    wSecondaryPickupObjects[currentWeaponSecondaryIndex].ammo -= wSecondaryPickupObjects[currentWeaponSecondaryIndex].roundsPerFire;
+                    audioSourcePlayer.PlayOneShot(wSecondaryPickupObjects[currentWeaponSecondaryIndex].weaponFireSound);
+                    }
                 break;
             }
         }

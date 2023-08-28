@@ -7,6 +7,7 @@ public class MainMenu : MonoBehaviour
     public TMP_Text versionText;
     public GameObject menuElements;
     public AudioSource buttonSound;
+    public Transform cameraPivotPoint;
 
     private void Awake()
     {
@@ -46,5 +47,10 @@ public class MainMenu : MonoBehaviour
     {
         buttonSound.Play();
         SceneManager.LoadScene(1);
+    }
+
+    private void Update()
+    {
+        cameraPivotPoint.Rotate(new Vector3(0, -Mathf.Deg2Rad * 1, 0));
     }
 }

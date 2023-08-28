@@ -55,29 +55,15 @@ private void FixedUpdate()
     fireRatePrimary = currentWeaponPrimary.fireRate * 0.375f;
     fireRateSecondary = currentWeaponSecondary.fireRate * 0.5f;
 
-    if (Time.time >= nextTimeToFirePrimary && backgroundMaskCanvasGroup.alpha == 0 && (currentPrimaryWeaponIndex < 3 || currentWeaponPrimary.ammo > 0))
+    if (Time.time >= nextTimeToFirePrimary && backgroundMaskCanvasGroup.alpha == 0 && (currentPrimaryWeaponIndex < 3 || currentWeaponPrimary.ammo > 0) && !controller.isReloading)
     {
         if (inputHandler.shoot)
         {
             nextTimeToFirePrimary = Time.time + 1f / fireRatePrimary;
-            //audioSourcePlayer.clip = currentWeaponPrimary.shootSound;
             audioSourcePlayer.PlayOneShot(currentWeaponPrimary.weaponFireSound);
             currentWeaponPrimary.ammo -= currentWeaponPrimary.roundsPerFire;
             HitRegCheck();
             controller.PressedShoot();
-        }
-    }
-    if (backgroundMaskCanvasGroup.alpha == 0 && !controller.isThrowingGrenade && currentWeaponSecondary.ammo > 0) // && Time.time >= nextTimeToFireSecondary)
-    {
-        // WIP, FIX BY TRIGGERING STARG AND END OF ANIMATION TO ENSURE CANNOT THROW MULTIPLE GRENADES DURING ANIMATION
-        if (inputHandler.grenade)
-        {
-            controller.isThrowingGrenade = true;
-            nextTimeToFireSecondary = Time.time + 1f / fireRateSecondary;
-            currentWeaponSecondary.ammo -= currentWeaponSecondary.roundsPerFire;
-            //audioSourcePlayer.clip = currentWeaponSecondary.shootSound;
-            audioSourcePlayer.PlayOneShot(currentWeaponSecondary.weaponFireSound);
-            //controller.PressedGrenade();
         }
     }
 }

@@ -30,6 +30,8 @@ public class GameMenu : MonoBehaviour
     public bool showControls;
     public GameObject[] PrimaryWeaponIcons;
     public GameObject[] SecondaryWeaponIcons;
+    public GameObject[] wIconPrimaryGUI;
+    public GameObject[] wIconSecondaryGUI;
     public TextMeshProUGUI AmmoCountPrimary;
     public TextMeshProUGUI ClipCountPrimary;
     public TextMeshProUGUI AmmoCountSecondary;
@@ -38,6 +40,7 @@ public class GameMenu : MonoBehaviour
     public GameObject[] pickupsWeaponPrimary;
     public GameObject[] pickupsWeaponSecondary;
     public GameObject[] pickupsPowerUps;
+    
     public GameObject currentPickupGameObject;
     public bool setNavigate = false;
 
@@ -134,14 +137,34 @@ public class GameMenu : MonoBehaviour
                 currentWeaponPrimaryIndex--;
 
             // index out of bounds check
-            if (currentWeaponPrimaryIndex > weaponsPrimaryCount - 3)
+            if (currentWeaponPrimaryIndex > weaponsPrimaryCount - 1)
                 currentWeaponPrimaryIndex = 0;
             if (currentWeaponPrimaryIndex < 0)
-                currentWeaponPrimaryIndex = weaponsPrimaryCount - 3;
-
-            //Debug.Log(currentWeaponPrimaryIndex + "/" + weaponsPrimaryCount);
+                currentWeaponPrimaryIndex = weaponsPrimaryCount - 1;
 
             controller.SetCurrentWeaponPrimaryIndex(currentWeaponPrimaryIndex, currentWeaponPrimaryIndex);
+        }
+        else if (optionsMenuCanvasGroup.alpha != 1 && controller.switchSecondary && (setNavigate || inputHandler.scrollWheel != Vector2.zero))
+        {
+            int currentWeaponSecondaryIndex = controller.currentWeaponSecondaryIndex;
+            int weaponsSecondaryCount = controller.wSecondaryModels.Length;
+
+            if (setNavigate)
+                setNavigate = false;
+
+            if (inputHandler.navUp || inputHandler.scrollWheel.y > 0)
+                currentWeaponSecondaryIndex++;
+
+            if (inputHandler.navDown || inputHandler.scrollWheel.y < 0)
+                currentWeaponSecondaryIndex--;
+
+            // index out of bounds check
+            if (currentWeaponSecondaryIndex > weaponsSecondaryCount - 1)
+                currentWeaponSecondaryIndex = 0;
+            if (currentWeaponSecondaryIndex < 0)
+                currentWeaponSecondaryIndex = weaponsSecondaryCount - 1;
+
+            controller.SetCurrentWeaponSecondaryIndex(currentWeaponSecondaryIndex, currentWeaponSecondaryIndex);
         }
     }
 

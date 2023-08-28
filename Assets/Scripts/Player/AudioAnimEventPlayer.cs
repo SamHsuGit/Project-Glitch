@@ -51,11 +51,29 @@ public class AudioAnimEventPlayer : MonoBehaviour
 
     public void SpawnGrenade()
     {
-        controller.PressedGrenade();
+        if(!controller.isThrowingGrenade)
+        {
+            controller.isThrowingGrenade = true;
+            controller.PressedGrenade();
+        }
     }
 
     public void GrenadeAnimEnd()
     {
         controller.isThrowingGrenade = false;
+    }
+
+    public void Reload()
+    {
+        if(!controller.isReloading)
+        {
+            controller.isReloading = true;
+            controller.CheckReloadPrimaryWeapon();
+        }
+    }
+
+    public void ReloadEnd()
+    {
+        controller.isReloading = false;
     }
 }

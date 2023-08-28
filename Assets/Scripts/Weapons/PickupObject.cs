@@ -42,9 +42,14 @@ public class PickupObject : MonoBehaviour
 
     private float initialYPos;
 
+    private MeshRenderer mr;
+    private BoxCollider bc;
+
     private void Awake()
     {
         initialYPos = transform.position.y;
+        mr = GetComponent<MeshRenderer>();
+        bc = GetComponent<BoxCollider>();
     }
 
     void Start()
@@ -61,5 +66,18 @@ public class PickupObject : MonoBehaviour
                 transform.position = new Vector3(transform.position.x, initialYPos + Mathf.Sin(Mathf.Deg2Rad* 360 * Time.time) * 0.25f, transform.position.z);
             transform.Rotate(new Vector3(0, Mathf.Deg2Rad * 100, 0));
         }
+    }
+
+    public void Respawn()
+    {
+        mr.enabled = false;
+        bc.enabled = false;
+        Invoke("Unhide", 20f);
+    }
+
+    private void Unhide()
+    {
+        mr.enabled = true;
+        bc.enabled = true;
     }
 }

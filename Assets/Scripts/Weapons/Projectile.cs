@@ -12,12 +12,17 @@ public class Projectile : MonoBehaviour
     public AudioClip explosion;
     private ParticleSystem particle_Sys;
 
-    private float grenadeFuseTime = 4f;
+    public float grenadeFuseTime = 2f;
+    public float explosionLength = 2.01f;
     public bool isGrenade = false;
+
+    private MeshRenderer mr;
 
     private void Awake()
     {
         particle_Sys = GetComponent<ParticleSystem>();
+        if(isGrenade && GetComponent<MeshRenderer>() != null)
+            mr = GetComponent<MeshRenderer>();
     }
 
     private void Start()
@@ -40,11 +45,16 @@ public class Projectile : MonoBehaviour
 
     private void Explode()
     {
+        if(isGrenade && mr != null)
+            mr.enabled = false;
+
         if(explosion != null)
             audioSourcePlayer.PlayOneShot(explosion);
+
         if(isGrenade && particle_Sys != null)
             particle_Sys.Play(); // used for grenades
-        Invoke("DestroyObject", grenadeFuseTime + 0.1f);
+
+        Invoke("DestroyObject", explosionLength);
     }
 
     private void DestroyObject()
