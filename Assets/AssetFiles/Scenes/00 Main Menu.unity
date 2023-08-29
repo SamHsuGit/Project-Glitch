@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 3818942aa150c2c4da01cd6638d5ae80, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: 79194685077683647adde00398c7cb14, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 477cc4148fad3449482a3bc3178594e2, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -1370,7 +1370,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 660146744}
   m_LocalRotation: {x: -0.34186354, y: -0.25270686, z: -0.17237116, w: 0.8885701}
-  m_LocalPosition: {x: 3.6462622, y: 2.1322045, z: -7.8768086}
+  m_LocalPosition: {x: 2.23, y: 2.48, z: -6.37}
   m_LocalScale: {x: 0.30480003, y: 0.30479997, z: 0.3048}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1408,20 +1408,20 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 0.87843144, g: 0.909804, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 2
   m_Range: 10
-  m_SpotAngle: 47.598907
-  m_InnerSpotAngle: 15.3048
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 1
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
+    m_Bias: 0.02
+    m_NormalBias: 0.1
+    m_NearPlane: 0.1
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -1945,7 +1945,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 802732392}
   m_LocalRotation: {x: -0.10964693, y: -0.8527685, z: -0.35200793, w: 0.36993778}
-  m_LocalPosition: {x: 6.4972835, y: 2.3784428, z: 3.674665}
+  m_LocalPosition: {x: 5.17, y: 2.49, z: 4.66}
   m_LocalScale: {x: 0.30480006, y: 0.30479997, z: 0.30480006}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1983,20 +1983,20 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 0.87843144, g: 0.909804, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 2
   m_Range: 10
-  m_SpotAngle: 47.598907
-  m_InnerSpotAngle: 15.3048
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 1
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
+    m_Bias: 0.02
+    m_NormalBias: 0.1
+    m_NearPlane: 0.1
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -2214,7 +2214,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 0.69803923, g: 0.7254902, b: 0.882353, a: 1}
-  m_Intensity: 0.75
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 45
   m_InnerSpotAngle: 21.80208
@@ -2888,7 +2888,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1174233468}
   m_LocalRotation: {x: -0.20860866, y: 0.8075953, z: 0.30416405, w: 0.46017003}
-  m_LocalPosition: {x: -5.2397118, y: 2.0221279, z: 2.9072552}
+  m_LocalPosition: {x: -6.5, y: 2.15, z: 3.95}
   m_LocalScale: {x: 0.30479985, y: 0.3047999, z: 0.3048}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2926,20 +2926,20 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 0.87843144, g: 0.909804, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 2
   m_Range: 10
-  m_SpotAngle: 47.598907
-  m_InnerSpotAngle: 15.3048
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 1
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
+    m_Bias: 0.02
+    m_NormalBias: 0.1
+    m_NearPlane: 0.1
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
