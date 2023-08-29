@@ -8,8 +8,6 @@ using UnityEngine.InputSystem.UI;
 public class SetupMenu : MonoBehaviour
 {
     public GameObject mainMenu;
-    public GameObject setupMenuElements;
-    public GameObject mainMenuElements;
     public Slider loadingSlider;
     public TextMeshProUGUI loadingPercentageText;
     public TMP_InputField playerNameInputField;
@@ -58,7 +56,6 @@ public class SetupMenu : MonoBehaviour
     public void Local()
     {
         buttonSound.Play();
-        setupMenuElements.SetActive(false);
         SaveSettings();
 
         Settings.OnlinePlay = false;
@@ -81,7 +78,6 @@ public class SetupMenu : MonoBehaviour
     public void Online()
     {
         buttonSound.Play();
-        setupMenuElements.SetActive(false);
         SaveSettings();
 
         Settings.OnlinePlay = true;
@@ -104,13 +100,10 @@ public class SetupMenu : MonoBehaviour
         SaveSettings();
         //SceneManager.LoadScene(0);
 
+        mainMenu.SetActive(true);
         mainMenuMultiplayerEventSystem.enabled = true;
-        mainMenuElements.SetActive(true);
-
-        setupMenuElements.SetActive(false);
         setupMenuMultiplayerEventSystem.enabled = false;
-        //mainMenu.SetActive(true);
-        //gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     public void SaveSettings()

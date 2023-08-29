@@ -7,8 +7,6 @@ public class MainMenu : MonoBehaviour
 {
     
     public GameObject setupMenu;
-    public GameObject setupMenuElements;
-    public GameObject mainMenuElements;
     public AudioSource buttonSound;
     public Transform cameraPivotPoint;
     public TMP_Text versionText;
@@ -42,13 +40,10 @@ public class MainMenu : MonoBehaviour
         buttonSound.Play();
         //SceneManager.LoadScene(2);
 
+        setupMenu.SetActive(true);
         setupMenuMultiplayerEventSystem.enabled = true;
-        setupMenuElements.SetActive(true);
-
-        mainMenuElements.SetActive(false);
         mainMenuMultiplayerEventSystem.enabled = false;
-        //setupMenu.SetActive(true);
-        //gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     public void Quit()
