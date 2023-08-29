@@ -5,12 +5,15 @@ using UnityEngine.InputSystem.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    public TMP_Text versionText;
-    public GameObject menuElements;
+    
+    public GameObject setupMenu;
+    public GameObject setupMenuElements;
+    public GameObject mainMenuElements;
     public AudioSource buttonSound;
     public Transform cameraPivotPoint;
-    public GameObject setupMenu;
-    public MultiplayerEventSystem SetupMenuMultiplayerEventSystem;
+    public TMP_Text versionText;
+    public MultiplayerEventSystem mainMenuMultiplayerEventSystem;
+    public MultiplayerEventSystem setupMenuMultiplayerEventSystem;
 
     private void Awake()
     {
@@ -38,9 +41,14 @@ public class MainMenu : MonoBehaviour
     {
         buttonSound.Play();
         //SceneManager.LoadScene(2);
-        setupMenu.SetActive(true);
-        menuElements.SetActive(false);
-        SetupMenuMultiplayerEventSystem.enabled = true;
+
+        setupMenuMultiplayerEventSystem.enabled = true;
+        setupMenuElements.SetActive(true);
+
+        mainMenuElements.SetActive(false);
+        mainMenuMultiplayerEventSystem.enabled = false;
+        //setupMenu.SetActive(true);
+        //gameObject.SetActive(false);
     }
 
     public void Quit()

@@ -3,10 +3,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.IO;
+using UnityEngine.InputSystem.UI;
 
 public class SetupMenu : MonoBehaviour
 {
-    public GameObject menuElements;
+    public GameObject mainMenu;
+    public GameObject setupMenuElements;
+    public GameObject mainMenuElements;
     public Slider loadingSlider;
     public TextMeshProUGUI loadingPercentageText;
     public TMP_InputField playerNameInputField;
@@ -19,6 +22,9 @@ public class SetupMenu : MonoBehaviour
     public AudioSource buttonSound;
 
     public int index;
+
+    public MultiplayerEventSystem mainMenuMultiplayerEventSystem;
+    public MultiplayerEventSystem setupMenuMultiplayerEventSystem;
 
     private LevelLoader levelLoader;
 
@@ -52,7 +58,7 @@ public class SetupMenu : MonoBehaviour
     public void Local()
     {
         buttonSound.Play();
-        menuElements.SetActive(false);
+        setupMenuElements.SetActive(false);
         SaveSettings();
 
         Settings.OnlinePlay = false;
@@ -75,7 +81,7 @@ public class SetupMenu : MonoBehaviour
     public void Online()
     {
         buttonSound.Play();
-        menuElements.SetActive(false);
+        setupMenuElements.SetActive(false);
         SaveSettings();
 
         Settings.OnlinePlay = true;
@@ -96,7 +102,15 @@ public class SetupMenu : MonoBehaviour
     {
         buttonSound.Play();
         SaveSettings();
-        SceneManager.LoadScene(0);
+        //SceneManager.LoadScene(0);
+
+        mainMenuMultiplayerEventSystem.enabled = true;
+        mainMenuElements.SetActive(true);
+
+        setupMenuElements.SetActive(false);
+        setupMenuMultiplayerEventSystem.enabled = false;
+        //mainMenu.SetActive(true);
+        //gameObject.SetActive(false);
     }
 
     public void SaveSettings()

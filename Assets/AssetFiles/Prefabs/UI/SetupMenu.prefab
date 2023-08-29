@@ -555,7 +555,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53d7d6e8d34b3774c809f06cf2a6d273, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuElements: {fileID: 6885639081671787491}
+  setupMenuElements: {fileID: 6885639081671787491}
+  mainMenuElements: {fileID: 0}
   loadingSlider: {fileID: 5850858195228258593}
   loadingPercentageText: {fileID: 6848971453528390958}
   playerNameInputField: {fileID: 6885639081722275123}
@@ -565,6 +566,8 @@ MonoBehaviour:
   worldRenderText: {fileID: 0}
   buttonSound: {fileID: 3808837827612691325}
   index: 0
+  mainMenuMultiplayerEventSystem: {fileID: 0}
+  setupMenuMultiplayerEventSystem: {fileID: 8786922023426107862}
 --- !u!114 &1758240014913230173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1536,7 +1539,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 350, y: 25}
-  m_SizeDelta: {x: 100, y: 30}
+  m_SizeDelta: {x: 70, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6885639081162736878
 CanvasRenderer:
@@ -2214,7 +2217,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 350, y: 50}
-  m_SizeDelta: {x: 100, y: 30}
+  m_SizeDelta: {x: 70, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6885639081749778822
 CanvasRenderer:
@@ -2348,7 +2351,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 350, y: 0}
-  m_SizeDelta: {x: 100, y: 30}
+  m_SizeDelta: {x: 60, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6885639081814093115
 CanvasRenderer:

@@ -105,13 +105,12 @@ public class NetworkMenu : MonoBehaviour
         {
             // Client + IP
             manager.StartClient();
-            networkAddressInputField.text = "EventServerIPAddress"; // load from file
-            manager.networkAddress = networkAddressInputField.text;
+            manager.networkAddress = "98.235.185.75"; // ideally load from file
         }
         else
         {
             // Connecting
-            connectionStatus.text = "Connecting to " + manager.networkAddress + "..";
+            connectionStatus.text = "Connecting to Server";
         }
 
         StatusLabels();

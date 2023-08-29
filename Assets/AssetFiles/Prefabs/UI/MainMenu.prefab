@@ -111,7 +111,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 66, y: -60.76}
-  m_SizeDelta: {x: 42, y: 16.199997}
+  m_SizeDelta: {x: 30, y: 16.199997}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5735848528093696627
 CanvasRenderer:
@@ -388,7 +388,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 66, y: -107}
-  m_SizeDelta: {x: 42, y: 19.699997}
+  m_SizeDelta: {x: 30, y: 19.699997}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3630708180532442518
 CanvasRenderer:
@@ -834,7 +834,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 44, y: 21.2}
+  m_SizeDelta: {x: 30, y: 21.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3630708181989585738
 CanvasRenderer:
@@ -1052,11 +1052,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   versionText: {fileID: 3630708181858657613}
-  menuElements: {fileID: 3630708181910033941}
+  setupMenuElements: {fileID: 0}
+  MainMenuElements: {fileID: 3630708181910033941}
   buttonSound: {fileID: 8408515250218413931}
   cameraPivotPoint: {fileID: 0}
   setupMenu: {fileID: 0}
-  SetupMenuMultiplayerEventSystem: {fileID: 0}
+  mainMenuMultiplayerEventSystem: {fileID: 6367735111302170160}
+  setupMenuMultiplayerEventSystem: {fileID: 0}
 --- !u!114 &6367735111302170160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1600,7 +1602,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 44, y: 14.7}
+  m_SizeDelta: {x: 30, y: 14.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4774395977087339080
 CanvasRenderer:
