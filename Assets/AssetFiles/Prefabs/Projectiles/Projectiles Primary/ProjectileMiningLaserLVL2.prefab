@@ -102,9 +102,11 @@ MonoBehaviour:
   damage: 2
   collisionCount: 0
   collisionCountThreshold: 2
-  audioSourcePlayer: {fileID: 2309356000084380065, guid: 9858fb0a33b47434996a97e31fa06795, type: 3}
+  audioSourcePlayer: {fileID: 2309356000084380065}
   ricochet: {fileID: 8300000, guid: a2ecfc1f050e598439591926c0d4c688, type: 3}
   explosion: {fileID: 8300000, guid: 93e19fb46f5f0a241a970f853055e461, type: 3}
+  grenadeFuseTime: 2
+  explosionLength: 2.01
   isGrenade: 0
 --- !u!82 &2309356000084380065
 AudioSource:

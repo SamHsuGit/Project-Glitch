@@ -14,6 +14,8 @@ public class NetworkMenu : MonoBehaviour
     public GameObject loadingText;
     public GameObject gameManagerObject;
 
+    public AudioSource soundtrack;
+
     GameManagerScript gameManager;
     NetworkManager manager;
     CanvasGroup networkMenuElementsCanvasGroup;
@@ -57,6 +59,9 @@ public class NetworkMenu : MonoBehaviour
 
         StatusLabels();
         gameManager.Setup(); // activate ldraw importer, etc.
+        loadingText.SetActive(false);
+        background.GetComponent<CanvasGroup>().alpha = 0;
+        soundtrack.Stop();
     }
 
     public void OnClientOnly()
@@ -82,6 +87,9 @@ public class NetworkMenu : MonoBehaviour
 
         StatusLabels();
         gameManager.Setup(); // activate ldraw importer, etc.
+        loadingText.SetActive(false);
+        background.GetComponent<CanvasGroup>().alpha = 0;
+        soundtrack.Stop();
     }
 
     public void Back()
@@ -90,6 +98,30 @@ public class NetworkMenu : MonoBehaviour
         FileSystemExtension.SaveSettings();
         SceneManager.LoadScene(2);
     }
+
+    public void OnClientConnectToEvent()
+    {
+        if (!NetworkClient.active)
+        {
+            // Client + IP
+            manager.StartClient();
+            networkAddressInputField.text = "EventServerIPAddress"; // load from file
+            manager.networkAddress = networkAddressInputField.text;
+        }
+        else
+        {
+            // Connecting
+            connectionStatus.text = "Connecting to " + manager.networkAddress + "..";
+        }
+
+        StatusLabels();
+        networkMenuElementsCanvasGroup.alpha = 0;
+        networkMenuElementsCanvasGroup.interactable = false;
+        loadingText.SetActive(false);
+        background.GetComponent<CanvasGroup>().alpha = 0;
+        soundtrack.Stop();
+    }
+
 
     // Used to host servers without actually adding a player
     public void OnServerOnly()
@@ -123,6 +155,9 @@ public class NetworkMenu : MonoBehaviour
 
         StatusLabels();
         gameManager.Setup();
+        loadingText.SetActive(false);
+        background.GetComponent<CanvasGroup>().alpha = 0;
+        soundtrack.Stop();
     }
 
     public void OnChangeNetworkAddress()

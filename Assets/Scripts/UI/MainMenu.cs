@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.InputSystem.UI;
 
 public class MainMenu : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class MainMenu : MonoBehaviour
     public GameObject menuElements;
     public AudioSource buttonSound;
     public Transform cameraPivotPoint;
+    public GameObject setupMenu;
+    public MultiplayerEventSystem SetupMenuMultiplayerEventSystem;
 
     private void Awake()
     {
@@ -34,7 +37,10 @@ public class MainMenu : MonoBehaviour
     public void Play()
     {
         buttonSound.Play();
-        SceneManager.LoadScene(2);
+        //SceneManager.LoadScene(2);
+        setupMenu.SetActive(true);
+        menuElements.SetActive(false);
+        SetupMenuMultiplayerEventSystem.enabled = true;
     }
 
     public void Quit()

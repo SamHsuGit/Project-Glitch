@@ -178,7 +178,7 @@ public class Controller : NetworkBehaviour
         playerCamera.GetComponent<Camera>().nearClipPlane = 0.01f;
 
         // position nametag procedurally based on imported char model size
-        nametag.transform.localPosition = new Vector3(0, colliderCenter.y + colliderHeight * 0.55f, 0);
+        //nametag.transform.localPosition = new Vector3(0, colliderCenter.y + colliderHeight * 0.55f, 0);
 
         foreach (Animator anims in animators) // play initial respawn animation
             anims.Play("Respawn");

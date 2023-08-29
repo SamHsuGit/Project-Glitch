@@ -41,12 +41,12 @@ public class SetupMenu : MonoBehaviour
 
     private void Update()
     {
-        modelsObjectToSpin.transform.Rotate(new Vector3(0, 1, 0));
+        //modelsObjectToSpin.transform.Rotate(new Vector3(0, 1, 0));
     }
 
     public void SetRenderDistance()
     {
-        worldRenderText.text = worldRenderDistanceSlider.value.ToString();
+        //worldRenderText.text = worldRenderDistanceSlider.value.ToString();
     }
 
     public void Local()
@@ -56,18 +56,20 @@ public class SetupMenu : MonoBehaviour
         SaveSettings();
 
         Settings.OnlinePlay = false;
+
+        // play loading animation?
         loadingSlider.gameObject.SetActive(true);
 
-        if (Settings.Platform == 2)
-        {
-            SceneManager.LoadScene(5); // mobile VR loads smaller scene
-            //levelLoader.LoadLevel(5, loadingSlider, loadingPercentageText); // doesn't work since most of level loading is done by world after scene is loaded
-        }
-        else
-        {
-            SceneManager.LoadScene(3);
+        //if (Settings.Platform == 2)
+        //{
+        //    SceneManager.LoadScene(5); // mobile VR loads smaller scene
+        //    //levelLoader.LoadLevel(5, loadingSlider, loadingPercentageText); // doesn't work since most of level loading is done by world after scene is loaded
+        //}
+        //else
+        //{
+            SceneManager.LoadScene(1);
             //levelLoader.LoadLevel(3, loadingSlider, loadingPercentageText); // doesn't work since most of level loading is done by world after scene is loaded
-        }
+        //}
     }
 
     public void Online()
@@ -78,16 +80,16 @@ public class SetupMenu : MonoBehaviour
 
         Settings.OnlinePlay = true;
 
-        if (Settings.Platform == 2)
-        {
-            SceneManager.LoadScene(5); // mobile VR loads smaller scene
-            //levelLoader.LoadLevel(5, loadingSlider, loadingPercentageText); // doesn't work since most of level loading is done by world after scene is loaded
-        }
-        else
-        {
-            SceneManager.LoadScene(3);
+        //if (Settings.Platform == 2)
+        //{
+        //    SceneManager.LoadScene(5); // mobile VR loads smaller scene
+        //    //levelLoader.LoadLevel(5, loadingSlider, loadingPercentageText); // doesn't work since most of level loading is done by world after scene is loaded
+        //}
+        //else
+        //{
+            SceneManager.LoadScene(1);
             //levelLoader.LoadLevel(3, loadingSlider, loadingPercentageText); // doesn't work since most of level loading is done by world after scene is loaded
-        }
+        //}
     }
 
     public void Back()

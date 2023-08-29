@@ -827,6 +827,7 @@ MonoBehaviour:
   background: {fileID: 7085100174170922114}
   loadingText: {fileID: 3134939849204132585}
   gameManagerObject: {fileID: 0}
+  soundtrack: {fileID: 3139788332195023822}
 --- !u!82 &3139788332195023822
 AudioSource:
   m_ObjectHideFlags: 0
@@ -838,7 +839,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -5395903399210832978, guid: a04d52d1510f7a74895a2e19335ea64f, type: 2}
   m_audioClip: {fileID: 8300000, guid: 749d3e53268aa034c9b888f2291290cc, type: 3}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 0.25
   m_Pitch: 1
   Loop: 0
@@ -1019,7 +1020,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Loading...
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
