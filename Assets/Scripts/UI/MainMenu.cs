@@ -5,13 +5,13 @@ using UnityEngine.InputSystem.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    
     public GameObject setupMenu;
     public AudioSource buttonSound;
     public Transform cameraPivotPoint;
     public TMP_Text versionText;
-    public MultiplayerEventSystem mainMenuMultiplayerEventSystem;
-    public MultiplayerEventSystem setupMenuMultiplayerEventSystem;
+    public MultiplayerEventSystem multiplayerEventSystem;
+    public GameObject localPlayButton;
+    //public MultiplayerEventSystem setupMenuMultiplayerEventSystem;
 
     private void Awake()
     {
@@ -40,9 +40,10 @@ public class MainMenu : MonoBehaviour
         buttonSound.Play();
         //SceneManager.LoadScene(2);
 
+        multiplayerEventSystem.SetSelectedGameObject(localPlayButton);
+        //multiplayerEventSystem.enabled = false;
+        //setupMenuMultiplayerEventSystem.enabled = true;
         setupMenu.SetActive(true);
-        setupMenuMultiplayerEventSystem.enabled = true;
-        mainMenuMultiplayerEventSystem.enabled = false;
         gameObject.SetActive(false);
     }
 

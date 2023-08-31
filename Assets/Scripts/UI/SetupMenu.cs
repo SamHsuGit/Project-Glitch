@@ -13,6 +13,7 @@ public class SetupMenu : MonoBehaviour
     public TMP_InputField playerNameInputField;
     public GameObject modelsObjectToSpin;
     public GameObject levelLoaderObject;
+    public GameObject playButton;
     
     public Slider worldRenderDistanceSlider;
     public TextMeshProUGUI worldRenderText;
@@ -21,8 +22,8 @@ public class SetupMenu : MonoBehaviour
 
     public int index;
 
-    public MultiplayerEventSystem mainMenuMultiplayerEventSystem;
-    public MultiplayerEventSystem setupMenuMultiplayerEventSystem;
+    public MultiplayerEventSystem multiplayerEventSystem;
+    //public MultiplayerEventSystem setupMenuMultiplayerEventSystem;
 
     private LevelLoader levelLoader;
 
@@ -100,9 +101,10 @@ public class SetupMenu : MonoBehaviour
         SaveSettings();
         //SceneManager.LoadScene(0);
 
+        //setupMenuMultiplayerEventSystem.enabled = false;
+        //multiplayerEventSystem.enabled = true;
+        multiplayerEventSystem.SetSelectedGameObject(playButton);
         mainMenu.SetActive(true);
-        mainMenuMultiplayerEventSystem.enabled = true;
-        setupMenuMultiplayerEventSystem.enabled = false;
         gameObject.SetActive(false);
     }
 

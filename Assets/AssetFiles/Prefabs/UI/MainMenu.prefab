@@ -946,8 +946,6 @@ GameObject:
   - component: {fileID: 3630708182166818223}
   - component: {fileID: 3630708182166818220}
   - component: {fileID: 4098539228138720138}
-  - component: {fileID: 6367735111302170160}
-  - component: {fileID: 166548058345203938}
   - component: {fileID: 8408515250218413931}
   - component: {fileID: 7822929694703600299}
   m_Layer: 5
@@ -1051,60 +1049,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11570577073ba73458bbac83d7fd9ebb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  versionText: {fileID: 3630708181858657613}
-  setupMenuElements: {fileID: 0}
-  MainMenuElements: {fileID: 3630708181910033941}
+  setupMenu: {fileID: 0}
   buttonSound: {fileID: 8408515250218413931}
   cameraPivotPoint: {fileID: 0}
-  setupMenu: {fileID: 0}
-  mainMenuMultiplayerEventSystem: {fileID: 6367735111302170160}
-  setupMenuMultiplayerEventSystem: {fileID: 0}
---- !u!114 &6367735111302170160
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3630708182166818221}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b16c6f78230fa4964a222622d8aae332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 1299766242335632061}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 10
-  m_PlayerRoot: {fileID: 0}
---- !u!114 &166548058345203938
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3630708182166818221}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
-  m_MoveRepeatDelay: 0.5
-  m_MoveRepeatRate: 0.1
-  m_XRTrackingOrigin: {fileID: 0}
-  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_PointAction: {fileID: 1054132383583890850, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_MoveAction: {fileID: 3710738434707379630, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_SubmitAction: {fileID: 2064916234097673511, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_CancelAction: {fileID: -1967631576421560919, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_LeftClickAction: {fileID: 8056856818456041789, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_MiddleClickAction: {fileID: 3279352641294131588, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_RightClickAction: {fileID: 3837173908680883260, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_ScrollWheelAction: {fileID: 4502412055082496612, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_TrackedDevicePositionAction: {fileID: 4754684134866288074, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_TrackedDeviceOrientationAction: {fileID: 1025543830046995696, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_DeselectOnBackgroundClick: 0
-  m_PointerBehavior: 0
-  m_CursorLockBehavior: 0
+  versionText: {fileID: 3630708181858657613}
+  multiplayerEventSystem: {fileID: 0}
+  localPlayButton: {fileID: 0}
 --- !u!82 &8408515250218413931
 AudioSource:
   m_ObjectHideFlags: 0
