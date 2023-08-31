@@ -11,7 +11,6 @@ public class MainMenu : MonoBehaviour
     public TMP_Text versionText;
     public MultiplayerEventSystem multiplayerEventSystem;
     public GameObject localPlayButton;
-    //public MultiplayerEventSystem setupMenuMultiplayerEventSystem;
 
     private void Awake()
     {
@@ -41,8 +40,6 @@ public class MainMenu : MonoBehaviour
         //SceneManager.LoadScene(2);
 
         multiplayerEventSystem.SetSelectedGameObject(localPlayButton);
-        //multiplayerEventSystem.enabled = false;
-        //setupMenuMultiplayerEventSystem.enabled = true;
         setupMenu.SetActive(true);
         gameObject.SetActive(false);
     }

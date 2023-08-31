@@ -2863,6 +2863,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1639193253}
     - target: {fileID: 3651580343961107257, guid: 97ee97b043dbbb6419cb3ae00e008cfc, type: 3}
+      propertyPath: cameraPivotPoint
+      value: 
+      objectReference: {fileID: 1052035392}
+    - target: {fileID: 3651580343961107257, guid: 97ee97b043dbbb6419cb3ae00e008cfc, type: 3}
       propertyPath: mainMenuElements
       value: 
       objectReference: {fileID: 766021067}

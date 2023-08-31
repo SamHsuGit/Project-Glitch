@@ -96,7 +96,7 @@ public class NetworkMenu : MonoBehaviour
     {
         buttonSound.Play();
         FileSystemExtension.SaveSettings();
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(0);
     }
 
     public void OnClientConnectToEvent()

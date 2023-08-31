@@ -8,22 +8,18 @@ using UnityEngine.InputSystem.UI;
 public class SetupMenu : MonoBehaviour
 {
     public GameObject mainMenu;
+    public Transform cameraPivotPoint;
     public Slider loadingSlider;
     public TextMeshProUGUI loadingPercentageText;
     public TMP_InputField playerNameInputField;
     public GameObject modelsObjectToSpin;
     public GameObject levelLoaderObject;
     public GameObject playButton;
-    
-    public Slider worldRenderDistanceSlider;
-    public TextMeshProUGUI worldRenderText;
-
     public AudioSource buttonSound;
 
     public int index;
 
     public MultiplayerEventSystem multiplayerEventSystem;
-    //public MultiplayerEventSystem setupMenuMultiplayerEventSystem;
 
     private LevelLoader levelLoader;
 
@@ -47,11 +43,7 @@ public class SetupMenu : MonoBehaviour
     private void Update()
     {
         //modelsObjectToSpin.transform.Rotate(new Vector3(0, 1, 0));
-    }
-
-    public void SetRenderDistance()
-    {
-        //worldRenderText.text = worldRenderDistanceSlider.value.ToString();
+        cameraPivotPoint.Rotate(new Vector3(0, -Mathf.Deg2Rad * 1, 0));
     }
 
     public void Local()
@@ -67,12 +59,10 @@ public class SetupMenu : MonoBehaviour
         //if (Settings.Platform == 2)
         //{
         //    SceneManager.LoadScene(5); // mobile VR loads smaller scene
-        //    //levelLoader.LoadLevel(5, loadingSlider, loadingPercentageText); // doesn't work since most of level loading is done by world after scene is loaded
         //}
         //else
         //{
             SceneManager.LoadScene(1);
-            //levelLoader.LoadLevel(3, loadingSlider, loadingPercentageText); // doesn't work since most of level loading is done by world after scene is loaded
         //}
     }
 
@@ -86,12 +76,10 @@ public class SetupMenu : MonoBehaviour
         //if (Settings.Platform == 2)
         //{
         //    SceneManager.LoadScene(5); // mobile VR loads smaller scene
-        //    //levelLoader.LoadLevel(5, loadingSlider, loadingPercentageText); // doesn't work since most of level loading is done by world after scene is loaded
         //}
         //else
         //{
             SceneManager.LoadScene(1);
-            //levelLoader.LoadLevel(3, loadingSlider, loadingPercentageText); // doesn't work since most of level loading is done by world after scene is loaded
         //}
     }
 
@@ -101,8 +89,6 @@ public class SetupMenu : MonoBehaviour
         SaveSettings();
         //SceneManager.LoadScene(0);
 
-        //setupMenuMultiplayerEventSystem.enabled = false;
-        //multiplayerEventSystem.enabled = true;
         multiplayerEventSystem.SetSelectedGameObject(playButton);
         mainMenu.SetActive(true);
         gameObject.SetActive(false);
