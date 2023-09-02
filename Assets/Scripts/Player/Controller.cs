@@ -16,10 +16,10 @@ public class Controller : NetworkBehaviour
 
     [SyncVar(hook = nameof(SetCurrentWeaponPrimaryIndex))] public int currentWeaponPrimaryIndex = 0;
     [SyncVar(hook = nameof(SetCurrentWeaponSecondaryIndex))] public int currentWeaponSecondaryIndex = 0;
+    [SyncVar(hook = nameof(SetIsGrounded))] public bool isGrounded = false;
 
     [Header("Debug States")]
     [SerializeField] float collisionDamage;
-    public bool isGrounded;
     [SyncVar(hook = nameof(SetIsMoving))] public bool isMoving = false;
     public bool options = false;
     public float m_Speed = 20f;
@@ -289,6 +289,11 @@ public class Controller : NetworkBehaviour
         for (int i = 0; i < wSecondaryModels.Length; i++)
             wSecondaryModels[i].SetActive(false);
         wSecondaryModels[newValue].SetActive(true);
+    }
+
+    public void SetIsGrounded(bool oldValue, bool newValue)
+    {
+        isGrounded = newValue;
     }
 
     private void OnTriggerEnter(Collider collider)
@@ -587,8 +592,9 @@ public class Controller : NetworkBehaviour
         {
             //charModelOrigin.transform.eulerAngles = Vector3.zero;
 
-            charModelHead.transform.eulerAngles = new Vector3(0, playerCameraOrigin.transform.rotation.eulerAngles.y, 0); // rotate char model head to face same y direction as camera
-            charModelTorso.transform.eulerAngles = new Vector3(0, playerCameraOrigin.transform.rotation.eulerAngles.y, 0); // rotate char model torso to face same y direction as camera
+            transform.eulerAngles = new Vector3(0, playerCameraOrigin.transform.rotation.eulerAngles.y, 0); // rotate gameobject to face direction of camera
+            //charModelHead.transform.eulerAngles = new Vector3(0, playerCameraOrigin.transform.rotation.eulerAngles.y, 0); // rotate char model head to face same y direction as camera
+            //charModelTorso.transform.eulerAngles = new Vector3(0, playerCameraOrigin.transform.rotation.eulerAngles.y, 0); // rotate char model torso to face same y direction as camera
 
             if (isMoving && direction != Vector3.zero)
             {
