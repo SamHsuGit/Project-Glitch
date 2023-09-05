@@ -22,10 +22,8 @@ public class Controller : NetworkBehaviour
     [SyncVar] public int playerNumber;
     //[SyncVar] public int currentWeaponPrimaryIndex = 0;
     //[SyncVar] public int currentWeaponSecondaryIndex = 0;
-    //[SyncVar]
-    public bool isGrounded = false;
-    //[SyncVar]
-    public bool isMoving = false;
+    [SyncVar] public bool isGrounded = false;
+    [SyncVar] public bool isMoving = false;
 
     [Header("Debug States")]
     [SerializeField] float collisionDamage;
@@ -280,7 +278,6 @@ public class Controller : NetworkBehaviour
     public void SetIsMoving(bool oldValue, bool newValue)
     {
         isMoving = newValue;
-        SetAnimVars();
     }
 
     public void SetCurrentWeaponPrimaryIndex(int oldValue, int newValue)
@@ -304,7 +301,6 @@ public class Controller : NetworkBehaviour
     public void SetIsGrounded(bool oldValue, bool newValue)
     {
         isGrounded = newValue;
-        SetAnimVars();
     }
 
     private void OnTriggerEnter(Collider collider)
