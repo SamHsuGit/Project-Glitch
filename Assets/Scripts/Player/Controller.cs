@@ -15,8 +15,8 @@ public class Controller : NetworkBehaviour
     readonly private SyncList<string> playerNamesServer = new SyncList<string>();
 
     [SyncVar] public int playerNumber;
-    [SyncVar] public int currentWeaponPrimaryIndex = 0;
-    [SyncVar] public int currentWeaponSecondaryIndex = 0;
+    [SyncVar(hook = nameof(SetCurrentWeaponPrimaryIndex))] public int currentWeaponPrimaryIndex = 0;
+    [SyncVar(hook = nameof(SetCurrentWeaponSecondaryIndex))] public int currentWeaponSecondaryIndex = 0;
     [SyncVar] public bool isGrounded = false;
     [SyncVar] public bool isMoving = false;
 
@@ -517,24 +517,10 @@ public class Controller : NetworkBehaviour
     public void CmdSetPrimaryWeaponIndex(int value)
     {
         currentWeaponPrimaryIndex = value;
-        //RpcSetPrimaryWeaponIndex(value);
     }
 
     [Command]
     public void CmdSetSecondaryWeaponIndex(int value)
-    {
-        currentWeaponSecondaryIndex = value;
-        //RpcSetSeconaryWeaponIndex(value);
-    }
-
-    [ClientRpc]
-    void RpcSetPrimaryWeaponIndex(int value)
-    {
-        currentWeaponPrimaryIndex = value;
-    }
-
-    [ClientRpc]
-    void RpcSetSeconaryWeaponIndex(int value)
     {
         currentWeaponSecondaryIndex = value;
     }
