@@ -275,10 +275,10 @@ public class Controller : NetworkBehaviour
         nametag.GetComponent<TextMesh>().text = newValue;
     }
 
-    public void SetIsMoving(bool oldValue, bool newValue)
-    {
-        isMoving = newValue;
-    }
+    //public void SetIsMoving(bool oldValue, bool newValue)
+    //{
+    //    isMoving = newValue;
+    //}
 
     public void SetCurrentWeaponPrimaryIndex(int oldValue, int newValue)
     {
@@ -298,10 +298,10 @@ public class Controller : NetworkBehaviour
         wSecondaryModels[currentWeaponSecondaryIndex].SetActive(true);
     }
 
-    public void SetIsGrounded(bool oldValue, bool newValue)
-    {
-        isGrounded = newValue;
-    }
+    //public void SetIsGrounded(bool oldValue, bool newValue)
+    //{
+    //    isGrounded = newValue;
+    //}
 
     private void OnTriggerEnter(Collider collider)
     {
@@ -487,7 +487,7 @@ public class Controller : NetworkBehaviour
             return;
         }
 
-        isGrounded = CheckGroundedCollider();
+        CmdCheckGroundedCollider();
         if (isGrounded)
             currentJumps = 0;
 
@@ -577,7 +577,8 @@ public class Controller : NetworkBehaviour
         }
     }
 
-    bool CheckGroundedCollider()
+    [Command]
+    void CmdCheckGroundedCollider()
     {
         float rayLength;
         Vector3 rayStart = transform.position;
@@ -592,9 +593,9 @@ public class Controller : NetworkBehaviour
 
         // check if the char is grounded by casting a ray from rayStart down extending rayLength
         if (Physics.SphereCast(rayStart, sphereCastRadius, Vector3.down, out RaycastHit hit, rayLength))
-            return true;
+            isGrounded = true;
         else
-            return false;
+            isGrounded = false;
     }
 
     private void CacheInput()
