@@ -14,11 +14,6 @@ public class Controller : NetworkBehaviour
     [SyncVar] private string versionServer;
     readonly private SyncList<string> playerNamesServer = new SyncList<string>();
 
-    //[SyncVar(hook = nameof(SetCurrentWeaponPrimaryIndex))] public int currentWeaponPrimaryIndex = 0;
-    //[SyncVar(hook = nameof(SetCurrentWeaponSecondaryIndex))] public int currentWeaponSecondaryIndex = 0;
-    //[SyncVar(hook = nameof(SetIsGrounded))] public bool isGrounded = false;
-    //[SyncVar(hook = nameof(SetIsMoving))] public bool isMoving = false;
-
     [SyncVar] public int playerNumber;
     [SyncVar] public int currentWeaponPrimaryIndex = 0;
     [SyncVar] public int currentWeaponSecondaryIndex = 0;
@@ -108,6 +103,7 @@ public class Controller : NetworkBehaviour
     // Order of network events: https://docs.unity3d.com/Manual/NetworkBehaviourCallbacks.html
     // Order of SyncVars: https://mirror-networking.gitbook.io/docs/guides/synchronization/syncvars
     // The state of SyncVars is applied to game objects on clients before OnStartClient() is called, so the state of the object is always up - to - date inside OnStartClient().
+    // SyncVars are applied from the server to the clients, if a client wants to update a value, you need to call a server Command using [Command]
 
     void Awake()
     {
