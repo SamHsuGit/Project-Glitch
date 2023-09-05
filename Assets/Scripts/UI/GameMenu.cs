@@ -142,7 +142,10 @@ public class GameMenu : MonoBehaviour
             if (currentWeaponPrimaryIndex < 0)
                 currentWeaponPrimaryIndex = weaponsPrimaryCount - 1;
 
-            controller.currentWeaponPrimaryIndex = currentWeaponPrimaryIndex;
+            if (Settings.OnlinePlay)
+                controller.CmdSetPrimaryWeaponIndex(currentWeaponPrimaryIndex);
+            else
+                controller.currentWeaponPrimaryIndex = currentWeaponPrimaryIndex;
         }
         else if (optionsMenuCanvasGroup.alpha != 1 && controller.switchSecondary && (setNavigate || inputHandler.scrollWheel != Vector2.zero))
         {
@@ -164,7 +167,10 @@ public class GameMenu : MonoBehaviour
             if (currentWeaponSecondaryIndex < 0)
                 currentWeaponSecondaryIndex = weaponsSecondaryCount - 1;
 
-            controller.currentWeaponSecondaryIndex = currentWeaponSecondaryIndex;
+            if (Settings.OnlinePlay)
+                controller.CmdSetSecondaryWeaponIndex(currentWeaponSecondaryIndex);
+            else
+                controller.currentWeaponSecondaryIndex = currentWeaponSecondaryIndex;
         }
     }
 

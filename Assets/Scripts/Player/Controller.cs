@@ -14,14 +14,14 @@ public class Controller : NetworkBehaviour
     [SyncVar] private string versionServer;
     readonly private SyncList<string> playerNamesServer = new SyncList<string>();
 
-    [SyncVar(hook = nameof(SetCurrentWeaponPrimaryIndex))] public int currentWeaponPrimaryIndex = 0;
-    [SyncVar(hook = nameof(SetCurrentWeaponSecondaryIndex))] public int currentWeaponSecondaryIndex = 0;
+    //[SyncVar(hook = nameof(SetCurrentWeaponPrimaryIndex))] public int currentWeaponPrimaryIndex = 0;
+    //[SyncVar(hook = nameof(SetCurrentWeaponSecondaryIndex))] public int currentWeaponSecondaryIndex = 0;
     //[SyncVar(hook = nameof(SetIsGrounded))] public bool isGrounded = false;
     //[SyncVar(hook = nameof(SetIsMoving))] public bool isMoving = false;
 
     [SyncVar] public int playerNumber;
-    //[SyncVar] public int currentWeaponPrimaryIndex = 0;
-    //[SyncVar] public int currentWeaponSecondaryIndex = 0;
+    [SyncVar] public int currentWeaponPrimaryIndex = 0;
+    [SyncVar] public int currentWeaponSecondaryIndex = 0;
     [SyncVar] public bool isGrounded = false;
     [SyncVar] public bool isMoving = false;
 
@@ -275,11 +275,6 @@ public class Controller : NetworkBehaviour
         nametag.GetComponent<TextMesh>().text = newValue;
     }
 
-    //public void SetIsMoving(bool oldValue, bool newValue)
-    //{
-    //    isMoving = newValue;
-    //}
-
     public void SetCurrentWeaponPrimaryIndex(int oldValue, int newValue)
     {
         currentWeaponPrimaryIndex = newValue;
@@ -297,11 +292,6 @@ public class Controller : NetworkBehaviour
             wSecondaryModels[i].SetActive(false);
         wSecondaryModels[currentWeaponSecondaryIndex].SetActive(true);
     }
-
-    //public void SetIsGrounded(bool oldValue, bool newValue)
-    //{
-    //    isGrounded = newValue;
-    //}
 
     private void OnTriggerEnter(Collider collider)
     {
@@ -487,7 +477,11 @@ public class Controller : NetworkBehaviour
             return;
         }
 
-        CmdCheckGroundedCollider();
+        if (Settings.OnlinePlay)
+            CmdCheckGroundedCollider();
+        else
+            isGrounded = CheckGroundedCollider();
+        
         if (isGrounded)
             currentJumps = 0;
 
@@ -499,6 +493,18 @@ public class Controller : NetworkBehaviour
             CheckReloadPrimaryWeapon();
             SetWeapons();
         }
+    }
+
+    [Command]
+    public void CmdSetPrimaryWeaponIndex(int value)
+    {
+        currentWeaponPrimaryIndex = value;
+    }
+
+    [Command]
+    public void CmdSetSecondaryWeaponIndex(int value)
+    {
+        currentWeaponSecondaryIndex = value;
     }
 
     void SetWeapons()
@@ -514,12 +520,18 @@ public class Controller : NetworkBehaviour
 
     public void PressedShoot()
     {
-        CmdSpawnObject(0, 0, projectilePrimaryOrigin.transform.position);
+        if(Settings.OnlinePlay)
+            CmdSpawnObject(0, 0, projectilePrimaryOrigin.transform.position);
+        else
+            SpawnObject(0, 0, projectilePrimaryOrigin.transform.position);
     }
 
     public void PressedGrenade()
     {
-        CmdSpawnObject(1, 0, projectileSecondaryOrigin.transform.position);
+        if (Settings.OnlinePlay)
+            CmdSpawnObject(1, 0, projectileSecondaryOrigin.transform.position);
+        else
+            SpawnObject(1, 0, projectileSecondaryOrigin.transform.position);
     }
 
     [Command]
@@ -580,6 +592,11 @@ public class Controller : NetworkBehaviour
     [Command]
     void CmdCheckGroundedCollider()
     {
+        isGrounded = CheckGroundedCollider();
+    }
+    
+    bool CheckGroundedCollider()
+    {
         float rayLength;
         Vector3 rayStart = transform.position;
 
@@ -593,9 +610,9 @@ public class Controller : NetworkBehaviour
 
         // check if the char is grounded by casting a ray from rayStart down extending rayLength
         if (Physics.SphereCast(rayStart, sphereCastRadius, Vector3.down, out RaycastHit hit, rayLength))
-            isGrounded = true;
+            return true;
         else
-            isGrounded = false;
+            return false;
     }
 
     private void CacheInput()
