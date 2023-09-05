@@ -9,11 +9,8 @@ vis2k Mirror (MIT License): https://github.com/vis2k/Mirror
 Unity (Personal License)
 
 Build the game yourself:
-
 Unity 2021.3.16f1
 
 For a pre-built installer:
-
 https://sam-hsu.itch.io/project-glitch
-
 Password: "exavolt"
