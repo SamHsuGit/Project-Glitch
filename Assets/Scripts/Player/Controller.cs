@@ -19,6 +19,7 @@ public class Controller : NetworkBehaviour
     //[SyncVar(hook = nameof(SetIsGrounded))] public bool isGrounded = false;
     //[SyncVar(hook = nameof(SetIsMoving))] public bool isMoving = false;
 
+    [SyncVar] public int playerNumber;
     [SyncVar] public int currentWeaponPrimaryIndex = 0;
     [SyncVar] public int currentWeaponSecondaryIndex = 0;
     [SyncVar] public bool isGrounded = false;
@@ -41,7 +42,6 @@ public class Controller : NetworkBehaviour
     public int batteries = 3;
     public bool isThrowingGrenade = false;
     public bool isReloading = false;
-    public int playerNumber = 1;
 
     [SerializeField] float _lookVelocity = 1f;
 
@@ -258,6 +258,8 @@ public class Controller : NetworkBehaviour
 
         //if (isClientOnly)
         //    customNetworkManager.InitWorld(); // activate world only after getting syncVar latest values from server
+
+        playerNumber = NetworkConnection.LocalConnectionId;
     }
 
     public void SetName(string oldValue, string newValue)
@@ -537,11 +539,16 @@ public class Controller : NetworkBehaviour
                     {
                         // create target vector from projectile origin
                         Vector3 targetVector = target.transform.position - pos;
-                        GameObject ob = Instantiate(wPrimaryPickupObjects[currentWeaponPrimaryIndex].projectile, pos, Quaternion.LookRotation(projectilePrimaryOrigin.transform.forward, Vector3.up));
-                        Rigidbody rb = ob.GetComponent<Rigidbody>();
-                        rb.velocity = targetVector.normalized * wPrimaryPickupObjects[currentWeaponPrimaryIndex].projectileVelocity;
-                        ob.transform.Rotate(Vector3.right, 90f);
-                        Destroy(ob, 3);
+                        if (Settings.OnlinePlay)
+                            NetworkServer.Spawn(wPrimaryPickupObjects[currentWeaponPrimaryIndex].projectile, gameObject);
+                        else
+                        {
+                            GameObject ob = Instantiate(wPrimaryPickupObjects[currentWeaponPrimaryIndex].projectile, pos, Quaternion.LookRotation(projectilePrimaryOrigin.transform.forward, Vector3.up));
+                            Rigidbody rb = ob.GetComponent<Rigidbody>();
+                            rb.velocity = targetVector.normalized * wPrimaryPickupObjects[currentWeaponPrimaryIndex].projectileVelocity;
+                            ob.transform.Rotate(Vector3.right, 90f);
+                            Destroy(ob, 3);
+                        }
                     }
                     break;
                 }
