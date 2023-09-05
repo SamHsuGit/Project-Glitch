@@ -539,9 +539,9 @@ public class Controller : NetworkBehaviour
                     {
                         // create target vector from projectile origin
                         Vector3 targetVector = target.transform.position - pos;
-                        if (Settings.OnlinePlay)
-                            NetworkServer.Spawn(wPrimaryPickupObjects[currentWeaponPrimaryIndex].projectile, gameObject);
-                        else
+                        //if (Settings.OnlinePlay)
+                        //    NetworkServer.Spawn(wPrimaryPickupObjects[currentWeaponPrimaryIndex].projectile, gameObject); // gives error: Player object is not a player
+                        //else
                         {
                             GameObject ob = Instantiate(wPrimaryPickupObjects[currentWeaponPrimaryIndex].projectile, pos, Quaternion.LookRotation(projectilePrimaryOrigin.transform.forward, Vector3.up));
                             Rigidbody rb = ob.GetComponent<Rigidbody>();
