@@ -481,6 +481,7 @@ public class Controller : NetworkBehaviour
         }
 
         isGrounded = CheckGroundedCollider();
+        SetIsGrounded(isGrounded, isGrounded);
         if (isGrounded)
             currentJumps = 0;
 
@@ -503,6 +504,7 @@ public class Controller : NetworkBehaviour
         CmdSpawnObject(1, 0, projectileSecondaryOrigin.transform.position);
     }
 
+    [Command]
     public void CmdSpawnObject(int type, int item, Vector3 pos)
     {
         switch(type)
@@ -570,6 +572,7 @@ public class Controller : NetworkBehaviour
             isMoving = true;
         else
             isMoving = false;
+        SetIsMoving(isMoving, isMoving);
 
         look = _inputHandler.look;
         jump = _inputHandler.jump;
