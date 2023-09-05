@@ -640,7 +640,7 @@ public class Controller : NetworkBehaviour
         else // if in air
         {
             // rotate entire char model to face direction of camera (must occur before camera is moved again)
-            charModelOrigin.transform.eulerAngles = new Vector3(0f, playerCameraOrigin.transform.eulerAngles.y, 0f);
+            transform.eulerAngles = new Vector3(0f, playerCameraOrigin.transform.eulerAngles.y, 0f);
         }
 
         // rotate cameraOrigin around player model (has to occur after rotating charModelOrigin to match camera origin rotation in mid-air)
