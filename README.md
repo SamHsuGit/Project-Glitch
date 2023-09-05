@@ -9,3 +9,6 @@ Unity Editor 2021.3.16f1
 vis2k Mirror (MIT License): https://github.com/vis2k/Mirror
 
 Unity (Personal License)
+
+https://sam-hsu.itch.io/project-glitch
+Password: "exavolt"
