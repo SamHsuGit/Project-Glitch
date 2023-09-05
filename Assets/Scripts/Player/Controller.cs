@@ -126,11 +126,7 @@ public class Controller : NetworkBehaviour
         health.isAlive = true;
 
         CinematicBars.SetActive(false);
-
-        
     }
-
-    
 
     private void Start()
     {
@@ -154,6 +150,8 @@ public class Controller : NetworkBehaviour
             SetName(playerName, playerName);
             nametag.SetActive(false); // disable nametag for singleplayer/splitscreen play
             SetInventory();
+            SetCurrentWeaponPrimaryIndex(currentWeaponPrimaryIndex, currentWeaponPrimaryIndex);
+            SetCurrentWeaponSecondaryIndex(currentWeaponSecondaryIndex, currentWeaponSecondaryIndex);
 
             world.gameObject.SetActive(true);
         }
@@ -236,6 +234,8 @@ public class Controller : NetworkBehaviour
         //customNetworkManager.InitWorld();
 
         SetInventory();
+        SetCurrentWeaponPrimaryIndex(currentWeaponPrimaryIndex, currentWeaponPrimaryIndex);
+        SetCurrentWeaponSecondaryIndex(currentWeaponSecondaryIndex, currentWeaponSecondaryIndex);
     }
     
     public override void OnStartClient() // Only called on Client and Host
@@ -257,6 +257,8 @@ public class Controller : NetworkBehaviour
 
         SetName(playerName, playerName); // called on both clients and host
         SetInventory();
+        SetCurrentWeaponPrimaryIndex(currentWeaponPrimaryIndex, currentWeaponPrimaryIndex);
+        SetCurrentWeaponSecondaryIndex(currentWeaponSecondaryIndex, currentWeaponSecondaryIndex);
 
         //if (isClientOnly)
         //    customNetworkManager.InitWorld(); // activate world only after getting syncVar latest values from server
@@ -538,33 +540,41 @@ public class Controller : NetworkBehaviour
 
     public void PressedShoot()
     {
-        if(Settings.OnlinePlay)
-            CmdSpawnObject(0, 0, projectilePrimaryOrigin.transform.position);
+        Vector3 pos = projectilePrimaryOrigin.transform.position;
+        Vector3 velocityVector = target.transform.position - pos;
+
+        if (Settings.OnlinePlay)
+            CmdSpawnObject(0, 0, pos, velocityVector);
         else
-            SpawnObject(0, 0, projectilePrimaryOrigin.transform.position);
+            SpawnObject(0, 0, pos, velocityVector);
     }
 
     public void PressedGrenade()
     {
+        Vector3 pos = projectilePrimaryOrigin.transform.position;
+        Vector3 grenadeTarget = target.transform.position + target.transform.up * 3; // grenade should have slight upwards velocity
+                                                                                     // create target vector from projectile origin
+        Vector3 velocityVector = grenadeTarget - pos;
+
         if (Settings.OnlinePlay)
-            CmdSpawnObject(1, 0, projectileSecondaryOrigin.transform.position);
+            CmdSpawnObject(1, 0, pos, velocityVector);
         else
-            SpawnObject(1, 0, projectileSecondaryOrigin.transform.position);
+            SpawnObject(1, 0, pos, velocityVector);
     }
 
     [Command]
-    public void CmdSpawnObject(int type, int item, Vector3 pos)
+    public void CmdSpawnObject(int type, int item, Vector3 pos, Vector3 velocityVector)
     {
-        RpcSpawnObject(type, item, pos);
+        RpcSpawnObject(type, item, pos, velocityVector);
     }
 
     [ClientRpc]
-    public void RpcSpawnObject(int type, int item, Vector3 pos)
+    public void RpcSpawnObject(int type, int item, Vector3 pos, Vector3 velocityVector)
     {
-        SpawnObject(type, item, pos);
+        SpawnObject(type, item, pos, velocityVector);
     }
 
-    public void SpawnObject(int type, int item, Vector3 pos)
+    public void SpawnObject(int type, int item, Vector3 pos, Vector3 velocityVector)
     {
         switch (type)
         {
@@ -573,14 +583,13 @@ public class Controller : NetworkBehaviour
                     if (wPrimaryPickupObjects[currentWeaponPrimaryIndex].projectile != null)
                     {
                         // create target vector from projectile origin
-                        Vector3 targetVector = target.transform.position - pos;
                         //if (Settings.OnlinePlay)
                         //    NetworkServer.Spawn(wPrimaryPickupObjects[currentWeaponPrimaryIndex].projectile, gameObject); // gives error: Player object is not a player
                         //else
                         {
                             GameObject ob = Instantiate(wPrimaryPickupObjects[currentWeaponPrimaryIndex].projectile, pos, Quaternion.LookRotation(projectilePrimaryOrigin.transform.forward, Vector3.up));
                             Rigidbody rb = ob.GetComponent<Rigidbody>();
-                            rb.velocity = targetVector.normalized * wPrimaryPickupObjects[currentWeaponPrimaryIndex].projectileVelocity;
+                            rb.velocity = velocityVector.normalized * wPrimaryPickupObjects[currentWeaponPrimaryIndex].projectileVelocity;
                             ob.transform.Rotate(Vector3.right, 90f);
                             Destroy(ob, 3);
                         }
@@ -591,12 +600,9 @@ public class Controller : NetworkBehaviour
                 {
                     if (wSecondaryPickupObjects[currentWeaponSecondaryIndex].projectile != null && wSecondaryPickupObjects[currentWeaponSecondaryIndex].ammo > 0)
                     {
-                        Vector3 grenadeTarget = target.transform.position + target.transform.up * 3; // grenade should have slight upwards velocity
-                                                                                                     // create target vector from projectile origin
-                        Vector3 targetVector = grenadeTarget - pos;
-                        GameObject ob = Instantiate(wSecondaryPickupObjects[currentWeaponSecondaryIndex].projectile, pos, Quaternion.Euler(targetVector));
+                        GameObject ob = Instantiate(wSecondaryPickupObjects[currentWeaponSecondaryIndex].projectile, pos, Quaternion.Euler(velocityVector));
                         Rigidbody rb = ob.GetComponent<Rigidbody>();
-                        rb.velocity = targetVector.normalized * wSecondaryPickupObjects[currentWeaponSecondaryIndex].projectileVelocity;
+                        rb.velocity = velocityVector.normalized * wSecondaryPickupObjects[currentWeaponSecondaryIndex].projectileVelocity;
                         Destroy(ob, 10); // grenade should destroy itself before 10 sec, but just in case, clean up scene
 
                         wSecondaryPickupObjects[currentWeaponSecondaryIndex].ammo -= wSecondaryPickupObjects[currentWeaponSecondaryIndex].roundsPerFire;

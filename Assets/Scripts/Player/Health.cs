@@ -4,7 +4,6 @@ using Mirror;
 public class Health : NetworkBehaviour
 {
     public AudioSource audioSourcePlayer;
-    public AudioClip hurtSound;
     public AudioClip[] hurtClips;
     public int currentHurtClipIndex;
     public AudioClip deathSound;
@@ -61,6 +60,7 @@ public class Health : NetworkBehaviour
             // Respawn
             if (hp < 1)
             {
+                audioSourcePlayer.PlayOneShot(deathSound);
                 if (Settings.OnlinePlay && hasAuthority)
                     CmdRespawn();
                 else
@@ -74,7 +74,6 @@ public class Health : NetworkBehaviour
                 CmdEditSelfHealth(-1);
             if (!Settings.OnlinePlay)
                 EditSelfHealth(-1);
-            audioSourcePlayer.PlayOneShot(deathSound);
         }
     }
 

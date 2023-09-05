@@ -149,7 +149,5 @@ public Health FindTarget() // use hitscan to detect if something is targeted by 
     {
         target.hp -= damage; // only edit health on server which pushes syncVar updates to clients
         target.UpdateHP(target.hp, target.hp);
-        if (target.isAlive)
-            target.PlayHurtSound(currentPrimaryWeaponIndex);
     }
 }
