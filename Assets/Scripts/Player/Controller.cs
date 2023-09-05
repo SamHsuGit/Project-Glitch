@@ -127,7 +127,46 @@ public class Controller : NetworkBehaviour
 
         CinematicBars.SetActive(false);
 
-        SetInventory();
+        
+    }
+
+    
+
+    private void Start()
+    {
+        world.JoinPlayer(gameObject); // must NamePlayer and initialize world before this can be run
+
+        InputComponents();
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
+        playerCamera.GetComponent<Camera>().nearClipPlane = 0.01f;
+
+        // position nametag procedurally based on imported char model size
+        //nametag.transform.localPosition = new Vector3(0, colliderCenter.y + colliderHeight * 0.55f, 0);
+
+        foreach (Animator anims in animators) // play initial respawn animation
+            anims.Play("Respawn");
+
+        if (!Settings.OnlinePlay)
+        {
+            SetName(playerName, playerName);
+            nametag.SetActive(false); // disable nametag for singleplayer/splitscreen play
+            SetInventory();
+
+            world.gameObject.SetActive(true);
+        }
+    }
+
+    void NamePlayer()
+    {
+        {
+            // set this object's name from saved settings so it can be modified by the world script when player joins
+            playerName = SettingsStatic.LoadedSettings.playerName;
+
+            player = new Player(gameObject, playerName); // create a new player, try to load player stats from save file
+        }
     }
 
     void SetInventory()
@@ -155,42 +194,6 @@ public class Controller : NetworkBehaviour
         // Set starting weapons to first in array
         currentWeaponPrimaryIndex = 0;
         currentWeaponSecondaryIndex = 0;
-    }
-
-    void NamePlayer()
-    {
-        {
-            // set this object's name from saved settings so it can be modified by the world script when player joins
-            playerName = SettingsStatic.LoadedSettings.playerName;
-
-            player = new Player(gameObject, playerName); // create a new player, try to load player stats from save file
-        }
-    }
-
-    private void Start()
-    {
-        world.JoinPlayer(gameObject); // must NamePlayer and initialize world before this can be run
-
-        InputComponents();
-
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-
-        playerCamera.GetComponent<Camera>().nearClipPlane = 0.01f;
-
-        // position nametag procedurally based on imported char model size
-        //nametag.transform.localPosition = new Vector3(0, colliderCenter.y + colliderHeight * 0.55f, 0);
-
-        foreach (Animator anims in animators) // play initial respawn animation
-            anims.Play("Respawn");
-
-        if (!Settings.OnlinePlay)
-        {
-            SetName(playerName, playerName);
-            nametag.SetActive(false); // disable nametag for singleplayer/splitscreen play
-
-           world.gameObject.SetActive(true);
-        }
     }
 
     void InputComponents()
@@ -231,6 +234,8 @@ public class Controller : NetworkBehaviour
         //SetServerChunkStringSyncVar(); // Server sends initially loaded chunks as chunkStringSyncVar to clients (DISABLED, send chunks over internet manually, figure out how to send data not as strings)
 
         //customNetworkManager.InitWorld();
+
+        SetInventory();
     }
     
     public override void OnStartClient() // Only called on Client and Host
@@ -251,6 +256,7 @@ public class Controller : NetworkBehaviour
         }
 
         SetName(playerName, playerName); // called on both clients and host
+        SetInventory();
 
         //if (isClientOnly)
         //    customNetworkManager.InitWorld(); // activate world only after getting syncVar latest values from server
@@ -493,7 +499,7 @@ public class Controller : NetworkBehaviour
 
     public void SetPrimaryWeaponIndex(int value)
     {
-        if (Settings.OnlinePlay && isLocalPlayer)
+        if (Settings.OnlinePlay && isLocalPlayer && isClientOnly)
             CmdSetPrimaryWeaponIndex(value);
         else
             currentWeaponPrimaryIndex = value;
@@ -501,7 +507,7 @@ public class Controller : NetworkBehaviour
 
     public void SetSecondaryWeaponIndex(int value)
     {
-        if (Settings.OnlinePlay && isLocalPlayer)
+        if (Settings.OnlinePlay && isLocalPlayer && isClientOnly)
             CmdSetSecondaryWeaponIndex(value);
         else
             currentWeaponSecondaryIndex = value;
@@ -510,19 +516,21 @@ public class Controller : NetworkBehaviour
     [Command]
     public void CmdSetPrimaryWeaponIndex(int value)
     {
-        RpcSetPrimaryWeaponIndex(value);
+        currentWeaponPrimaryIndex = value;
+        //RpcSetPrimaryWeaponIndex(value);
+    }
+
+    [Command]
+    public void CmdSetSecondaryWeaponIndex(int value)
+    {
+        currentWeaponSecondaryIndex = value;
+        //RpcSetSeconaryWeaponIndex(value);
     }
 
     [ClientRpc]
     void RpcSetPrimaryWeaponIndex(int value)
     {
         currentWeaponPrimaryIndex = value;
-    }
-
-    [Command]
-    public void CmdSetSecondaryWeaponIndex(int value)
-    {
-        RpcSetSeconaryWeaponIndex(value);
     }
 
     [ClientRpc]
