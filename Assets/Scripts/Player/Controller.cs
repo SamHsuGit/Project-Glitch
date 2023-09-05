@@ -16,10 +16,8 @@ public class Controller : NetworkBehaviour
 
     [SyncVar(hook = nameof(SetCurrentWeaponPrimaryIndex))] public int currentWeaponPrimaryIndex = 0;
     [SyncVar(hook = nameof(SetCurrentWeaponSecondaryIndex))] public int currentWeaponSecondaryIndex = 0;
-    //[SyncVar(hook = nameof(SetIsGrounded))] 
-    public bool isGrounded = false;
-    //[SyncVar(hook = nameof(SetIsMoving))] 
-    public bool isMoving = false;
+    [SyncVar(hook = nameof(SetIsGrounded))] public bool isGrounded = false;
+    [SyncVar(hook = nameof(SetIsMoving))] public bool isMoving = false;
 
     [Header("Debug States")]
     [SerializeField] float collisionDamage;
