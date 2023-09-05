@@ -491,14 +491,42 @@ public class Controller : NetworkBehaviour
         }
     }
 
+    public void SetPrimaryWeaponIndex(int value)
+    {
+        if (Settings.OnlinePlay && isLocalPlayer)
+            CmdSetPrimaryWeaponIndex(value);
+        else
+            currentWeaponPrimaryIndex = value;
+    }
+
+    public void SetSecondaryWeaponIndex(int value)
+    {
+        if (Settings.OnlinePlay && isLocalPlayer)
+            CmdSetSecondaryWeaponIndex(value);
+        else
+            currentWeaponSecondaryIndex = value;
+    }
+
     [Command]
     public void CmdSetPrimaryWeaponIndex(int value)
+    {
+        RpcSetPrimaryWeaponIndex(value);
+    }
+
+    [ClientRpc]
+    void RpcSetPrimaryWeaponIndex(int value)
     {
         currentWeaponPrimaryIndex = value;
     }
 
     [Command]
     public void CmdSetSecondaryWeaponIndex(int value)
+    {
+        RpcSetSeconaryWeaponIndex(value);
+    }
+
+    [ClientRpc]
+    void RpcSetSeconaryWeaponIndex(int value)
     {
         currentWeaponSecondaryIndex = value;
     }

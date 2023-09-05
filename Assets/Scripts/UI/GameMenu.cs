@@ -6,7 +6,7 @@ using UnityEngine.Audio;
 using Mirror;
 using TMPro;
 
-public class GameMenu : NetworkBehaviour
+public class GameMenu : MonoBehaviour
 {
     public Slider hpSlider;
     public Slider volumeSlider;
@@ -142,10 +142,7 @@ public class GameMenu : NetworkBehaviour
             if (currentWeaponPrimaryIndex < 0)
                 currentWeaponPrimaryIndex = weaponsPrimaryCount - 1;
 
-            if (Settings.OnlinePlay && isLocalPlayer && isClientOnly)
-                controller.CmdSetPrimaryWeaponIndex(currentWeaponPrimaryIndex);
-            else
-                controller.currentWeaponPrimaryIndex = currentWeaponPrimaryIndex;
+            controller.SetPrimaryWeaponIndex(currentWeaponPrimaryIndex);
         }
         else if (optionsMenuCanvasGroup.alpha != 1 && controller.switchSecondary && (setNavigate || inputHandler.scrollWheel != Vector2.zero))
         {
@@ -167,10 +164,7 @@ public class GameMenu : NetworkBehaviour
             if (currentWeaponSecondaryIndex < 0)
                 currentWeaponSecondaryIndex = weaponsSecondaryCount - 1;
 
-            if (Settings.OnlinePlay && isLocalPlayer && isClientOnly)
-                controller.CmdSetSecondaryWeaponIndex(currentWeaponSecondaryIndex);
-            else
-                controller.currentWeaponSecondaryIndex = currentWeaponSecondaryIndex;
+            controller.SetSecondaryWeaponIndex(currentWeaponSecondaryIndex);
         }
     }
 
