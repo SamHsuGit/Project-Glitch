@@ -14,10 +14,15 @@ public class Controller : NetworkBehaviour
     [SyncVar] private string versionServer;
     readonly private SyncList<string> playerNamesServer = new SyncList<string>();
 
-    [SyncVar(hook = nameof(SetCurrentWeaponPrimaryIndex))] public int currentWeaponPrimaryIndex = 0;
-    [SyncVar(hook = nameof(SetCurrentWeaponSecondaryIndex))] public int currentWeaponSecondaryIndex = 0;
-    [SyncVar(hook = nameof(SetIsGrounded))] public bool isGrounded = false;
-    [SyncVar(hook = nameof(SetIsMoving))] public bool isMoving = false;
+    //[SyncVar(hook = nameof(SetCurrentWeaponPrimaryIndex))] public int currentWeaponPrimaryIndex = 0;
+    //[SyncVar(hook = nameof(SetCurrentWeaponSecondaryIndex))] public int currentWeaponSecondaryIndex = 0;
+    //[SyncVar(hook = nameof(SetIsGrounded))] public bool isGrounded = false;
+    //[SyncVar(hook = nameof(SetIsMoving))] public bool isMoving = false;
+
+    [SyncVar] public int currentWeaponPrimaryIndex = 0;
+    [SyncVar] public int currentWeaponSecondaryIndex = 0;
+    [SyncVar] public bool isGrounded = false;
+    [SyncVar] public bool isMoving = false;
 
     [Header("Debug States")]
     [SerializeField] float collisionDamage;
@@ -277,26 +282,17 @@ public class Controller : NetworkBehaviour
     public void SetCurrentWeaponPrimaryIndex(int oldValue, int newValue)
     {
         currentWeaponPrimaryIndex = newValue;
-        
-        for (int i = 0; i < wPrimaryModels.Length; i++)
-            wPrimaryModels[i].SetActive(false);
-        wPrimaryModels[newValue].SetActive(true);
     }
 
     public void SetCurrentWeaponSecondaryIndex(int oldValue, int newValue)
     {
         currentWeaponSecondaryIndex = newValue;
-
-        for (int i = 0; i < wSecondaryModels.Length; i++)
-            wSecondaryModels[i].SetActive(false);
-        wSecondaryModels[newValue].SetActive(true);
     }
 
     public void SetIsGrounded(bool oldValue, bool newValue)
     {
         isGrounded = newValue;
         SetAnimVars();
-
     }
 
     private void OnTriggerEnter(Collider collider)
@@ -494,7 +490,19 @@ public class Controller : NetworkBehaviour
             RbForceJump();
             SetAnimVars();
             CheckReloadPrimaryWeapon();
+            SetWeapons();
         }
+    }
+
+    void SetWeapons()
+    {
+        for (int i = 0; i < wPrimaryModels.Length; i++)
+            wPrimaryModels[i].SetActive(false);
+        wPrimaryModels[currentWeaponPrimaryIndex].SetActive(true);
+
+        for (int i = 0; i < wSecondaryModels.Length; i++)
+            wSecondaryModels[i].SetActive(false);
+        wSecondaryModels[currentWeaponSecondaryIndex].SetActive(true);
     }
 
     public void PressedShoot()
