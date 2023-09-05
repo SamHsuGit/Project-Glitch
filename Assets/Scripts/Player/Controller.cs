@@ -14,14 +14,14 @@ public class Controller : NetworkBehaviour
     [SyncVar] private string versionServer;
     readonly private SyncList<string> playerNamesServer = new SyncList<string>();
 
-    //[SyncVar(hook = nameof(SetCurrentWeaponPrimaryIndex))] public int currentWeaponPrimaryIndex = 0;
-    //[SyncVar(hook = nameof(SetCurrentWeaponSecondaryIndex))] public int currentWeaponSecondaryIndex = 0;
+    [SyncVar(hook = nameof(SetCurrentWeaponPrimaryIndex))] public int currentWeaponPrimaryIndex = 0;
+    [SyncVar(hook = nameof(SetCurrentWeaponSecondaryIndex))] public int currentWeaponSecondaryIndex = 0;
     //[SyncVar(hook = nameof(SetIsGrounded))] public bool isGrounded = false;
     //[SyncVar(hook = nameof(SetIsMoving))] public bool isMoving = false;
 
     [SyncVar] public int playerNumber;
-    [SyncVar] public int currentWeaponPrimaryIndex = 0;
-    [SyncVar] public int currentWeaponSecondaryIndex = 0;
+    //[SyncVar] public int currentWeaponPrimaryIndex = 0;
+    //[SyncVar] public int currentWeaponSecondaryIndex = 0;
     [SyncVar] public bool isGrounded = false;
     [SyncVar] public bool isMoving = false;
 
@@ -157,8 +157,8 @@ public class Controller : NetworkBehaviour
         }
 
         // Set starting weapons to first in array
-        SetCurrentWeaponPrimaryIndex(0, 0);
-        SetCurrentWeaponSecondaryIndex(0, 0);
+        currentWeaponPrimaryIndex = 0;
+        currentWeaponSecondaryIndex = 0;
     }
 
     void NamePlayer()
@@ -284,11 +284,19 @@ public class Controller : NetworkBehaviour
     public void SetCurrentWeaponPrimaryIndex(int oldValue, int newValue)
     {
         currentWeaponPrimaryIndex = newValue;
+
+        for (int i = 0; i < wPrimaryModels.Length; i++)
+            wPrimaryModels[i].SetActive(false);
+        wPrimaryModels[currentWeaponPrimaryIndex].SetActive(true);
     }
 
     public void SetCurrentWeaponSecondaryIndex(int oldValue, int newValue)
     {
         currentWeaponSecondaryIndex = newValue;
+
+        for (int i = 0; i < wSecondaryModels.Length; i++)
+            wSecondaryModels[i].SetActive(false);
+        wSecondaryModels[currentWeaponSecondaryIndex].SetActive(true);
     }
 
     public void SetIsGrounded(bool oldValue, bool newValue)
@@ -598,7 +606,6 @@ public class Controller : NetworkBehaviour
             isMoving = true;
         else
             isMoving = false;
-        SetIsMoving(isMoving, isMoving);
 
         look = _inputHandler.look;
         jump = _inputHandler.jump;
@@ -622,7 +629,6 @@ public class Controller : NetworkBehaviour
             //charModelOrigin.transform.eulerAngles = Vector3.zero;
 
             transform.eulerAngles = new Vector3(0, playerCameraOrigin.transform.rotation.eulerAngles.y, 0); // rotate gameobject to face direction of camera
-            //_rb.rotation = Quaternion.Euler(new Vector3(0, playerCameraOrigin.transform.rotation.eulerAngles.y, 0)); // rotate rigidbody to face direction of camera
             //charModelHead.transform.eulerAngles = new Vector3(0, playerCameraOrigin.transform.rotation.eulerAngles.y, 0); // rotate char model head to face same y direction as camera
             //charModelTorso.transform.eulerAngles = new Vector3(0, playerCameraOrigin.transform.rotation.eulerAngles.y, 0); // rotate char model torso to face same y direction as camera
 
