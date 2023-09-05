@@ -488,9 +488,9 @@ MonoBehaviour:
   playerName: PlayerName
   currentWeaponPrimaryIndex: 0
   currentWeaponSecondaryIndex: 0
-  collisionDamage: 0
   isGrounded: 0
   isMoving: 0
+  collisionDamage: 0
   options: 0
   m_Speed: 20
   m_SpeedAir: 10
@@ -807,7 +807,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  clientAuthority: 0
+  clientAuthority: 1
   animator: {fileID: 2451549598188852664}
 --- !u!114 &2001150064968269384
 MonoBehaviour:
@@ -823,7 +823,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  clientAuthority: 0
+  clientAuthority: 1
   animator: {fileID: 5521995334900915846}
 --- !u!114 &6602663469932926552
 MonoBehaviour:
@@ -839,7 +839,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  clientAuthority: 0
+  clientAuthority: 1
   animator: {fileID: 6375770597639287793}
 --- !u!1001 &2006931272366879335
 PrefabInstance:
