@@ -482,7 +482,6 @@ public class Controller : NetworkBehaviour
         }
 
         isGrounded = CheckGroundedCollider();
-        SetIsGrounded(isGrounded, isGrounded);
         if (isGrounded)
             currentJumps = 0;
 
@@ -622,8 +621,8 @@ public class Controller : NetworkBehaviour
         {
             //charModelOrigin.transform.eulerAngles = Vector3.zero;
 
-            //transform.eulerAngles = new Vector3(0, playerCameraOrigin.transform.rotation.eulerAngles.y, 0); // rotate gameobject to face direction of camera
-            _rb.rotation = Quaternion.Euler(new Vector3(0, playerCameraOrigin.transform.rotation.eulerAngles.y, 0)); // rotate rigidbody to face direction of camera
+            transform.eulerAngles = new Vector3(0, playerCameraOrigin.transform.rotation.eulerAngles.y, 0); // rotate gameobject to face direction of camera
+            //_rb.rotation = Quaternion.Euler(new Vector3(0, playerCameraOrigin.transform.rotation.eulerAngles.y, 0)); // rotate rigidbody to face direction of camera
             //charModelHead.transform.eulerAngles = new Vector3(0, playerCameraOrigin.transform.rotation.eulerAngles.y, 0); // rotate char model head to face same y direction as camera
             //charModelTorso.transform.eulerAngles = new Vector3(0, playerCameraOrigin.transform.rotation.eulerAngles.y, 0); // rotate char model torso to face same y direction as camera
 
