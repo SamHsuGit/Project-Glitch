@@ -271,6 +271,7 @@ public class Controller : NetworkBehaviour
     public void SetIsMoving(bool oldValue, bool newValue)
     {
         isMoving = newValue;
+        SetAnimVars();
     }
 
     public void SetCurrentWeaponPrimaryIndex(int oldValue, int newValue)
@@ -294,6 +295,8 @@ public class Controller : NetworkBehaviour
     public void SetIsGrounded(bool oldValue, bool newValue)
     {
         isGrounded = newValue;
+        SetAnimVars();
+
     }
 
     private void OnTriggerEnter(Collider collider)
@@ -475,7 +478,7 @@ public class Controller : NetworkBehaviour
         //disable virtual camera and exit from FixedUpdate if this is not the local player
         if (Settings.OnlinePlay && !isLocalPlayer)
         {
-            Animate();
+            SetAnimVars();
             playerCamera.SetActive(false);
             return;
         }
@@ -489,7 +492,7 @@ public class Controller : NetworkBehaviour
         {
             Move();
             RbForceJump();
-            Animate();
+            SetAnimVars();
             CheckReloadPrimaryWeapon();
         }
     }
@@ -507,42 +510,51 @@ public class Controller : NetworkBehaviour
     [Command]
     public void CmdSpawnObject(int type, int item, Vector3 pos)
     {
-        switch(type)
+        RpcSpawnObject(type, item, pos);
+    }
+
+    [ClientRpc]
+    public void RpcSpawnObject(int type, int item, Vector3 pos)
+    {
+        SpawnObject(type, item, pos);
+    }
+
+    public void SpawnObject(int type, int item, Vector3 pos)
+    {
+        switch (type)
         {
             case (0):
-            {
-                if (wPrimaryPickupObjects[currentWeaponPrimaryIndex].projectile != null)
                 {
-                    // create target vector from projectile origin
-                    Vector3 targetVector = target.transform.position - pos;
-                    GameObject ob = Instantiate(wPrimaryPickupObjects[currentWeaponPrimaryIndex].projectile, pos, Quaternion.LookRotation(projectilePrimaryOrigin.transform.forward, Vector3.up));
-                    Rigidbody rb = ob.GetComponent<Rigidbody>();
-                    rb.velocity = targetVector.normalized * wPrimaryPickupObjects[currentWeaponPrimaryIndex].projectileVelocity;
-                    ob.transform.Rotate(Vector3.right, 90f);
-                    Destroy(ob, 3);
-                }
-                break;
-            }
-            case 1:
-            {
-                if (wSecondaryPickupObjects[currentWeaponSecondaryIndex].projectile != null && wSecondaryPickupObjects[currentWeaponSecondaryIndex].ammo > 0)
-                {
-                    Vector3 grenadeTarget = target.transform.position + target.transform.up * 3; // grenade should have slight upwards velocity
-                    // create target vector from projectile origin
-                    Vector3 targetVector = grenadeTarget - pos;
-                    GameObject ob = Instantiate(wSecondaryPickupObjects[currentWeaponSecondaryIndex].projectile, pos, Quaternion.Euler(targetVector));
-                    Rigidbody rb = ob.GetComponent<Rigidbody>();
-                    rb.velocity = targetVector.normalized * wSecondaryPickupObjects[currentWeaponSecondaryIndex].projectileVelocity;
-                    Destroy(ob, 10); // grenade should destroy itself before 10 sec, but just in case, clean up scene
-
-                    wSecondaryPickupObjects[currentWeaponSecondaryIndex].ammo -= wSecondaryPickupObjects[currentWeaponSecondaryIndex].roundsPerFire;
-                    audioSourcePlayer.PlayOneShot(wSecondaryPickupObjects[currentWeaponSecondaryIndex].weaponFireSound);
+                    if (wPrimaryPickupObjects[currentWeaponPrimaryIndex].projectile != null)
+                    {
+                        // create target vector from projectile origin
+                        Vector3 targetVector = target.transform.position - pos;
+                        GameObject ob = Instantiate(wPrimaryPickupObjects[currentWeaponPrimaryIndex].projectile, pos, Quaternion.LookRotation(projectilePrimaryOrigin.transform.forward, Vector3.up));
+                        Rigidbody rb = ob.GetComponent<Rigidbody>();
+                        rb.velocity = targetVector.normalized * wPrimaryPickupObjects[currentWeaponPrimaryIndex].projectileVelocity;
+                        ob.transform.Rotate(Vector3.right, 90f);
+                        Destroy(ob, 3);
                     }
-                break;
-            }
+                    break;
+                }
+            case 1:
+                {
+                    if (wSecondaryPickupObjects[currentWeaponSecondaryIndex].projectile != null && wSecondaryPickupObjects[currentWeaponSecondaryIndex].ammo > 0)
+                    {
+                        Vector3 grenadeTarget = target.transform.position + target.transform.up * 3; // grenade should have slight upwards velocity
+                                                                                                     // create target vector from projectile origin
+                        Vector3 targetVector = grenadeTarget - pos;
+                        GameObject ob = Instantiate(wSecondaryPickupObjects[currentWeaponSecondaryIndex].projectile, pos, Quaternion.Euler(targetVector));
+                        Rigidbody rb = ob.GetComponent<Rigidbody>();
+                        rb.velocity = targetVector.normalized * wSecondaryPickupObjects[currentWeaponSecondaryIndex].projectileVelocity;
+                        Destroy(ob, 10); // grenade should destroy itself before 10 sec, but just in case, clean up scene
+
+                        wSecondaryPickupObjects[currentWeaponSecondaryIndex].ammo -= wSecondaryPickupObjects[currentWeaponSecondaryIndex].roundsPerFire;
+                        audioSourcePlayer.PlayOneShot(wSecondaryPickupObjects[currentWeaponSecondaryIndex].weaponFireSound);
+                    }
+                    break;
+                }
         }
-        
-        
     }
 
     bool CheckGroundedCollider()
@@ -683,7 +695,7 @@ public class Controller : NetworkBehaviour
         options = !options;
     }
 
-    void Animate()
+    void SetAnimVars()
     {
         foreach (Animator anims in animators)
         {
