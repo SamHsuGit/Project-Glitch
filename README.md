@@ -23,7 +23,7 @@ https://archive.org/details/malevelkitv-2.7z
 https://www.models-resource.com/gamecube/metalarmsglitchinthesystem/
 https://steamcommunity.com/sharedfiles/filedetails/?id=1840135546
 
-Asset Pipeline: 
+Character Asset Pipeline: 
 blender > 
 split sungle mesh into individual parts > 
 rigging > 
@@ -35,8 +35,24 @@ mark animation event triggers for animation event script >
 set skeleton as humanoid derive from model with torso as root >
 import Asset into Unity/create prefab >
 copy meshes into mesh subfolder > 
-delete blend file from Unity project > 
+delete blend file from Unity project (to be able to upload to GitHub) > 
 re assign meshes to copied ones > 
 re assign materials to extracted ones > 
 assign components like animator, network transform, player input, colliders, physics rigidbody >
 assign scripts like inputHandler, controller, health, gun > 
+add taga and layers (for collisions) > 
+
+Map Asset Pipeline: 
+blender > 
+drop into Unity Assets folder structure > 
+extract materials into materials subfolder > 
+import Asset into Unity/create prefab >
+copy meshes into mesh subfolder > 
+delete blend file from Unity project (to be able to upload to GitHub) > 
+re assign meshes to copied ones > 
+re assign materials to extracted ones > 
+assign components like mesh colliders > 
+set all objects as static > 
+add bots, vehicles, pickups >
+add tags and layers (for collisions) > 
+add map to new scene with pickups added to World script to be respawned > 
