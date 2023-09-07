@@ -24,6 +24,7 @@ https://www.models-resource.com/gamecube/metalarmsglitchinthesystem/
 https://steamcommunity.com/sharedfiles/filedetails/?id=1840135546
 
 Contribute:
+
 Scripting:
 The main script is the Controller Script which uses Mirror for networking (see Mirror documentation)
 
