@@ -8,6 +8,11 @@ vis2k Mirror (MIT License): https://github.com/vis2k/Mirror
 
 Unity (Personal License)
 
+Resources Used:
+https://archive.org/details/malevelkitv-2.7z
+https://www.models-resource.com/gamecube/metalarmsglitchinthesystem/
+https://steamcommunity.com/sharedfiles/filedetails/?id=1840135546
+
 Build the game yourself:
 Unity 2021.3.16f1
 
