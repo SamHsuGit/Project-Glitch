@@ -23,6 +23,8 @@ https://archive.org/details/malevelkitv-2.7z
 https://www.models-resource.com/gamecube/metalarmsglitchinthesystem/
 https://steamcommunity.com/sharedfiles/filedetails/?id=1840135546
 
+Contribute:
+
 Character Asset Pipeline: 
 blender > 
 split sungle mesh into individual parts > 
