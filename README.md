@@ -4,24 +4,12 @@ The creators of this fan-made recreation take no credit for the production of th
 PCB Productions owns the legal rights to the soundtrack.
 The Soundtrack is owned by PCB Productions and is in no way associated with the user who uploaded them.
 
-Installer:
+Play the Game:
 https://sam-hsu.itch.io/project-glitch
 Password: "exavolt"
 
 Build the game yourself:
 Unity 2021.3.16f1
-
-vis2k Mirror (MIT License): https://github.com/vis2k/Mirror
-
-Unity (Personal License)
-
-Asset Files:
-https://drive.google.com/drive/folders/1pyk0Zvp2rV6Oi3VI_Pq_EvOhh8XvEtPu?usp=drive_link
-
-Resources Used:
-https://archive.org/details/malevelkitv-2.7z
-https://www.models-resource.com/gamecube/metalarmsglitchinthesystem/
-https://steamcommunity.com/sharedfiles/filedetails/?id=1840135546
 
 Contribute:
 
@@ -62,3 +50,15 @@ set all objects as static >
 add bots, vehicles, pickups >
 add tags and layers (for collisions) > 
 add map to new scene with pickups added to World script to be respawned > 
+
+vis2k Mirror (MIT License): https://github.com/vis2k/Mirror
+
+Unity (Personal License)
+
+Asset Files:
+https://drive.google.com/drive/folders/1pyk0Zvp2rV6Oi3VI_Pq_EvOhh8XvEtPu?usp=drive_link
+
+Resources Used:
+https://archive.org/details/malevelkitv-2.7z
+https://www.models-resource.com/gamecube/metalarmsglitchinthesystem/
+https://steamcommunity.com/sharedfiles/filedetails/?id=1840135546
