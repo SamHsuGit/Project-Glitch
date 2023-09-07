@@ -11,7 +11,18 @@ Password: "exavolt"
 Build the game yourself:
 Unity 2021.3.16f1
 
-Contribute:
+Contributing Guidelines:
+
+My goals for this Project:
+1. All Weapons from original game
+2. One multiplayer map: Tanks alot
+3. Bot Possession Mechanic
+4. Vehicles
+5. Enemy Bot AI
+6. Splitscreen Multiplayer
+7. Online Host-Client Multiplayer (up to 16)
+
+ALL CHANGES MUST BE PLAYTESTED BEFORE COMMIT
 
 Scripting:
 The main script is the Controller Script which uses Mirror for networking (see Mirror documentation)
