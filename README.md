@@ -24,7 +24,10 @@ https://www.models-resource.com/gamecube/metalarmsglitchinthesystem/
 https://steamcommunity.com/sharedfiles/filedetails/?id=1840135546
 
 Contribute:
+Scripting:
+The main script is the Controller Script which uses Mirror for networking (see Mirror documentation)
 
+Assets/Materials:
 Character Asset Pipeline: 
 blender > 
 split sungle mesh into individual parts > 
@@ -42,7 +45,7 @@ re assign meshes to copied ones >
 re assign materials to extracted ones > 
 assign components like animator, network transform, player input, colliders, physics rigidbody >
 assign scripts like inputHandler, controller, health, gun > 
-add taga and layers (for collisions) > 
+add tags and layers (for collisions) > 
 
 Map Asset Pipeline: 
 blender > 
