@@ -11,6 +11,9 @@ Password: "exavolt"
 Build the game yourself:
 Unity 2021.3.16f1
 
+Asset Files used:
+https://drive.google.com/drive/folders/1pyk0Zvp2rV6Oi3VI_Pq_EvOhh8XvEtPu?usp=drive_link
+
 vis2k Mirror (MIT License): https://github.com/vis2k/Mirror
 
 Unity (Personal License)
