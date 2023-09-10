@@ -66,6 +66,9 @@ public class NetworkMenu : MonoBehaviour
 
     public void OnClientOnly()
     {
+
+        manager.networkAddress = networkAddressInputField.text;
+
         networkMenuElementsCanvasGroup.alpha = 0;
         networkMenuElementsCanvasGroup.interactable = false;
         loadingText.SetActive(true); // in order for this text to show before world load, would need to change scene before loading next scene with world (like Setup Menu for Splitscreen)
@@ -77,7 +80,6 @@ public class NetworkMenu : MonoBehaviour
         {
             // Client + IP
             manager.StartClient();
-            manager.networkAddress = networkAddressInputField.text;
         }
         else
         {
@@ -101,11 +103,19 @@ public class NetworkMenu : MonoBehaviour
 
     public void OnClientConnectToEvent()
     {
+        manager.networkAddress = "98.235.185.75"; // ideally load from file
+
+        networkMenuElementsCanvasGroup.alpha = 0;
+        networkMenuElementsCanvasGroup.interactable = false;
+        loadingText.SetActive(true);
+
+        buttonSound.Play();
+        FileSystemExtension.SaveSettings();
+
         if (!NetworkClient.active)
         {
             // Client + IP
             manager.StartClient();
-            manager.networkAddress = "98.235.185.75"; // ideally load from file
         }
         else
         {
@@ -114,8 +124,7 @@ public class NetworkMenu : MonoBehaviour
         }
 
         StatusLabels();
-        networkMenuElementsCanvasGroup.alpha = 0;
-        networkMenuElementsCanvasGroup.interactable = false;
+        gameManager.Setup(); // activate ldraw importer, etc.
         loadingText.SetActive(false);
         background.GetComponent<CanvasGroup>().alpha = 0;
         soundtrack.Stop();
