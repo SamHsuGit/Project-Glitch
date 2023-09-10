@@ -8,6 +8,18 @@ Play the Game:
 https://sam-hsu.itch.io/project-glitch
 Password: "exavolt"
 
+Controls:
+Move = WASD (Left Stick)
+Look = Mouse (Right Stick)
+Jump = Space (Button East)
+Shoot = Left Click (Right Trigger)
+Grenade = Right Click (Left Trigger)
+Melee = F Key (Right Bumper)
+Interact Y Key (Button North)
+Change Primary = Hold E + Scroll Wheel (Hold Button South + D Pad)
+Change Secondary = Hold Q + Scroll Wheel (Hold Button West + D Pad)
+Reload = Tap E (Tap Button West)
+
 Build the game yourself:
 Unity 2021.3.16f1
 
