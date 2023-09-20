@@ -145,6 +145,8 @@ MonoBehaviour:
   audioSourcePlayer: {fileID: 5739653638858081340}
   ricochet: {fileID: 8300000, guid: a2ecfc1f050e598439591926c0d4c688, type: 3}
   explosion: {fileID: 0}
+  grenadeFuseTime: 2
+  explosionLength: 2.01
   isGrenade: 0
 --- !u!82 &5739653638858081340
 AudioSource:
@@ -303,7 +305,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f3e9187672415654f890fdd546dd32ad, type: 2}
+  - {fileID: 2100000, guid: 524c92bfb2fdcf047bd19a4abdeee1f4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

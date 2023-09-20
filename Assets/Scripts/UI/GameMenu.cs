@@ -56,7 +56,7 @@ public class GameMenu : MonoBehaviour
     CustomNetworkManager customNetworkManager;
     InputHandler inputHandler;
 
-    UnityEngine.Rendering.Universal.UniversalAdditionalCameraData uac;
+    //UnityEngine.Rendering.HighDefinition.UniversalAdditionalCameraData uac;
 
     private void Awake()
     {
@@ -86,7 +86,7 @@ public class GameMenu : MonoBehaviour
         fullScreenToggle.isOn = SettingsStatic.LoadedSettings.fullscreen;
         invertYToggle.isOn = SettingsStatic.LoadedSettings.invertY;
 
-        uac = playerCamera.GetComponent<Camera>().GetComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>();
+        //uac = playerCamera.GetComponent<Camera>().GetComponent<UnityEngine.Rendering.HighDefinition.UniversalAdditionalCameraData>();
 
         // initialize objects when starting the game
         playerHUDCanvasGroup.alpha = 1;
@@ -270,7 +270,7 @@ public class GameMenu : MonoBehaviour
             return;
         SettingsStatic.LoadedSettings = SettingsStatic.LoadSettings();
 
-        uac.renderPostProcessing = false;
+        //uac.renderPostProcessing = false;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         backgroundMaskCanvasGroup.alpha = 1;
@@ -286,7 +286,7 @@ public class GameMenu : MonoBehaviour
             return;
         buttonSound.Play();
 
-        uac.renderPostProcessing = true;
+        //uac.renderPostProcessing = true;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         backgroundMaskCanvasGroup.alpha = 0;

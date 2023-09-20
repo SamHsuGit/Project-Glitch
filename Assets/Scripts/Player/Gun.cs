@@ -30,6 +30,7 @@ public class Gun : NetworkBehaviour
     private Image image;
     private int currentPrimaryWeaponIndex;
     private int currentSecondaryWeaponIndex;
+    private int maxWeaponInt;
 
     private void Awake()
     {
@@ -37,6 +38,7 @@ public class Gun : NetworkBehaviour
         image = reticleChangeColor.GetComponent<Image>();
         controller = GetComponent<Controller>();
         backgroundMaskCanvasGroup = backgroundMask.GetComponent<CanvasGroup>();
+        maxWeaponInt = controller.wPrimaryModels.Length;
     }
 
     //Disabled since we are using the shoot button to place bricks
@@ -55,15 +57,33 @@ private void FixedUpdate()
     fireRatePrimary = currentWeaponPrimary.fireRate * 0.375f;
     fireRateSecondary = currentWeaponSecondary.fireRate * 0.5f;
 
-    if (Time.time >= nextTimeToFirePrimary && backgroundMaskCanvasGroup.alpha == 0 && (currentPrimaryWeaponIndex < 3 || currentWeaponPrimary.ammo > 0) && !controller.isReloading)
+    if (Time.time >= nextTimeToFirePrimary && backgroundMaskCanvasGroup.alpha == 0 && (!currentWeaponPrimary.hasAmmoCount || currentWeaponPrimary.ammo > 0) && !controller.isReloading)
     {
         if (inputHandler.shoot)
         {
-            nextTimeToFirePrimary = Time.time + 1f / fireRatePrimary;
-            audioSourcePlayer.PlayOneShot(currentWeaponPrimary.weaponFireSound);
-            currentWeaponPrimary.ammo -= currentWeaponPrimary.roundsPerFire;
-            HitRegCheck();
-            controller.PressedShoot();
+            if (currentPrimaryWeaponIndex > maxWeaponInt - 2)
+            {
+                //// causes error state
+                //nextTimeToFirePrimary = Time.time + 1f / fireRatePrimary;
+                //if (currentWeaponPrimary.weaponFireSound != null)
+                //    audioSourcePlayer.PlayOneShot(currentWeaponPrimary.weaponFireSound);
+                //HitRegCheck();
+
+                controller.melee = true;
+            }
+            else
+            {
+                nextTimeToFirePrimary = Time.time + 1f / fireRatePrimary;
+
+                if (currentWeaponPrimary.weaponFireSound != null)
+                    audioSourcePlayer.PlayOneShot(currentWeaponPrimary.weaponFireSound);
+
+                    if (currentWeaponPrimary.ammo - currentWeaponPrimary.roundsPerFire >= 0)
+                currentWeaponPrimary.ammo -= currentWeaponPrimary.roundsPerFire;
+
+                HitRegCheck();
+                controller.PressedShoot(); // make projectile
+            }
         }
     }
 }

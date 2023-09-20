@@ -7212,7 +7212,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 150, y: 109.7}
+  m_AnchoredPosition: {x: 150, y: 162.4}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3357997552119483664
@@ -7244,10 +7244,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Options\t\tEsc (Start)\nMove\t\tWASD (Left Stick)\nLook\t\tMouse (Right
-    Stick)\nJump\t\tSpace (Xbox A)"
+    Stick)\nJump\t\tSpace (Xbox A)\nShoot\t\tLeft Click (Right Trigger)\nGrenade\tRight
+    Click (Left Trigger)\nChange Primary\tHold E (Xbox X) + Scroll (Dpad)\nChange
+    Second\tHold Q (Xbox B) + Scroll (Dpad)"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
-  m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
+  m_sharedMaterial: {fileID: 2147374, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9857,7 +9859,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7241781667188759218
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9909,7 +9911,7 @@ MonoBehaviour:
   m_text: Y (Select) = HIDE/SHOW CONTROLS
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
-  m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
+  m_sharedMaterial: {fileID: 2147374, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

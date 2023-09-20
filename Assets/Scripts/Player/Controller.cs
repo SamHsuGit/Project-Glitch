@@ -435,20 +435,36 @@ public class Controller : NetworkBehaviour
 
     public void CheckReloadPrimaryWeapon()
     {
-        if (!isReloading && wPrimaryPickupObjects[currentWeaponPrimaryIndex].ammo == 0)
-        {
-            isReloading = true;
-            Invoke("ReloadPrimaryWeapon", 3f);
-        }
+        if (!isReloading && wPrimaryPickupObjects[currentWeaponPrimaryIndex].hasAmmoCount && wPrimaryPickupObjects[currentWeaponPrimaryIndex].ammo <= 0)
+            TriggerReload();
+    }
+
+    public void TriggerReload()
+    {
+        isReloading = true;
+        Invoke("ReloadPrimaryWeapon", 1f); // pauses for reload animation
     }
 
     private void ReloadPrimaryWeapon()
     {
-        if (wPrimaryPickupObjects[currentWeaponPrimaryIndex].ammoReserve == 0 && wPrimaryPickupObjects[currentWeaponPrimaryIndex].ammo != wPrimaryPickupObjects[currentWeaponPrimaryIndex].maxAmmo)
+        if (wPrimaryPickupObjects[currentWeaponPrimaryIndex].ammoReserve <= 0 || wPrimaryPickupObjects[currentWeaponPrimaryIndex].ammo >= wPrimaryPickupObjects[currentWeaponPrimaryIndex].maxAmmo)
+        {
+            isReloading = false;
             return;
+        }
+
+        isReloading = true;
 
         wPrimaryPickupObjects[currentWeaponPrimaryIndex].ammoReserve -= wPrimaryPickupObjects[currentWeaponPrimaryIndex].maxAmmo;
         wPrimaryPickupObjects[currentWeaponPrimaryIndex].ammo = wPrimaryPickupObjects[currentWeaponPrimaryIndex].maxAmmo;
+
+        if(wPrimaryPickupObjects[currentWeaponPrimaryIndex].weaponReloadSound != null)
+            audioSourcePlayer.PlayOneShot(wPrimaryPickupObjects[currentWeaponPrimaryIndex].weaponReloadSound);
+        else if (wPrimaryPickupObjects[currentWeaponPrimaryIndex].clipEjectSound != null && wPrimaryPickupObjects[currentWeaponPrimaryIndex].clipInsertSound != null)
+        {
+            audioSourcePlayer.PlayOneShot(wPrimaryPickupObjects[currentWeaponPrimaryIndex].clipEjectSound);
+            audioSourcePlayer.PlayOneShot(wPrimaryPickupObjects[currentWeaponPrimaryIndex].clipInsertSound);
+        }
 
         isReloading = false; // remove this eventually as the reloading anim end will trigger this is finished
     }
@@ -551,7 +567,7 @@ public class Controller : NetworkBehaviour
 
     public void PressedGrenade()
     {
-        Vector3 pos = projectilePrimaryOrigin.transform.position;
+        Vector3 pos = projectileSecondaryOrigin.transform.position;
         Vector3 grenadeTarget = target.transform.position + target.transform.up * 3; // grenade should have slight upwards velocity
                                                                                      // create target vector from projectile origin
         Vector3 velocityVector = grenadeTarget - pos;

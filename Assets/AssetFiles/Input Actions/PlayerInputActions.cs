@@ -170,6 +170,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""6565a352-1d16-4973-b55d-33a32eaaefe9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -555,6 +564,28 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""SwitchSecondary"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""334b975f-29d7-4e81-b03f-72d7f1ef089c"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""944fe270-dd38-44ec-81c9-9e8c46cc7ce6"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1191,6 +1222,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Actions_Debug = m_Actions.FindAction("Debug", throwIfNotFound: true);
         m_Actions_SwitchPrimary = m_Actions.FindAction("SwitchPrimary", throwIfNotFound: true);
         m_Actions_SwitchSecondary = m_Actions.FindAction("SwitchSecondary", throwIfNotFound: true);
+        m_Actions_Reload = m_Actions.FindAction("Reload", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1278,6 +1310,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Actions_Debug;
     private readonly InputAction m_Actions_SwitchPrimary;
     private readonly InputAction m_Actions_SwitchSecondary;
+    private readonly InputAction m_Actions_Reload;
     public struct ActionsActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -1298,6 +1331,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Debug => m_Wrapper.m_Actions_Debug;
         public InputAction @SwitchPrimary => m_Wrapper.m_Actions_SwitchPrimary;
         public InputAction @SwitchSecondary => m_Wrapper.m_Actions_SwitchSecondary;
+        public InputAction @Reload => m_Wrapper.m_Actions_Reload;
         public InputActionMap Get() { return m_Wrapper.m_Actions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1355,6 +1389,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @SwitchSecondary.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSwitchSecondary;
                 @SwitchSecondary.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSwitchSecondary;
                 @SwitchSecondary.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSwitchSecondary;
+                @Reload.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnReload;
+                @Reload.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnReload;
+                @Reload.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnReload;
             }
             m_Wrapper.m_ActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -1407,6 +1444,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @SwitchSecondary.started += instance.OnSwitchSecondary;
                 @SwitchSecondary.performed += instance.OnSwitchSecondary;
                 @SwitchSecondary.canceled += instance.OnSwitchSecondary;
+                @Reload.started += instance.OnReload;
+                @Reload.performed += instance.OnReload;
+                @Reload.canceled += instance.OnReload;
             }
         }
     }
@@ -1579,6 +1619,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnDebug(InputAction.CallbackContext context);
         void OnSwitchPrimary(InputAction.CallbackContext context);
         void OnSwitchSecondary(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

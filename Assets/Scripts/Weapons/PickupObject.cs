@@ -19,6 +19,7 @@ public class PickupObject : MonoBehaviour
     public int maxAmmoReserve;
     public bool isPickup;
     public bool bounce = true;
+    public bool hasAmmoCount = true;
     public AudioSource audioSourcePlayer;
     public AudioClip pickupSound1;
     public AudioClip ammoPickupSound;
@@ -44,12 +45,16 @@ public class PickupObject : MonoBehaviour
 
     private MeshRenderer mr;
     private BoxCollider bc;
+    private Light lt;
 
     private void Awake()
     {
         initialYPos = transform.position.y;
         mr = GetComponent<MeshRenderer>();
         bc = GetComponent<BoxCollider>();
+        
+        if(GetComponent<Light>() != null)
+            lt = GetComponent<Light>();
     }
 
     void Start()
@@ -72,6 +77,8 @@ public class PickupObject : MonoBehaviour
     {
         mr.enabled = false;
         bc.enabled = false;
+        if (lt != null)
+            lt.enabled = false;
         Invoke("Unhide", 20f);
     }
 
@@ -79,5 +86,7 @@ public class PickupObject : MonoBehaviour
     {
         mr.enabled = true;
         bc.enabled = true;
+        if (lt != null)
+            lt.enabled = true;
     }
 }

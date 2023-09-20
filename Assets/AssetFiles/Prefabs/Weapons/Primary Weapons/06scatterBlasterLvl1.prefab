@@ -66,8 +66,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 67888ec48ee4e5d4a968ef21fb8c4691, type: 2}
-  - {fileID: 2100000, guid: 7cd47b6f082331e4b901f7633825a685, type: 2}
+  - {fileID: 2100000, guid: 327ac5cb410919c4593179eee986c23a, type: 2}
+  - {fileID: 2100000, guid: 6627caaae22c945488b77fef4216090f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -171,7 +171,6 @@ MonoBehaviour:
   roundsPerFire: 1
   ammoReserve: 0
   ammo: 0
-  clipSize: 8
   maxAmmo: 8
   maxAmmoReserve: 32
   isPickup: 1

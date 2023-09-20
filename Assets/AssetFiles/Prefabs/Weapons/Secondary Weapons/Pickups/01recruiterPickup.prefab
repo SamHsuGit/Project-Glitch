@@ -68,8 +68,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a9568c594ef13b64f8318cd292674d1e, type: 2}
-  - {fileID: 2100000, guid: daaa9ad1849c7894c9742a05ae5647d7, type: 2}
+  - {fileID: 2100000, guid: 524c92bfb2fdcf047bd19a4abdeee1f4, type: 2}
+  - {fileID: 2100000, guid: 6627caaae22c945488b77fef4216090f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4951,11 +4951,10 @@ MonoBehaviour:
   fireRate: 1
   projectileVelocity: 20
   roundsPerFire: 1
-  clips: 0
+  ammoReserve: 0
   ammo: 0
-  clipSize: 0
   maxAmmo: 2
-  maxClips: 0
+  maxAmmoReserve: 0
   isPickup: 1
   bounce: 1
   audioSourcePlayer: {fileID: 5582357516438606965}

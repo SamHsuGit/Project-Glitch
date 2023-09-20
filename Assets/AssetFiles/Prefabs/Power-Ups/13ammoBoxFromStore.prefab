@@ -66,8 +66,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7eaef7a4b32f1a24888f33a71adff5cf, type: 2}
-  - {fileID: 2100000, guid: 379caca0fe9ebb646b97b0c43fdb5661, type: 2}
+  - {fileID: 2100000, guid: 524c92bfb2fdcf047bd19a4abdeee1f4, type: 2}
+  - {fileID: 2100000, guid: 6627caaae22c945488b77fef4216090f, type: 2}
   - {fileID: 2100000, guid: c2da583adcfe19d42844c3f6d06c5fec, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -111,11 +111,12 @@ MonoBehaviour:
   fireRate: 0
   projectileVelocity: 0
   roundsPerFire: 0
-  clips: 0
+  ammoReserve: 0
   ammo: 0
-  clipSize: 0
   maxAmmo: 0
+  maxAmmoReserve: 0
   isPickup: 1
+  bounce: 1
   audioSourcePlayer: {fileID: -6975521441544677061}
   pickupSound1: {fileID: 8300000, guid: 977ec7387d007ad4389b4622b9d545f4, type: 3}
   ammoPickupSound: {fileID: 0}

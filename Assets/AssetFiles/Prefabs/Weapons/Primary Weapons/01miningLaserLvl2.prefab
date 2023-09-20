@@ -66,9 +66,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f876b8c67c31df84fbddece9470e22cd, type: 2}
-  - {fileID: 2100000, guid: 5279881bba0cbdb4887be6702a59d8be, type: 2}
-  - {fileID: 2100000, guid: c322f0f17f6dc2f498da7b2e6910e60e, type: 2}
+  - {fileID: 2100000, guid: 524c92bfb2fdcf047bd19a4abdeee1f4, type: 2}
+  - {fileID: 2100000, guid: 8ecef93562a6354479d5f704a3f616e5, type: 2}
+  - {fileID: 2100000, guid: 8ecef93562a6354479d5f704a3f616e5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -172,19 +172,19 @@ MonoBehaviour:
   roundsPerFire: 1
   ammoReserve: 0
   ammo: 0
-  clipSize: 0
   maxAmmo: 100
   maxAmmoReserve: 100
   isPickup: 1
   bounce: 1
+  hasAmmoCount: 0
   audioSourcePlayer: {fileID: 314539599937059684}
   pickupSound1: {fileID: 8300000, guid: d8bf25860bd0715428cec115f11e5059, type: 3}
   ammoPickupSound: {fileID: 8300000, guid: 977ec7387d007ad4389b4622b9d545f4, type: 3}
   weaponFireSound: {fileID: 8300000, guid: 343fae11370088d4f9d72bf75f8608c0, type: 3}
   weaponReloadSound: {fileID: 0}
   weaponChargeSound: {fileID: 8300000, guid: 37ef2404848f9a745a4e8c73d859615f, type: 3}
-  clipEjectSound: {fileID: 8300000, guid: 4026c25dbc3e43d47a9aa8245dda944c, type: 3}
-  clipInsertSound: {fileID: 8300000, guid: b06b8102dbfb2fa4391ec404b89e0133, type: 3}
+  clipEjectSound: {fileID: 0}
+  clipInsertSound: {fileID: 0}
   ripperSawLoop: {fileID: 8300000, guid: 8824aa6b07ea9fa4387d6e17af925993, type: 3}
   ripperSawWindDown: {fileID: 8300000, guid: 50eb8ac131d651d44a5fc31c995d42c4, type: 3}
   lockOn: {fileID: 8300000, guid: 3b2a510068d6c51429ccc8b8bef9e93e, type: 3}

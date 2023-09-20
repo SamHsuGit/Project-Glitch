@@ -410,18 +410,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 3963772888375218276}
-        m_TargetAssemblyTypeName: Controller, Assembly-CSharp
-        m_MethodName: CheckReloadPrimaryWeapon
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
     m_ActionId: cc34004f-11af-422f-9470-476e01cfc478
     m_ActionName: Actions/SwitchPrimary[/Keyboard/e]
   - m_PersistentCalls:
@@ -440,6 +428,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 50e36b93-2d02-45ec-b1ec-4590ea3922fe
     m_ActionName: Actions/SwitchSecondary[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3963772888375218276}
+        m_TargetAssemblyTypeName: Controller, Assembly-CSharp
+        m_MethodName: TriggerReload
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6565a352-1d16-4973-b55d-33a32eaaefe9
+    m_ActionName: Actions/Reload[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Actions
@@ -6049,7 +6053,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4064034394015724694, guid: 4714d538d9e4e6046808ce08addc9a8d, type: 3}
       propertyPath: field of view
-      value: 60
+      value: 100.388855
       objectReference: {fileID: 0}
     - target: {fileID: 4064034394015724713, guid: 4714d538d9e4e6046808ce08addc9a8d, type: 3}
       propertyPath: m_LocalPosition.x

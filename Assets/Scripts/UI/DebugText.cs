@@ -22,7 +22,7 @@ public class DebugText : MonoBehaviour
         if (player == null)
             return;
 
-        string debugText = "Digital Bricks v" + Application.version;
+        string debugText = "Project Glitch v" + Application.version;
         debugText += "\n";
         debugText += frameRate + " fps";
         debugText += "\n";
