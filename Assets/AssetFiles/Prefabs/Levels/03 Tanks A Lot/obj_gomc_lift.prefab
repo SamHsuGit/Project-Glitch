@@ -57,7 +57,7 @@ MonoBehaviour:
   liftTravelSound: {fileID: 8300000, guid: 6337896d6878dce42a4a26f7c719ebe1, type: 3}
   liftWaitPeriod: 1
   timeOfLastLiftTrigger: 0
-  liftSpeed: 1
+  liftSpeed: 0.01
   liftIsUp: 0
   liftTriggered: 0
 --- !u!82 &5069542493549774780

@@ -49,7 +49,8 @@ public class Controller : NetworkBehaviour
     public GameObject gameMenu;
     public GameObject nametag;
     public GameObject backgroundMask;
-    public GameObject playerCamera;
+    public GameObject playerCameraGameObject;
+    public Camera playerCamera;
     public GameObject playerHUD;
     public GameObject CinematicBars;
     public GameObject reticle;
@@ -120,8 +121,8 @@ public class Controller : NetworkBehaviour
         
         backgroundMaskCanvasGroup = backgroundMask.GetComponent<CanvasGroup>();
         gameMenuComponent = gameMenu.GetComponent<GameMenu>();
-        playerCameraOrigin = playerCamera.transform.parent.gameObject;
-        playerCameraBoxCollider = playerCamera.GetComponent<BoxCollider>();
+        playerCameraOrigin = playerCameraGameObject.transform.parent.gameObject;
+        playerCameraBoxCollider = playerCameraGameObject.GetComponent<BoxCollider>();
 
         health.isAlive = true;
 
@@ -137,7 +138,7 @@ public class Controller : NetworkBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
-        playerCamera.GetComponent<Camera>().nearClipPlane = 0.01f;
+        playerCameraGameObject.GetComponent<Camera>().nearClipPlane = 0.01f;
 
         // position nametag procedurally based on imported char model size
         //nametag.transform.localPosition = new Vector3(0, colliderCenter.y + colliderHeight * 0.55f, 0);
@@ -312,7 +313,10 @@ public class Controller : NetworkBehaviour
             Projectile projectile = ob.GetComponent<Projectile>();
 
             // subtract health by damage value of projectile instead of -1 every time
-            health.EditSelfHealth(-projectile.damage);
+            if (Settings.OnlinePlay)
+                health.CmdEditSelfHealth(-projectile.damage);
+            else
+                health.EditSelfHealth(-projectile.damage);
         }
         else if(ob.tag == "Pickup")
         {
@@ -493,7 +497,7 @@ public class Controller : NetworkBehaviour
         if (Settings.OnlinePlay && !isLocalPlayer)
         {
             SetAnimVars();
-            playerCamera.SetActive(false);
+            playerCameraGameObject.SetActive(false);
             return;
         }
 

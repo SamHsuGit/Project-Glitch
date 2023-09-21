@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 100539453759486110}
   - component: {fileID: 8804237191795902662}
   - component: {fileID: 7215464217227285311}
+  - component: {fileID: 2807164792026722201}
   m_Layer: 0
   m_Name: 00coringCharge
   m_TagString: Hazard
@@ -113,6 +114,7 @@ MonoBehaviour:
   audioSourcePlayer: {fileID: 610814122563447460}
   ricochet: {fileID: 0}
   explosion: {fileID: 8300000, guid: bf41ae177c584464ea580ad199fa372a, type: 3}
+  explosionRadiusSphereCollider: {fileID: 2807164792026722201}
   grenadeFuseTime: 2
   explosionLength: 2.01
   isGrenade: 1
@@ -5067,3 +5069,16 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!135 &2807164792026722201
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2982366427439032964}
+  m_Material: {fileID: 13400000, guid: eb6c4df8f1ad7fb47bfe2e436a3df34f, type: 2}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 5
+  m_Center: {x: 0, y: 0.004215002, z: 0.000018000603}

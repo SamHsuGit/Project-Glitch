@@ -12,7 +12,7 @@ public class Lift : MonoBehaviour
     public AudioClip liftTravelSound;
     public float liftWaitPeriod = 1f;
     public float timeOfLastLiftTrigger;
-    public float liftSpeed = 50f;
+    public float liftSpeed = .01f;
     public bool liftIsUp = false;
     public bool liftTriggered = false;
 

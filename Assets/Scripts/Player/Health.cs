@@ -62,9 +62,9 @@ public class Health : NetworkBehaviour
             {
                 audioSourcePlayer.PlayOneShot(deathSound);
                 if (Settings.OnlinePlay && hasAuthority)
-                    CmdRespawn();
+                    Invoke("CmdRespawn",3f);
                 else
-                    Respawn();
+                    Invoke("Respawn", 3f);
             }
         }
 
@@ -170,8 +170,6 @@ public class Health : NetworkBehaviour
 
     public void Respawn()
     {
-        //death.Play();
-
         // teleport player to spawn point
         transform.position = Settings.DefaultSpawnPosition;
 

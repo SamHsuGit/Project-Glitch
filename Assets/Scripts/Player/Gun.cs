@@ -48,7 +48,7 @@ private void FixedUpdate()
 
     target = null; // reset target
     target = FindTarget(); // get target gameObject
-    sphereCastStart = controller.playerCamera.transform.parent.transform.position;
+    sphereCastStart = controller.playerCameraGameObject.transform.parent.transform.position;
 
     currentPrimaryWeaponIndex = controller.currentWeaponPrimaryIndex;
     currentSecondaryWeaponIndex = controller.currentWeaponSecondaryIndex;
