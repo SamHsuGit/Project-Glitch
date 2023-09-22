@@ -42,6 +42,7 @@ public class Controller : NetworkBehaviour
 
     [Header("GameObject References")]
     public Player player;
+    public GameManagerScript gameManager;
     public GameObject charModelOrigin;
     public GameObject charModelHead;
     public GameObject charModelTorso;
@@ -68,7 +69,6 @@ public class Controller : NetworkBehaviour
     public InputHandler _inputHandler;
 
     //Components
-    private GameManagerScript gameManager;
     private GameObject playerCameraOrigin;
     private CapsuleCollider cc;
     private Rigidbody _rb;

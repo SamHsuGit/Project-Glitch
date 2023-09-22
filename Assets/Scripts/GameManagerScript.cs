@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 public class GameManagerScript : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class GameManagerScript : MonoBehaviour
     public GameObject PlayerManagerNetwork;
     public GameObject LOCAL;
     public GameObject charPrefab;
+    public VolumeProfile levelVolumeProfile;
 
     private Stopwatch preWorldGenStopwatch;
 

@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.Audio;
 using Mirror;
 using TMPro;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.HighDefinition;
 
 public class GameMenu : MonoBehaviour
 {
@@ -41,11 +43,13 @@ public class GameMenu : MonoBehaviour
     public GameObject[] pickupsWeaponSecondary;
     public GameObject[] pickupsPowerUps;
     
+
     public GameObject currentPickupGameObject;
     public bool setNavigate = false;
 
     private int previousGraphicsQuality;
     private World world;
+    private MotionBlur motionBlur;
 
     CanvasGroup backgroundMaskCanvasGroup;
     CanvasGroup playerHUDCanvasGroup;
@@ -69,6 +73,10 @@ public class GameMenu : MonoBehaviour
         health = player.GetComponent<Health>();
         showControls = SettingsStatic.LoadedSettings.showControls;
         inputHandler = controller._inputHandler;
+
+        MotionBlur tmpBlur;
+        if (controller.gameManager.levelVolumeProfile.TryGet<MotionBlur>(out tmpBlur))
+            motionBlur = tmpBlur;
     }
 
     private void Start()
@@ -109,6 +117,11 @@ public class GameMenu : MonoBehaviour
     private void Update()
     {
         CheckSplitscreenCanvasRenderMode();
+
+        if (SettingsStatic.LoadedSettings.graphicsQuality == 0)
+            motionBlur.active = false;
+        else
+            motionBlur.active = true;
 
         if (showControls)
             basicControlsText.SetActive(true);

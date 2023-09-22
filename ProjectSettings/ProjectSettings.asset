@@ -795,7 +795,7 @@ PlayerSettings:
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
   metroPackageName: Project-Glitch
-  metroPackageVersion: 0.4.0.0
+  metroPackageVersion: 0.3.0.0
   metroCertificatePath: Assets/WSATestCertificate.pfx
   metroCertificatePassword: "@ikc\x7F8ai"
   metroCertificateSubject: Sam Hsu

@@ -1333,6 +1333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99e440ada5ad5cd45b9a6f0b24c0a545, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volumeProfile: {fileID: 11400000, guid: 72e97169ea744e74fa818477555b6197, type: 2}
   hpSlider: {fileID: 8077262434672036017}
   volumeSlider: {fileID: 2571130917083906550}
   lookSpeedSlider: {fileID: 2813964470443044392}
