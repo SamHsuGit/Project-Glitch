@@ -95,7 +95,7 @@ public Health FindTarget() // use hitscan to detect if something is targeted by 
 
         //if hit something
         //if (Physics.SphereCast(sphereCastStart, sphereCastRadius, controller.bulletVector, out hit, hitScanDist)) //fpsCam.transform.forward, out hit, hitScanDist))
-        if(Physics.Raycast(controller.projectilePrimaryOrigin.transform.position, fpsCam.transform.forward, out RaycastHit hit, hitScanDist))
+        if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out RaycastHit hit, hitScanDist))
         {
             if (hit.transform.GetComponent<Health>() != null)
                 target = hit.transform.GetComponent<Health>();

@@ -240,7 +240,7 @@ public class GameMenu : MonoBehaviour
 
     public void UpdateHP()
     {
-        hpSlider.value = (float)health.hp;
+        hpSlider.value = health.hp;
     }
 
     public void UpdateWeaponIcons()
