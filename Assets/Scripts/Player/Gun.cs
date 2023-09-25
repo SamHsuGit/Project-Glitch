@@ -88,7 +88,7 @@ private void FixedUpdate()
     }
 }
 
-// if raycast hits a destructible object (with health but not this player), turn outer reticle red
+// if raycast hits a destructible object (with health but not this player), turn reticle red
 public Health FindTarget() // use hitscan to detect if something is targeted by reticle
     {
         image.color = Color.HSVToRGB(0, 0, 50, true);
@@ -117,28 +117,28 @@ public Health FindTarget() // use hitscan to detect if something is targeted by 
     // Server calculated shoot logic gives players the authority to change hp of other preregistered gameObjects
     public void HitRegCheck() // if hitscan weapon is used and hits something
     {
-        if (hit.transform != null) // hit anything (ground, walls)
-        {
-            //audioSourcePlayer.clip = currentWeaponPrimary.hitSound;
-            audioSourcePlayer.PlayOneShot(currentWeaponPrimary.hitSound);
+        //if (hit.transform != null) // hit anything (ground, walls)
+        //{
+        //    //audioSourcePlayer.clip = currentWeaponPrimary.hitSound;
+        //    audioSourcePlayer.PlayOneShot(currentWeaponPrimary.hitSound);
 
-            // spawn damage sparks effects (use particle system)
-            Vector3 pos = hit.transform.position;
-            if (Settings.OnlinePlay)
-            {
-                //controller.CmdSpawnObject(3, 3, new Vector3(pos.x + -0.25f, pos.y + 0, pos.z + 0.25f));
-                //controller.CmdSpawnObject(3, 3, new Vector3(pos.x + -0.25f, pos.y + 0, pos.z - 0.25f));
-                //controller.CmdSpawnObject(3, 3, new Vector3(pos.x + 0.25f, pos.y + 0, pos.z + 0.25f));
-                //controller.CmdSpawnObject(3, 3, new Vector3(pos.x + 0.25f, pos.y + 0, pos.z - 0.25f));
-            }
-            else
-            {
-                //controller.SpawnObject(3, 3, new Vector3(pos.x + -0.25f, pos.y + 0, pos.z + 0.25f));
-                //controller.SpawnObject(3, 3, new Vector3(pos.x + -0.25f, pos.y + 0, pos.z - 0.25f));
-                //controller.SpawnObject(3, 3, new Vector3(pos.x + 0.25f, pos.y + 0, pos.z + 0.25f));
-                //controller.SpawnObject(3, 3, new Vector3(pos.x + 0.25f, pos.y + 0, pos.z - 0.25f));
-            }
-        }
+        //    // spawn damage sparks effects (use particle system)
+        //    Vector3 pos = hit.transform.position;
+        //    if (Settings.OnlinePlay)
+        //    {
+        //        //controller.CmdSpawnObject(3, 3, new Vector3(pos.x + -0.25f, pos.y + 0, pos.z + 0.25f));
+        //        //controller.CmdSpawnObject(3, 3, new Vector3(pos.x + -0.25f, pos.y + 0, pos.z - 0.25f));
+        //        //controller.CmdSpawnObject(3, 3, new Vector3(pos.x + 0.25f, pos.y + 0, pos.z + 0.25f));
+        //        //controller.CmdSpawnObject(3, 3, new Vector3(pos.x + 0.25f, pos.y + 0, pos.z - 0.25f));
+        //    }
+        //    else
+        //    {
+        //        //controller.SpawnObject(3, 3, new Vector3(pos.x + -0.25f, pos.y + 0, pos.z + 0.25f));
+        //        //controller.SpawnObject(3, 3, new Vector3(pos.x + -0.25f, pos.y + 0, pos.z - 0.25f));
+        //        //controller.SpawnObject(3, 3, new Vector3(pos.x + 0.25f, pos.y + 0, pos.z + 0.25f));
+        //        //controller.SpawnObject(3, 3, new Vector3(pos.x + 0.25f, pos.y + 0, pos.z - 0.25f));
+        //    }
+        //}
         if (target != null) // if target was found (i.e. player)
         {
             //audioSourcePlayer.clip = currentWeaponPrimary.hitSound;
