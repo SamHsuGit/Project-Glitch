@@ -88,8 +88,8 @@ public class Health : NetworkBehaviour
     [Command]
     public void CmdEditSelfHealth(int amount)
     {
-        EditSelfHealth(amount); // calls server to update SyncVar hp which then pushes updates to clients automatically
-        RpcUpdateHP(); // after hp update on server, need to update pieces on all clients
+        EditSelfHealth(amount);
+        RpcUpdateHP(); // after hp update on server, need to update hp on all clients
     }
 
     [ClientRpc]
@@ -116,7 +116,7 @@ public class Health : NetworkBehaviour
     public void UpdateHP(int oldValue, int newValue)
     {
         hp = newValue;
-        controller.gameMenu.GetComponent<GameMenu>().UpdateHP(newValue); // hp slider gets updated to match the hp value in client-side gameMenu
+        controller.gameMenu.GetComponent<GameMenu>().UpdateHP(); // update the hp slider value
         SetModelPieceVisibility(modelPieces);
     }
 

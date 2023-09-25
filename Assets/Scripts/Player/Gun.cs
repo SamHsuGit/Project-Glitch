@@ -156,7 +156,7 @@ public Health FindTarget() // use hitscan to detect if something is targeted by 
     public void CmdDamage(Health target)
     {
         // player identity validation logic here
-        RpcDamage(target); // server tells all clients to update the hp value of the object
+        RpcDamage(target); // server tells all clients to register the damage
     }
 
     [ClientRpc]
@@ -167,8 +167,7 @@ public Health FindTarget() // use hitscan to detect if something is targeted by 
 
     public void Damage(Health target)
     {
-        target.hp -= damage; // triggers syncVarHook UpdateHP to tell clients to update the hp value and runs function to update the HP slider in gameMenu
-        //target.UpdateHP(target.hp, target.hp);
-        target.gameObject.GetComponent<GameMenu>().UpdateHP(target.hp); // tell clients to update the hp slider
+        //target.hp -= damage; // triggers syncVarHook UpdateHP to tell clients to update the hp value and runs function to update the HP slider in gameMenu
+        target.CmdEditSelfHealth(-damage); // client registers the damage and tells the server to tell all clients to update hp
     }
 }

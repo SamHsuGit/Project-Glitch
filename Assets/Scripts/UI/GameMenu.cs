@@ -138,7 +138,7 @@ public class GameMenu : MonoBehaviour
         debugText.SetActive(false);
         basicControlsText.SetActive(false);
 
-        UpdateHP(health.hp);
+        UpdateHP();
         UpdateWeaponIcons();
         UpdateAmmoCounts();
     }
@@ -187,7 +187,7 @@ public class GameMenu : MonoBehaviour
 
         UpdateWeaponIcons();
         UpdateAmmoCounts();
-        UpdateHP(health.hp);
+        UpdateHP();
 
         if (currentPickupGameObject != null)
             currentPickupGameObject.transform.Rotate(new Vector3(0, Mathf.Deg2Rad * 100, 0));
@@ -238,9 +238,10 @@ public class GameMenu : MonoBehaviour
         }
     }
 
-    public void UpdateHP(float value)
+    // runs on each client for itself
+    public void UpdateHP()
     {
-        hpSlider.value = value;
+        hpSlider.value = health.hp;
     }
 
     public void UpdateWeaponIcons()
