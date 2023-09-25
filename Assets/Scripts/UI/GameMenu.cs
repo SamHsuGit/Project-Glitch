@@ -187,7 +187,7 @@ public class GameMenu : MonoBehaviour
 
         UpdateWeaponIcons();
         UpdateAmmoCounts();
-        //UpdateHP();
+        UpdateHP();
 
         if (currentPickupGameObject != null)
             currentPickupGameObject.transform.Rotate(new Vector3(0, Mathf.Deg2Rad * 100, 0));
@@ -238,11 +238,9 @@ public class GameMenu : MonoBehaviour
         }
     }
 
-    // runs on each client for itself
     public void UpdateHP()
     {
-        hpSlider.value = health.hp;
-        //Debug.Log(health.hp);
+        //hpSlider.value = health.hp;
     }
 
     public void UpdateWeaponIcons()
