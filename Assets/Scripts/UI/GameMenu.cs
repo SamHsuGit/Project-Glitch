@@ -242,6 +242,7 @@ public class GameMenu : MonoBehaviour
     public void UpdateHP()
     {
         hpSlider.value = health.hp;
+        Debug.Log(health.hp);
     }
 
     public void UpdateWeaponIcons()
