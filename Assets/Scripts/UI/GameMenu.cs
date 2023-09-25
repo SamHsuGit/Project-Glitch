@@ -49,7 +49,15 @@ public class GameMenu : MonoBehaviour
 
     private int previousGraphicsQuality;
     private World world;
+
     private MotionBlur motionBlur;
+    private Bloom bloom;
+    private AmbientOcclusion ao;
+    private GlobalIllumination gi;
+    private Fog fog;
+    private CloudLayer cl;
+    private GradientSky gs;
+    private VisualEnvironment ve;
 
     CanvasGroup backgroundMaskCanvasGroup;
     CanvasGroup playerHUDCanvasGroup;
@@ -77,6 +85,27 @@ public class GameMenu : MonoBehaviour
         MotionBlur tmpBlur;
         if (controller.gameManager.levelVolumeProfile.TryGet<MotionBlur>(out tmpBlur))
             motionBlur = tmpBlur;
+        Bloom tmpBloom;
+        if (controller.gameManager.levelVolumeProfile.TryGet<Bloom>(out tmpBloom))
+            bloom = tmpBloom;
+        AmbientOcclusion tmpAO;
+        if (controller.gameManager.levelVolumeProfile.TryGet<AmbientOcclusion>(out tmpAO))
+            ao = tmpAO;
+        GlobalIllumination tmpGI;
+        if (controller.gameManager.levelVolumeProfile.TryGet<GlobalIllumination>(out tmpGI))
+            gi = tmpGI;
+        Fog tmpFog;
+        if (controller.gameManager.levelVolumeProfile.TryGet<Fog>(out tmpFog))
+            fog = tmpFog;
+        CloudLayer tmpCL;
+        if (controller.gameManager.levelVolumeProfile.TryGet<CloudLayer>(out tmpCL))
+            cl = tmpCL;
+        GradientSky tmpGS;
+        if (controller.gameManager.levelVolumeProfile.TryGet<GradientSky>(out tmpGS))
+            gs = tmpGS;
+        VisualEnvironment tmpVE;
+        if (controller.gameManager.levelVolumeProfile.TryGet<VisualEnvironment>(out tmpVE))
+            ve = tmpVE;
     }
 
     private void Start()
@@ -114,14 +143,37 @@ public class GameMenu : MonoBehaviour
         setNavigate = true;
     }
 
+    private void setQualitySettings()
+    {
+        if (SettingsStatic.LoadedSettings.graphicsQuality == 0)
+        {
+            motionBlur.active = false;
+            bloom.active = false;
+            ao.active = false;
+            gi.active = false;
+            fog.active = false;
+            cl.active = false;
+            gs.active = false;
+            ve.active = false;
+        }
+        else
+        {
+            motionBlur.active = true;
+            bloom.active = true;
+            ao.active = true;
+            gi.active = true;
+            fog.active = true;
+            cl.active = true;
+            gs.active = true;
+            ve.active = true;
+        }
+    }
+
     private void Update()
     {
         CheckSplitscreenCanvasRenderMode();
 
-        if (SettingsStatic.LoadedSettings.graphicsQuality == 0)
-            motionBlur.active = false;
-        else
-            motionBlur.active = true;
+        setQualitySettings();
 
         if (showControls)
             basicControlsText.SetActive(true);
