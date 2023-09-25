@@ -167,7 +167,7 @@ public Health FindTarget() // use hitscan to detect if something is targeted by 
 
     public void Damage(Health target)
     {
-        //target.hp -= damage; // triggers syncVarHook UpdateHP to tell clients to update the hp value and runs function to update the HP slider in gameMenu
-        target.CmdEditSelfHealth(-damage); // client registers the damage and tells the server to tell all clients to update hp
+        target.hp -= damage; // triggers syncVarHook UpdateHP to tell clients to update the hp value and runs function to update the HP slider in gameMenu
+        //target.CmdEditSelfHealth(-damage); // client registers the damage and tells the server to tell all clients to update hp
     }
 }

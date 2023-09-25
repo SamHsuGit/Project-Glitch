@@ -10,8 +10,7 @@ public class Health : NetworkBehaviour
     public PhysicMaterial physicMaterial;
     
     private int pieceCount;
-    //[SyncVar(hook = nameof(UpdateHP))] // uses hp SyncVar hook to syncronize # pieces an object has across all online players when hp value changes
-    public int hp; // hp is updated with method calls from servers to clients
+    [SyncVar(hook = nameof(UpdateHP))] public int hp; // uses hp SyncVar hook to syncronize # pieces an object has across all online players when hp value changes
     public int hpMax;
     public int batteryMaxHP = 100;
     public float piecesRbMass = 0.0001f;
