@@ -37,6 +37,7 @@ public class Controller : NetworkBehaviour
     public int batteries = 3;
     public bool isThrowingGrenade = false;
     public bool isReloading = false;
+    public Vector3 bulletVector;
 
     [SerializeField] float _lookVelocity = 1f;
 
@@ -561,12 +562,12 @@ public class Controller : NetworkBehaviour
     public void PressedShoot()
     {
         Vector3 pos = projectilePrimaryOrigin.transform.position;
-        Vector3 velocityVector = target.transform.position - pos;
+        bulletVector = target.transform.position - pos;
 
         if (Settings.OnlinePlay)
-            CmdSpawnObject(0, 0, pos, velocityVector);
+            CmdSpawnObject(0, 0, pos, bulletVector);
         else
-            SpawnObject(0, 0, pos, velocityVector);
+            SpawnObject(0, 0, pos, bulletVector);
     }
 
     public void PressedGrenade()
