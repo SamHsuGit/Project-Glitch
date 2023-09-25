@@ -485,7 +485,25 @@ public class Controller : NetworkBehaviour
         {
             CacheInput();
             Look();
+
+            if (Settings.OnlinePlay)
+                UpdateUIOnline();
+            else
+                UpdateUI();
         }
+    }
+
+    [Client] // have to mark this as client run only so server does not run this
+    private void UpdateUIOnline()
+    {
+        UpdateUI();
+    }
+
+    private void UpdateUI()
+    {
+        gameMenuComponent.UpdateHPSlider();
+        gameMenuComponent.UpdateAmmoCounts();
+        gameMenuComponent.UpdateWeaponIcons();
     }
 
     void FixedUpdate()
