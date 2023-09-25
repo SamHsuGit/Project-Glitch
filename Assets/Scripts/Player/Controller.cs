@@ -305,7 +305,7 @@ public class Controller : NetworkBehaviour
 
         GameObject ob = collider.gameObject;
         // hazards hurt player
-        if (ob.layer == 12 && ob.tag != "Hazard" + playerNumber)
+        if (ob.layer == 12 && ob.tag != "Hazard") // + playerNumber to prevent self spawned particles from hurting your own player? (disabled to allow better combat)
         {
             if (ob.GetComponent<Projectile>() == null)
                 return;

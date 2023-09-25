@@ -18,6 +18,8 @@ public class Projectile : MonoBehaviour
     public bool isGrenade = false;
     public bool exploded = false;
 
+    public List<GameObject> damageObs;
+
     private MeshRenderer mr;
 
     private void Awake()
@@ -42,11 +44,20 @@ public class Projectile : MonoBehaviour
 
         if (ob.layer == 11 || ob.tag == "Player" && ob.GetComponent<Health>() != null)
         {
-            Health health = ob.GetComponent<Health>();
-            if (Settings.OnlinePlay)
-                health.CmdEditSelfHealth(-damage);
-            else
-                health.EditSelfHealth(-damage);
+            damageObs.Add(ob);
+        }
+    }
+
+    private void OnTriggerExit(Collider collider)
+    {
+        if (!isGrenade || !exploded || collider.gameObject == null)
+            return;
+
+        GameObject ob = collider.gameObject;
+
+        if (ob.layer == 11 || ob.tag == "Player" && ob.GetComponent<Health>() != null)
+        {
+            damageObs.Remove(ob);
         }
     }
 
@@ -77,6 +88,15 @@ public class Projectile : MonoBehaviour
         exploded = true;
 
         Invoke("DestroyObject", explosionLength);
+
+        foreach (GameObject ob in damageObs)
+        {
+            Health health = ob.GetComponent<Health>();
+            if (Settings.OnlinePlay)
+                health.CmdEditSelfHealth(-damage);
+            else
+                health.EditSelfHealth(-damage);
+        }
     }
 
     private void DestroyObject()
