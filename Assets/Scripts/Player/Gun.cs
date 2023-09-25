@@ -95,7 +95,7 @@ public Health FindTarget() // use hitscan to detect if something is targeted by 
 
         //if hit something
         //if (Physics.SphereCast(sphereCastStart, sphereCastRadius, controller.bulletVector, out hit, hitScanDist)) //fpsCam.transform.forward, out hit, hitScanDist))
-        if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out RaycastHit hit, hitScanDist))
+        if(Physics.Raycast(controller.projectilePrimaryOrigin.transform.position, controller.bulletVector, out RaycastHit hit, hitScanDist))
         {
             if (hit.transform.GetComponent<Health>() != null)
                 target = hit.transform.GetComponent<Health>();
@@ -157,8 +157,8 @@ public Health FindTarget() // use hitscan to detect if something is targeted by 
     public void CmdDamage(Health target)
     {
         // player identity validation logic here
-        //RpcDamage(target);
-        Damage(target);
+        RpcDamage(target); // server tells all clients to update the hp value of the object
+        //Damage(target);
     }
 
     [ClientRpc]
