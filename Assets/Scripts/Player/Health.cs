@@ -116,7 +116,7 @@ public class Health : NetworkBehaviour
     public void UpdateHP(int oldValue, int newValue)
     {
         hp = newValue;
-        controller.gameMenu.GetComponent<GameMenu>().UpdateHP(); // hp slider gets updated to match the hp value in client-side gameMenu
+        controller.gameMenu.GetComponent<GameMenu>().UpdateHP(newValue); // hp slider gets updated to match the hp value in client-side gameMenu
         SetModelPieceVisibility(modelPieces);
     }
 
