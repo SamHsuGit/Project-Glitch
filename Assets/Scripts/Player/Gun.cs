@@ -151,20 +151,18 @@ public Health FindTarget() // use hitscan to detect if something is targeted by 
         }
     }
 
-    [Command]
-    // public function called when gun raycast hits target
+    [ServerCallback] // prevents clients from running this
     public void CmdDamage(Health target)
     {
         // player identity validation logic here
-        target.hp -= damage;
-        //RpcDamage(target); // server tells all clients to register the damage
+        target.hp -= damage; // update the hp value on the server (hp is a syncVar which will then propogate to all clients)
     }
 
-    [ClientRpc]
-    public void RpcDamage(Health target)
-    {
-        Damage(target);
-    }
+    //[ClientRpc]
+    //public void RpcDamage(Health target)
+    //{
+    //    Damage(target);
+    //}
 
     public void Damage(Health target)
     {

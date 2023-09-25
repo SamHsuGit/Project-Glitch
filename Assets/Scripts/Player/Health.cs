@@ -117,8 +117,7 @@ public class Health : NetworkBehaviour
         }
     }
 
-    // runs from gun script when things are shot, runs in this script when object falls below certain height
-    public void UpdateHP(int oldValue, int newValue)
+    public void UpdateHP(int oldValue, int newValue) // called on clients when hp syncVar changes
     {
         hp = newValue;
         SetModelPieceVisibility(modelPieces);
