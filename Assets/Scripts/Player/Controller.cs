@@ -436,6 +436,7 @@ public class Controller : NetworkBehaviour
     private void SetAmmoSecondary(int index, int amount)
     {
         wSecondaryPickupObjects[index].ammo = amount;
+        gameMenuComponent.UpdateAmmoCounts();
     }
 
     public void CheckReloadPrimaryWeapon()
