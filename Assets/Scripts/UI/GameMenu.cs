@@ -232,6 +232,7 @@ public class GameMenu : MonoBehaviour
 
     public void UpdateHPSlider()
     {
+        hpSlider.gameObject.SetActive(true);
         hpSlider.value = health.hp;
     }
 
@@ -277,6 +278,7 @@ public class GameMenu : MonoBehaviour
         ClipCountPrimary.text = controller.wPrimaryPickupObjects[controller.currentWeaponPrimaryIndex].ammoReserve.ToString();
 
         // secondary weapon counter
+        AmmoCountSecondary.gameObject.SetActive(true);
         AmmoCountSecondary.text = controller.wSecondaryPickupObjects[controller.currentWeaponSecondaryIndex].ammo.ToString();
     }
 
