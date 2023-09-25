@@ -82,6 +82,11 @@ public class GameMenu : MonoBehaviour
         showControls = SettingsStatic.LoadedSettings.showControls;
         inputHandler = controller._inputHandler;
 
+        GetQualityComponents();
+    }
+
+    private void GetQualityComponents()
+    {
         MotionBlur tmpBlur;
         if (controller.gameManager.levelVolumeProfile.TryGet<MotionBlur>(out tmpBlur))
             motionBlur = tmpBlur;
