@@ -94,7 +94,7 @@ public Health FindTarget() // use hitscan to detect if something is targeted by 
         image.color = Color.HSVToRGB(0, 0, 50, true);
 
         //if hit something
-        if (Physics.SphereCast(sphereCastStart, sphereCastRadius, fpsCam.transform.forward + new Vector3(0, 1, 0), out hit, hitScanDist))
+        if (Physics.SphereCast(sphereCastStart, sphereCastRadius, fpsCam.transform.forward, out hit, hitScanDist))
         {
             if (hit.transform.GetComponent<Health>() != null)
                 target = hit.transform.GetComponent<Health>();
