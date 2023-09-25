@@ -49,6 +49,7 @@ public class Controller : NetworkBehaviour
     public GameObject charModelTorso;
     public GameObject charModelLegs;
     public GameObject gameMenu;
+    public GameMenu gameMenuComponent;
     public GameObject nametag;
     public GameObject backgroundMask;
     public GameObject playerCameraGameObject;
@@ -77,7 +78,6 @@ public class Controller : NetworkBehaviour
     private PlayerInput playerInput;
     private Health health;
     private Gun gun;
-    private GameMenu gameMenuComponent;
     private CanvasGroup backgroundMaskCanvasGroup;
     private BoxCollider playerCameraBoxCollider;
     private PhysicMaterial physicMaterial;
