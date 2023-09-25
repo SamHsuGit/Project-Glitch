@@ -354,13 +354,11 @@ public class Controller : NetworkBehaviour
                             case 0: //energy
                                 {
                                     health.EditSelfHealth(health.batteryMaxHP); // energy fills one battery's worth of hp
-                                    gameMenuComponent.UpdateHP();
                                     break;
                                 }
                             case 1: //mega energy
                                 {
                                     health.EditSelfHealth(health.hpMax - health.hp); // mega energy fills hp to max
-                                    gameMenuComponent.UpdateHP();
                                     break;
                                 }
                             case 2://shield

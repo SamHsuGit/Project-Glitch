@@ -51,6 +51,11 @@ public class Health : NetworkBehaviour
         }  
     }
 
+    private void Update()
+    {
+        controller.gameMenuComponent.hpSlider.value = hp; // always update UI to reflect hp variable
+    }
+
     private void FixedUpdate()
     {
         if (gameObject.layer == 11) // if it is a player
@@ -116,7 +121,6 @@ public class Health : NetworkBehaviour
     public void UpdateHP(int oldValue, int newValue)
     {
         hp = newValue;
-        controller.gameMenuComponent.hpSlider.value = hp;
         SetModelPieceVisibility(modelPieces);
     }
 
