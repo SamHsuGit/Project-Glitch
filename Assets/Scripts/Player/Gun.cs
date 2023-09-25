@@ -80,6 +80,7 @@ private void FixedUpdate()
 
                     if (currentWeaponPrimary.ammo - currentWeaponPrimary.roundsPerFire >= 0)
                 currentWeaponPrimary.ammo -= currentWeaponPrimary.roundsPerFire;
+                controller.gameMenuComponent.UpdateAmmoCounts();
 
                 HitRegCheck();
                 controller.PressedShoot(); // make projectile
@@ -157,12 +158,6 @@ public Health FindTarget() // use hitscan to detect if something is targeted by 
         // player identity validation logic here
         target.hp -= damage; // update the hp value on the server (hp is a syncVar which will then propogate to all clients)
     }
-
-    //[ClientRpc]
-    //public void RpcDamage(Health target)
-    //{
-    //    Damage(target);
-    //}
 
     public void Damage(Health target)
     {

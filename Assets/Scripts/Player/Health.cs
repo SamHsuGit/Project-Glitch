@@ -115,6 +115,7 @@ public class Health : NetworkBehaviour
     public void UpdateHP(int oldValue, int newValue) // called on clients when hp syncVar changes
     {
         hp = newValue;
+        controller.gameMenuComponent.UpdateHPSlider();
         SetModelPieceVisibility(modelPieces);
     }
 

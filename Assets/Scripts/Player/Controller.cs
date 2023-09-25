@@ -288,6 +288,8 @@ public class Controller : NetworkBehaviour
         for (int i = 0; i < wPrimaryModels.Length; i++)
             wPrimaryModels[i].SetActive(false);
         wPrimaryModels[currentWeaponPrimaryIndex].SetActive(true);
+
+        gameMenuComponent.UpdateWeaponIcons();
     }
 
     public void SetCurrentWeaponSecondaryIndex(int oldValue, int newValue)
@@ -501,9 +503,7 @@ public class Controller : NetworkBehaviour
 
     private void UpdateUI()
     {
-        gameMenuComponent.UpdateHPSlider();
-        gameMenuComponent.UpdateAmmoCounts();
-        gameMenuComponent.UpdateWeaponIcons();
+
     }
 
     void FixedUpdate()
