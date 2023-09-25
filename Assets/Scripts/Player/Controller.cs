@@ -288,8 +288,6 @@ public class Controller : NetworkBehaviour
         for (int i = 0; i < wPrimaryModels.Length; i++)
             wPrimaryModels[i].SetActive(false);
         wPrimaryModels[currentWeaponPrimaryIndex].SetActive(true);
-
-        gameMenuComponent.UpdateWeaponIcons();
     }
 
     public void SetCurrentWeaponSecondaryIndex(int oldValue, int newValue)
@@ -436,7 +434,6 @@ public class Controller : NetworkBehaviour
     private void SetAmmoSecondary(int index, int amount)
     {
         wSecondaryPickupObjects[index].ammo = amount;
-        gameMenuComponent.UpdateAmmoCounts();
     }
 
     public void CheckReloadPrimaryWeapon()
@@ -499,12 +496,15 @@ public class Controller : NetworkBehaviour
     [Client] // have to mark this as client run only so server does not run this
     private void UpdateUIOnline()
     {
-        UpdateUI();
+        if(isLocalPlayer)
+            UpdateUI();
     }
 
     private void UpdateUI()
     {
-
+        gameMenuComponent.UpdateHPSlider();
+        gameMenuComponent.UpdateAmmoCounts();
+        gameMenuComponent.UpdateWeaponIcons();
     }
 
     void FixedUpdate()

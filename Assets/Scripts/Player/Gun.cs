@@ -80,7 +80,6 @@ private void FixedUpdate()
 
                     if (currentWeaponPrimary.ammo - currentWeaponPrimary.roundsPerFire >= 0)
                 currentWeaponPrimary.ammo -= currentWeaponPrimary.roundsPerFire;
-                controller.gameMenuComponent.UpdateAmmoCounts();
 
                 HitRegCheck();
                 controller.PressedShoot(); // make projectile
