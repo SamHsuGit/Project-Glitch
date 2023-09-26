@@ -6,7 +6,6 @@ The Soundtrack is owned by PCB Productions and is in no way associated with the 
 
 Play the Game:
 https://sam-hsu.itch.io/project-glitch
-Password: "exavolt"
 
 Controls:
 Move = WASD (Left Stick)
