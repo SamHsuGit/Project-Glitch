@@ -62,7 +62,7 @@ public class SetupMenu : MonoBehaviour
         //}
         //else
         //{
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(2);
         //}
     }
 
@@ -79,7 +79,7 @@ public class SetupMenu : MonoBehaviour
         //}
         //else
         //{
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(2);
         //}
     }
 

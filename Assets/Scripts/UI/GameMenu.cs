@@ -402,7 +402,7 @@ public class GameMenu : MonoBehaviour
             customNetworkManager.StopServer();
         }
 
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
     public void SetVolume(float value)
